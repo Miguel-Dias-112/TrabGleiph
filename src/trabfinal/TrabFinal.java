@@ -4,6 +4,9 @@
  */
 package trabfinal;
 
+import View.Tela;
+import javax.swing.JFrame;
+
 /**
  *
  * @author migue
@@ -13,7 +16,14 @@ public class TrabFinal {
     /**
      * @param args the command line arguments
      */
+    
+    
     public static void main(String[] args) {
+     
+        Tela x = new Tela(new JFrame("Agenda"),true);
+
+         
+        x.setVisible(true);
         // TODO code application logic here
     }
     
