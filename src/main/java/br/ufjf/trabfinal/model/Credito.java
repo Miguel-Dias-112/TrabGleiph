@@ -3,16 +3,14 @@ package br.ufjf.trabfinal.model;
 public class Credito {
     private String id;
     private double valor;
-    private String status; // Ex: Pendente, Aprovado, Negado
+    private String status; 
 
-    // Construtor
     public Credito(String id, double valor) {
         this.id = id;
         this.valor = valor;
         this.status = "Pendente";
     }
 
-    // Getters e Setters
     public String getId() {
         return id;
     }

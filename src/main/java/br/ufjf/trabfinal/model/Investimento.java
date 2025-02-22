@@ -2,11 +2,10 @@ package br.ufjf.trabfinal.model;
 
 public class Investimento {
     private String id;
-    private String tipo; // Ex: Renda Fixa, Renda Variável
+    private String tipo;
     private double valor;
     private double taxaRendimento;
 
-    // Construtor
     public Investimento(String id, String tipo, double valor, double taxaRendimento) {
         this.id = id;
         this.tipo = tipo;
@@ -14,7 +13,6 @@ public class Investimento {
         this.taxaRendimento = taxaRendimento;
     }
 
-    // Getters e Setters
     public String getId() {
         return id;
     }

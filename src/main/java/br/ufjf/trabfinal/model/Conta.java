@@ -8,14 +8,12 @@ public class Conta {
     private double saldo;
     private List<Transacao> transacoes;
 
-    // Construtor
     public Conta(String id) {
         this.id = id;
         this.saldo = 0.0;
         this.transacoes = new ArrayList<>();
     }
 
-    // Métodos
     public void adicionarTransacao(Transacao transacao) {
         transacoes.add(transacao);
         if (transacao instanceof Saque) {
@@ -27,7 +25,6 @@ public class Conta {
         }
     }
 
-    // Getters e Setters
     public String getId() {
         return id;
     }
