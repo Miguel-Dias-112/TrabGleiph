@@ -1,13 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ufjf.trabfinal.model;
 
-/**
- *
- * @author ggiacz
- */
-public class Cliente {
-    
+public class Cliente extends Usuario {
+    private Conta conta; 
+
+    public Cliente(String nome, String cpf, String senha) {
+        super(nome, cpf, senha);
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
 }

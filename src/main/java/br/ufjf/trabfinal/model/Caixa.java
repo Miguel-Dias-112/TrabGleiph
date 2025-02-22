@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ufjf.trabfinal.model;
 
-/**
- *
- * @author ggiacz
- */
-public class Caixa {
-    
+public class Caixa extends Usuario {
+
+    public Caixa(String nome, String cpf, String senha) {
+        super(nome, cpf, senha);
+    }
 }

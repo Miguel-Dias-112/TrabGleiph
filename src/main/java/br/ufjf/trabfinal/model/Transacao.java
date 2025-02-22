@@ -1,13 +1,38 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ufjf.trabfinal.model;
 
-/**
- *
- * @author ggiacz
- */
-public class Transacao {
-    
+//tirei data/hora, acredito que nao seja necessario. mas seria interessante
+
+
+public abstract class Transacao {
+    private String id;
+    private double valor;
+
+    public Transacao(double valor) {
+        this.valor = valor;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    // mockup para testes sem a interface grafica
+    @Override
+    public String toString() {
+        return "Transacao{" +
+                "id='" + id + '\'' +
+                ", valor=" + valor +
+                '}';
+    }
 }

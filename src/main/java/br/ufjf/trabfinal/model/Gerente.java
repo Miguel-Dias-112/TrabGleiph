@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.ufjf.trabfinal.model;
 
-/**
- *
- * @author ggiacz
- */
-public class Gerente {
+public class Gerente extends Usuario {
     
+    public Gerente(String nome, String cpf, String senha) {
+        super(nome, cpf, senha);
+    }
 }
