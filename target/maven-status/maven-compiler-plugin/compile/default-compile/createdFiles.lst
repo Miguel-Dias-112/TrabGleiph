@@ -1,3 +1,8 @@
-br/ufjf/trabfinal/Arquivo.class
+br/ufjf/trabfinal/model/Investimento.class
+br/ufjf/trabfinal/model/Cliente.class
+br/ufjf/trabfinal/model/Transacao.class
+br/ufjf/trabfinal/model/Credito.class
+br/ufjf/trabfinal/model/Caixa.class
+br/ufjf/trabfinal/model/Gerente.class
 br/ufjf/trabfinal/Main.class
-br/ufjf/trabfinal/TransDAO.class
+br/ufjf/trabfinal/model/Usuario.class
