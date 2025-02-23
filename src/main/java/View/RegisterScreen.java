@@ -92,7 +92,7 @@ public class RegisterScreen {
                 LoginScreen loginScreen = new LoginScreen();
             }
         });
-        registrarButton.addActionListener(new CadastrarUser(userField.getText(), loginField.getText(), senhaField.getText(),cpfField.getText()));
+        registrarButton.addActionListener(new CadastrarUser(userField, loginField, senhaField,cpfField));
         posicionaElemento(registrarButton, 0, 5, new Insets(0, 50, 8, 50));
         posicionaElemento(loginButton, 0, 6, new Insets(0, 50, 0, 50));
     }
