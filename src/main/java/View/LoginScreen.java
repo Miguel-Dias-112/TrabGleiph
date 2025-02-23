@@ -64,7 +64,7 @@ public class LoginScreen {
         registrarButton.addActionListener(
             new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    Tela.setVisible(false);
+                    Tela.dispose();
                     RegisterScreen registerScreen = new RegisterScreen();
                 }
             }
