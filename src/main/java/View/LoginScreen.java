@@ -10,7 +10,7 @@ public class LoginScreen {
     private static void configuraTela(){
         Tela = new JFrame("Tela de Login");
         Tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Tela.setSize(500, 300);
+        Tela.setSize(700, 500);
         Tela.setLayout(new GridBagLayout());
         Tela.setLocationRelativeTo(null);
 
@@ -19,7 +19,7 @@ public class LoginScreen {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = x;
         gbc.gridy = y;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
         Tela.add(elemento, gbc);
 
@@ -28,36 +28,50 @@ public class LoginScreen {
       
         configuraTela();
         // Criando os componentes
-        JLabel userLabel = new JLabel("Usuário:");
-        JTextField userField = new JTextField(15);
-        JLabel passLabel = new JLabel("Senha:");
-        JPasswordField passField = new JPasswordField(15);
-        JLabel messageLabel = new JLabel("", SwingConstants.CENTER);
-    
-        JButton loginButton = new JButton("Login");
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String username = userField.getText();
-                String password = new String(passField.getPassword());
+        JPanel panelUser = new JPanel();
 
-                if ("admin".equals(username) && "1234".equals(password)) {
-                    messageLabel.setText("Login bem-sucedido!");
-                    messageLabel.setForeground(Color.GREEN);
-                } else {
-                    messageLabel.setText("Credenciais inválidas!");
-                    messageLabel.setForeground(Color.RED);
+            JLabel userLabel = new JLabel("Usuário:");
+            JTextField userField = new JTextField(15);
+            panelUser.add(userLabel);
+            panelUser.add(userField);
+        JPanel panelSenha = new JPanel();
+            JLabel passLabel = new JLabel("Senha:  ");
+            JPasswordField passField = new JPasswordField(15);
+            panelSenha.add(passLabel);
+            panelSenha.add(passField);
+        JLabel messageLabel = new JLabel("", SwingConstants.CENTER);
+
+        JButton loginButton = new JButton("Login");
+            loginButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String username = userField.getText();
+                    String password = new String(passField.getPassword());
+
+                    if ("admin".equals(username) && "1234".equals(password)) {
+                        messageLabel.setText("Login bem-sucedido!");
+                        messageLabel.setForeground(Color.GREEN);
+                    } else {
+                        messageLabel.setText("Credenciais inválidas!");
+                        messageLabel.setForeground(Color.RED);
+                    }
                 }
-            }
-        });
+            });
+
+        JButton registrarButton = new JButton("Registrar");
+            registrarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    messageLabel.setText("usuário registrado com sucesso!");
+                    messageLabel.setForeground(Color.BLACK);
+                }
+            });
 
         // Configurando a janela
-        posicionaElemento(userLabel, 0, 0);
-        posicionaElemento(userField, 1, 0);
-        posicionaElemento(passLabel, 0, 1);
-        posicionaElemento(passField, 1, 1);
-        posicionaElemento(loginButton, 1, 2);
-        posicionaElemento(loginButton, 1, 3);
+        posicionaElemento(panelUser, 0, 0);
+        posicionaElemento(panelSenha, 0, 1);
+        posicionaElemento(loginButton, 0, 2);
+        posicionaElemento(registrarButton, 0, 3);
         posicionaElemento(messageLabel, 0, 5);
 
 
