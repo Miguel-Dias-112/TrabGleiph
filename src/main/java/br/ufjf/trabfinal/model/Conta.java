@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Conta {
     final private DecimalFormat df = new DecimalFormat("000");
-    private static int ultimoId;
-    private String id;
+    private static int ultimoId = 1;
+    final private String id;
     private double saldo;
     private List<Transacao> transacoes;
 
@@ -30,10 +30,6 @@ public class Conta {
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public double getSaldo() {

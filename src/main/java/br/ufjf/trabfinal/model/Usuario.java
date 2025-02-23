@@ -3,11 +3,13 @@ package br.ufjf.trabfinal.model;
 // login vai ser cpf e senha 
 
 public class Usuario {
+    private String login;
+    private String senha;
     private String nome;
     final private String cpf;
-    private String senha;
 
-    public Usuario(String nome, String cpf, String senha) {
+    public Usuario(String login, String senha, String nome, String cpf) {
+        this.login = login;
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
@@ -29,7 +31,11 @@ public class Usuario {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha(String novaSenha) {
+        if(novaSenha == this.senha){
+            throw new Error("Error: A nova senha não pode ser igual a antiga.");
+        }else{
+            this.senha = novaSenha;
+        }
     }
 }

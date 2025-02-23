@@ -3,7 +3,7 @@ import java.text.DecimalFormat;
 
 public class Credito {
     final private DecimalFormat df = new DecimalFormat("000");
-    private static int ultimoId;
+    private static int ultimoId = 1;
     private String id;
     private double valor;
     private String status; 
