@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Conta {
-    private String id;
+    private static int ultimoId;
+    private int id;
     private double saldo;
     private List<Transacao> transacoes;
 
     public Conta(String id) {
-        this.id = id;
+        this.id = ultimoId++;
         this.saldo = 0.0;
         this.transacoes = new ArrayList<>();
     }
@@ -25,11 +26,11 @@ public class Conta {
         }
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

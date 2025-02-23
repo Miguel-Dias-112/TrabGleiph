@@ -1,13 +1,11 @@
-
 package br.ufjf.trabfinal;
 
 /**
  * @authors 
- * MeuPawDeAsa
- * ggiacz
- * Miguel-Dias-112
+ * Eduarda Nunes
+ * Gabriel Giácomo
+ * Miguel Dias
  */
-
 
 import br.ufjf.trabfinal.controller.TransacaoController;
 import br.ufjf.trabfinal.model.Conta;
