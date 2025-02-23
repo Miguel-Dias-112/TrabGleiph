@@ -17,9 +17,7 @@ public class Main {
     public static void main(String[] args) throws CPFException {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         
-        Usuario user = new Usuario("duda.nunes", "senha123", "Eduarda Pereira Mourão Nunes", "16214363738");
-        usuarioDAO.adicionarNovoUsuario(user);
-        Usuario user2 = new Usuario("duda.nunes", "senha123", "Eduarda Pereira Mourão Nunes", "16214363738");
+        Usuario user2 = new Usuario("joao.silva", "senha123", "João Silva", "12345678909");
         usuarioDAO.adicionarNovoUsuario(user2);
         
         Conta conta = new Conta("12345");
