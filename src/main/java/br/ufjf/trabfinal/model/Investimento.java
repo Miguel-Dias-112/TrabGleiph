@@ -1,13 +1,17 @@
 package br.ufjf.trabfinal.model;
 
+import java.text.DecimalFormat;
+
 public class Investimento {
+    final private DecimalFormat df = new DecimalFormat("000");
+    private static int ultimoId;
     private String id;
     private String tipo;
     private double valor;
     private double taxaRendimento;
 
     public Investimento(String id, String tipo, double valor, double taxaRendimento) {
-        this.id = id;
+        this.id = "INVEST" + df.format(ultimoId++);
         this.tipo = tipo;
         this.valor = valor;
         this.taxaRendimento = taxaRendimento;

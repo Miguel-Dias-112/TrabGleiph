@@ -1,16 +1,18 @@
 package br.ufjf.trabfinal.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Conta {
+    final private DecimalFormat df = new DecimalFormat("000");
     private static int ultimoId;
-    private int id;
+    private String id;
     private double saldo;
     private List<Transacao> transacoes;
 
     public Conta(String id) {
-        this.id = ultimoId++;
+        this.id = "CONT" + df.format(ultimoId++);
         this.saldo = 0.0;
         this.transacoes = new ArrayList<>();
     }
@@ -26,11 +28,11 @@ public class Conta {
         }
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
