@@ -1,4 +1,4 @@
-package br.ufjf.trabfinal.model;
+package Models;
 
 import java.text.DecimalFormat;
 

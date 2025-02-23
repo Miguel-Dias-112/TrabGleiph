@@ -1,8 +1,12 @@
-package br.ufjf.trabfinal.controller;
+package Controller;
 
-import br.ufjf.trabfinal.model.*;
-import br.ufjf.trabfinal.persistence.TransacaoPersist;
-import br.ufjf.trabfinal.persistence.TransacaoDAO;
+import Models.Saque;
+import Models.Conta;
+import Models.Transacao;
+import Models.Transferencia;
+import Models.Deposito;
+import Persistence.TransacaoPersist;
+import Persistence.TransacaoDAO;
 
 public class TransacaoController {
     private TransacaoPersist  transacaoPersist; // final?

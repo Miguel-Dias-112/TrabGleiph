@@ -1,4 +1,4 @@
-package br.ufjf.trabfinal.model;
+package Models;
 
 // login vai ser cpf e senha 
 

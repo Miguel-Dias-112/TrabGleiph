@@ -1,4 +1,4 @@
-package br.ufjf.trabfinal.util;
+package Utils;
 
 import com.google.gson.Gson;
 import java.lang.reflect.Type;

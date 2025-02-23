@@ -1,4 +1,4 @@
-package br.ufjf.trabfinal.model;
+package Models;
 
 public class Saque extends Transacao {
     public Saque(double valor) {

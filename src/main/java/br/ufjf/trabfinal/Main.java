@@ -7,8 +7,8 @@ package br.ufjf.trabfinal;
  * Miguel Dias
  */
 
-import br.ufjf.trabfinal.controller.TransacaoController;
-import br.ufjf.trabfinal.model.Conta;
+import Controller.TransacaoController;
+import Models.Conta;
 
 public class Main {
     public static void main(String[] args) {

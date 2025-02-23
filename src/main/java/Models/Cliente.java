@@ -1,4 +1,4 @@
-package br.ufjf.trabfinal.model;
+package Models;
 
 public class Cliente extends Usuario {
     private Conta conta; 

@@ -1,6 +1,6 @@
-package br.ufjf.trabfinal.persistence;
+package Persistence;
 
-import br.ufjf.trabfinal.model.Transacao;
+import Models.Transacao;
 import java.util.List;
 
 public interface TransacaoPersist {

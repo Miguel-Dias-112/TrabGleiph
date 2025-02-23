@@ -1,8 +1,8 @@
-package br.ufjf.trabfinal.persistence;
+package Persistence;
 
-import br.ufjf.trabfinal.model.Transacao;
-import br.ufjf.trabfinal.util.GsonUtil;
-import br.ufjf.trabfinal.util.Arquivo;
+import Models.Transacao;
+import Utils.GsonUtil;
+import Utils.Arquivo;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;

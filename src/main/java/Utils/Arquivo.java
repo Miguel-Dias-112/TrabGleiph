@@ -1,4 +1,4 @@
-package br.ufjf.trabfinal.util;
+package Utils;
 
 import java.io.File;
 import java.io.FileWriter;

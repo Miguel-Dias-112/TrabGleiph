@@ -1,4 +1,4 @@
-package br.ufjf.trabfinal.model;
+package Models;
 
 //tirei data/hora, acredito que nao seja necessario. mas seria interessante
 

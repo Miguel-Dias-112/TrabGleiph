@@ -1,4 +1,4 @@
-package br.ufjf.trabfinal.model;
+package Models;
 
 public class Transferencia extends Transacao {
     private String contaDestino;
