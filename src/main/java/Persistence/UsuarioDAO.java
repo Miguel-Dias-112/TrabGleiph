@@ -24,6 +24,12 @@ public class UsuarioDAO implements UsuarioPersist {
 
         Arquivo.save(PATH, json); 
     }
+    
+    public void adicionarNovoUsuario(Usuario novoUsuario){
+        List<Usuario> usuarios = findAll();
+        usuarios.add(novoUsuario);
+        save(usuarios);
+    }
 
     @Override
     public List<Usuario> findAll() {

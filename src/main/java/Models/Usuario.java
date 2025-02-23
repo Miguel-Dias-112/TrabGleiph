@@ -1,6 +1,8 @@
-package Models;
+package Models; 
 
-// login vai ser cpf e senha 
+import Exception.CPFException;
+import Utils.CPF;
+
 
 public class Usuario {
     private String login;
@@ -8,11 +10,15 @@ public class Usuario {
     private String nome;
     final private String cpf;
 
-    public Usuario(String login, String senha, String nome, String cpf) {
+    public Usuario(String login, String senha, String nome, String cpf) throws CPFException {
+        if(!CPF.isCPFValido(cpf)){
+            throw new CPFException("Nao foi possivel cria o usuario.");
+        }
+        
         this.login = login;
         this.nome = nome;
-        this.cpf = cpf;
         this.senha = senha;
+        this.cpf = CPF.formatarCPF(cpf); //verifica se é válido antes de formatar
     }
     
     public String getNome() {

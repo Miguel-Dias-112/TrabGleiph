@@ -8,5 +8,7 @@
 - rever model de investimento e credito conforme requisitos trabalho
 
 
-
+- teste de unidade: cpf válido
+- teste de unidade: cpf único
+- teste de unidade: 
 */

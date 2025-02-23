@@ -1,9 +1,11 @@
 package Models;
 
+import Exception.CPFException;
+
 public class Cliente extends Usuario {
     private Conta conta; 
 
-    public Cliente(String login, String senha, String nome, String cpf) {
+    public Cliente(String login, String senha, String nome, String cpf) throws CPFException  {
         super(login, senha, nome, cpf);
     }
 

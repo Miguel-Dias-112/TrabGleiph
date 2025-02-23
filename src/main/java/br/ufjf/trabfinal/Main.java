@@ -8,10 +8,20 @@ package br.ufjf.trabfinal;
  */
 
 import Controller.TransacaoController;
+import Exception.CPFException;
 import Models.Conta;
+import Models.Usuario;
+import Persistence.UsuarioDAO;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CPFException {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        
+        Usuario user = new Usuario("duda.nunes", "senha123", "Eduarda Pereira Mourão Nunes", "16214363738");
+        usuarioDAO.adicionarNovoUsuario(user);
+        Usuario user2 = new Usuario("duda.nunes", "senha123", "Eduarda Pereira Mourão Nunes", "16214363738");
+        usuarioDAO.adicionarNovoUsuario(user2);
+        
         Conta conta = new Conta("12345");
 
         TransacaoController transacaoController = new TransacaoController();

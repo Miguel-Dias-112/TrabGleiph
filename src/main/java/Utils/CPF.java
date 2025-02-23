@@ -1,17 +1,24 @@
 package Utils;
 
 import Exception.CPFException;
+import Models.Usuario;
+import Persistence.UsuarioDAO;
+import java.util.List;
 
 public class CPF {
-    public static boolean isValidCPF(String cpf) throws CPFException {
+    public static boolean isCPFValido(String cpf) throws CPFException {
         cpf = cpf.replaceAll("[^0-9]", "");
 
-        if (cpf.length() != 11) {
+        if(cpf.length() != 11) {
             throw new CPFException("deve conter 11 digitos.");
         }
 
-        if (!validarDigitosCPF(cpf)) {
+        if(!validarDigitosCPF(cpf)) {
             throw new CPFException("digitos verificadores incorretos.");
+        }
+        
+        if(isCPFCadastrado(cpf)) {
+            throw new CPFException("cpf já cadastrado.");
         }
 
         return true;
@@ -47,13 +54,28 @@ public class CPF {
 
     public static String formatarCPF(String cpf) throws CPFException {
         
-        if (!isValidCPF(cpf)) {
-            throw new CPFException("nao foi possivel formatar.");
+        if(cpf.length() != 11) {
+            throw new CPFException("deve conter 11 digitos.");
         }
 
         cpf = cpf.replaceAll("[^0-9]", "");
         
         return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + 
                cpf.substring(6, 9) + "-" + cpf.substring(9, 11);
+    }
+    
+    public static boolean isCPFCadastrado(String cpf) throws CPFException{
+        cpf = formatarCPF(cpf);
+        
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        List<Usuario> usuarios = usuarioDAO.findAll();
+        
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCpf().equals(cpf)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
