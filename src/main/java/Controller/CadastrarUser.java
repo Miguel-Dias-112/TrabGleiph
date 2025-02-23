@@ -21,6 +21,7 @@ public class CadastrarUser implements ActionListener {
         this.login = login;
         this.senha = senha;
         this.cpf = cpf;
+        System.out.println(cpf);
 
     }
 

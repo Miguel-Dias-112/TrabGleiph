@@ -4,6 +4,8 @@ import javax.swing.*;
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class LoginScreen {
@@ -57,10 +59,16 @@ public class LoginScreen {
         JPanel panelBotoes = new JPanel();
         JButton loginButton = new JButton("Login");
         JButton registrarButton = new JButton("Registrar");
-     
-   
+
         //loginButton.addActionListener(new ActionListener() {});
-        //registrarButton.addActionListener(new CadastrarUser(userField.getText(), passField.getText(), userField.getText(),"16976385703"));
+        registrarButton.addActionListener(
+            new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Tela.setVisible(false);
+                    RegisterScreen registerScreen = new RegisterScreen();
+                }
+            }
+        );
         posicionaElemento(loginButton, 0, 3, new Insets(0, 50, 8, 50));
         posicionaElemento(registrarButton, 0, 4, new Insets(0, 50, 0, 50));
     }
@@ -77,5 +85,6 @@ public class LoginScreen {
         desenhaInputs();
         desenhaBotoes();
         Tela.setVisible(true);
+        
     }
 }
