@@ -54,6 +54,8 @@ public class CPF {
 
     public static String formatarCPF(String cpf) throws CPFException {
         
+        cpf = cpf.replaceAll("[^0-9]", "");
+        
         if(cpf.length() != 11) {
             throw new CPFException("deve conter 11 digitos.");
         }
