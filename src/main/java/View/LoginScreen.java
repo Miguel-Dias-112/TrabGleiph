@@ -1,5 +1,6 @@
 package View;
 
+import Controller.LogarUser;
 import javax.swing.*;
 
 
@@ -60,15 +61,11 @@ public class LoginScreen {
         JButton loginButton = new JButton("Login");
         JButton registrarButton = new JButton("Registrar");
 
-        //loginButton.addActionListener(new ActionListener() {});
-        registrarButton.addActionListener(
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Tela.dispose();
-                    RegisterScreen registerScreen = new RegisterScreen();
-                }
-            }
-        );
+        loginButton.addActionListener(new LogarUser(userField, passField));
+        registrarButton.addActionListener((ActionEvent e) -> {
+            Tela.dispose();
+            RegisterScreen registerScreen = new RegisterScreen();
+        });
         posicionaElemento(loginButton, 0, 3, new Insets(0, 50, 8, 50));
         posicionaElemento(registrarButton, 0, 4, new Insets(0, 50, 0, 50));
     }
@@ -79,8 +76,8 @@ public class LoginScreen {
         desenhaMensagem();
 
         // Criando os componentes
-        JLabel titutlo = new JLabel("Login Screen", SwingConstants.CENTER);
-        titutlo.setFont(new Font("Arial", Font.BOLD, 36));
+        JLabel titulo = new JLabel("Login Screen", SwingConstants.CENTER);
+        titulo.setFont(new Font("Arial", Font.BOLD, 36));
 
         desenhaInputs();
         desenhaBotoes();

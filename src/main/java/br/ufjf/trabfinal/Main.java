@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import Controller.TransacaoController;
 import Exception.CPFException;
 import Models.Conta;
+import Models.Login;
 import Models.Usuario;
 import Persistence.UsuarioDAO;
 import View.LoginScreen;

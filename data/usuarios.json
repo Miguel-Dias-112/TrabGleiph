@@ -4,5 +4,17 @@
     "senha": "senha123",
     "nome": "João Silva",
     "cpf": "123.456.789-09"
+  },
+  {
+    "login": "maria.joaquina",
+    "senha": "senha123",
+    "nome": "Maria Joaquina",
+    "cpf": "654.507.000-24"
+  },
+  {
+    "login": "geraldo.matias",
+    "senha": "senha123",
+    "nome": "Geraldo Matias",
+    "cpf": "061.679.950-01"
   }
 ]
