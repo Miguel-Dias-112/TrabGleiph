@@ -2,86 +2,83 @@ package View;
 
 import Controller.LogarUser;
 import javax.swing.*;
-
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 public class LoginScreen {
-    private JFrame Tela ;
-    private JTextField userField ;
-    private JPasswordField passField ;
-    private void configuraTela(){
-        Tela = new JFrame("Tela de Login");
+    private JFrame Tela;
+    private JTextField userField;
+    private JPasswordField passField;
+
+    private void configuraTela() {
+        Tela = new JFrame("BANCO JAVA");
         Tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Tela.setSize(600, 500);
+        Tela.setSize(700, 550);
         Tela.setLayout(new GridBagLayout());
         Tela.setLocationRelativeTo(null);
+    }
 
-    }
-    private 
-    void posicionaElemento(JComponent elemento, int x, int y,Insets margens) {
-       GridBagConstraints gbc = new GridBagConstraints();
-       gbc.gridx = x;
-       gbc.gridy = y;
-       gbc.fill = GridBagConstraints.HORIZONTAL;
-       gbc.insets =margens;
-       Tela.add(elemento, gbc);
-   }
-    private void desenhaTitulo(){
-        JLabel titutlo = new JLabel("Tela Login", SwingConstants.CENTER);
-        titutlo.setFont(new Font("Arial", Font.BOLD, 36));
-        posicionaElemento(titutlo, 0, 0, new Insets(0, 0, 60, 0));
-    }
-    private void desenhaMensagem(){
-        JLabel messageLabel = new JLabel("Insira suas crêdenciais", SwingConstants.CENTER);
-
-        posicionaElemento(messageLabel, 0, 10, new Insets(5, 0, 15, 0));
-    }
-   private void desenhaInputs(){
+    private void posicionaElemento(JComponent elemento, int x, int y, Insets margens) {
         GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = x;
+        gbc.gridy = y;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JPanel panelUser = new JPanel();
-            JLabel userLabel = new JLabel("Usuário:");
-            userField = new JTextField(15);
-            panelUser.add(userLabel);
-            panelUser.add(userField);
-        JPanel panelSenha = new JPanel();
-            JLabel passLabel = new JLabel("Senha:  ");
-            passField = new JPasswordField(15);
-            panelSenha.add(passLabel);
-            panelSenha.add(passField);
-        posicionaElemento(panelUser, 0, 1, new Insets(0, 0, 0, 0));
-        posicionaElemento(panelSenha, 0, 2, new Insets(0, 0, 15, 0));
+        gbc.insets = margens;
+        Tela.add(elemento, gbc);
     }
-    private void desenhaBotoes(){
-        JPanel panelBotoes = new JPanel();
-        JButton loginButton = new JButton("Login");
+
+    private void desenhaTitulo() {
+        JLabel titulo = new JLabel("Acesse o sistema", SwingConstants.CENTER);
+        titulo.setFont(new Font("Courier", Font.BOLD, 36));
+        posicionaElemento(titulo, 0, 0, new Insets(40, 0, 40, 0));
+    }
+
+    private void desenhaMensagem() {
+        JLabel messageLabel = new JLabel("Insira suas credenciais", SwingConstants.CENTER);
+        posicionaElemento(messageLabel, 0, 1, new Insets(0, 0, 20, 0));
+    }
+
+    private void desenhaInputs() {
+        JPanel panelUser = new JPanel();
+        JLabel userLabel = new JLabel("CPF:       ");
+        userField = new JTextField(20);
+        panelUser.add(userLabel);
+        panelUser.add(userField);
+
+        JPanel panelSenha = new JPanel();
+        JLabel passLabel = new JLabel("Senha:  ");
+        passField = new JPasswordField(20);
+        panelSenha.add(passLabel);
+        panelSenha.add(passField);
+
+        posicionaElemento(panelUser, 0, 2, new Insets(0, 0, 10, 0));
+        posicionaElemento(panelSenha, 0, 3, new Insets(0, 0, 20, 0));
+    }
+
+    private void desenhaBotoes() {
+        JButton loginButton = new JButton("Acessar");
         JButton registrarButton = new JButton("Registrar");
 
         loginButton.addActionListener(new LogarUser(userField, passField));
+
         registrarButton.addActionListener((ActionEvent e) -> {
             Tela.dispose();
-            RegisterScreen registerScreen = new RegisterScreen();
+            new RegisterScreen();
         });
-        posicionaElemento(loginButton, 0, 3, new Insets(0, 50, 8, 50));
-        posicionaElemento(registrarButton, 0, 4, new Insets(0, 50, 0, 50));
+
+        JPanel panelBotoes = new JPanel();
+        panelBotoes.add(registrarButton);
+        panelBotoes.add(loginButton);
+
+        posicionaElemento(panelBotoes, 0, 4, new Insets(20, 0, 0, 0));
     }
+
     public LoginScreen() {
-      
         configuraTela();
         desenhaTitulo();
         desenhaMensagem();
-
-        // Criando os componentes
-        JLabel titulo = new JLabel("Login Screen", SwingConstants.CENTER);
-        titulo.setFont(new Font("Arial", Font.BOLD, 36));
-
         desenhaInputs();
         desenhaBotoes();
         Tela.setVisible(true);
-        
     }
 }
