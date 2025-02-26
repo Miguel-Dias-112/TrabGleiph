@@ -1,9 +1,9 @@
 package View;
 
-import Controller.LogarUser;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginScreen {
     private JFrame Tela;
@@ -59,7 +59,14 @@ public class LoginScreen {
         JButton loginButton = new JButton("Acessar");
         JButton registrarButton = new JButton("Registrar");
 
-        loginButton.addActionListener(new LogarUser(userField, passField));
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Tela.dispose();
+                // logica de login LogarUser aqui
+                new HomeScreen("Cliente");
+            }
+        });
 
         registrarButton.addActionListener((ActionEvent e) -> {
             Tela.dispose();
