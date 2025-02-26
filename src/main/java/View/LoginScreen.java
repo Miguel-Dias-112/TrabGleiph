@@ -40,7 +40,7 @@ public class LoginScreen {
 
     private void desenhaInputs() {
         JPanel panelUser = new JPanel();
-        JLabel userLabel = new JLabel("CPF:       ");
+        JLabel userLabel = new JLabel("Login:       ");
         userField = new JTextField(20);
         panelUser.add(userLabel);
         panelUser.add(userField);
