@@ -1,10 +1,17 @@
 package Utils;
 
 import com.google.gson.Gson;
-import java.lang.reflect.Type;
+import com.google.gson.GsonBuilder;
+import java.text.DecimalFormat;
 
 public class GsonUtil {
-    private static final Gson gson = new Gson();
+    private static final Gson gson;
+
+    static {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(DecimalFormat.class, new DecimalFormatTypeAdapter());
+        gson = builder.create();  
+    }
 
     public static String toJson(Object obj) {
         return gson.toJson(obj);
@@ -14,7 +21,7 @@ public class GsonUtil {
         return gson.fromJson(json, classOfT);
     }
 
-    public static <T> T fromJson(String json, Type typeOfT) {
+    public static <T> T fromJson(String json, java.lang.reflect.Type typeOfT) {
         return gson.fromJson(json, typeOfT);
     }
 }

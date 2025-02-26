@@ -10,6 +10,7 @@ import java.util.List;
 import com.google.gson.reflect.TypeToken;
 
 public class UsuarioDAO implements UsuarioPersist {
+
     private static final String DIRECTORY = "data";
     private static final String PATH = DIRECTORY + File.separator + "usuarios.json";
 
@@ -19,13 +20,13 @@ public class UsuarioDAO implements UsuarioPersist {
 
         File diretorio = new File(DIRECTORY);
         if (!diretorio.exists()) {
-            diretorio.mkdirs(); 
+            diretorio.mkdirs();
         }
 
-        Arquivo.save(PATH, json); 
+        Arquivo.save(PATH, json);
     }
-    
-    public void adicionarNovoUsuario(Usuario novoUsuario){
+
+    public void adicionarNovoUsuario(Usuario novoUsuario) {
         List<Usuario> usuarios = findAll();
         usuarios.add(novoUsuario);
         save(usuarios);
@@ -37,7 +38,8 @@ public class UsuarioDAO implements UsuarioPersist {
 
         List<Usuario> usuarios = new ArrayList<>();
         if (!json.trim().isEmpty()) {
-            Type tipoLista = new TypeToken<List<Usuario>>() {}.getType();
+            Type tipoLista = new TypeToken<List<Usuario>>() {
+            }.getType();
             usuarios = GsonUtil.fromJson(json, tipoLista);
 
             if (usuarios == null) {

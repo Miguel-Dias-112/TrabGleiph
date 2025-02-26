@@ -1,45 +1,67 @@
 package Controller;
 
-
-
-import Models.Usuario;
+import Exception.CPFException;
+import Models.*;
 import Persistence.UsuarioDAO;
-import View.LoginScreen;
+import Utils.CPF;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class CadastrarUser implements ActionListener {
 
     private JTextField nomeField;
-    private JTextField loginField;
-    private JTextField senhaField;
     private JTextField cpfField;
+    private JTextField loginField;
+    private JPasswordField senhaField;
+    private JComboBox<String> cargoBox;
 
-    public CadastrarUser(JTextField nome, JTextField login, JTextField senha, JTextField cpf) {
+    public CadastrarUser(JTextField nome, JTextField cpf, JTextField login, JPasswordField senha, JComboBox<String> cargo) {
         this.nomeField = nome;
+        this.cpfField = cpf;
         this.loginField = login;
         this.senhaField = senha;
-        this.cpfField = cpf;
-     //   System.out.println(cpf);
-
+        this.cargoBox = cargo;
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String nome = nomeField.getText();
-        String login = loginField.getText();
-        String senha = senhaField.getText();
         String cpf = cpfField.getText();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        String login = loginField.getText();
+        String senha = new String(senhaField.getPassword());
+        String cargo = (String) cargoBox.getSelectedItem();
+
+        Usuario novoUsuario = null;
         try {
-            Usuario novoUsuario = new Usuario(login, senha, nome, cpf);
+            // Verifica se o CPF está cadastrado
+            if (CPF.isCPFCadastrado(cpf)) {
+                JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            switch (cargo) {
+                case "Cliente":
+                    novoUsuario = new Cliente(login, senha, nome, cpf);
+                    break;
+                case "Caixa":
+                    novoUsuario = new Caixa(login, senha, nome, cpf);
+                    break;
+                case "Gerente":
+                    novoUsuario = new Gerente(login, senha, nome, cpf);
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Cargo inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+            }
+
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.adicionarNovoUsuario(novoUsuario);
-        } catch (Exception e1) {
-            e1.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (CPFException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 }

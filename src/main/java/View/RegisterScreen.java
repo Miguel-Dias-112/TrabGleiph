@@ -80,21 +80,18 @@ public class RegisterScreen {
         posicionaElemento(panelCargo, 0, 6, new Insets(0, 0, 20, 0));
     }
 
-    private void desenhaBotoes() {
-        JButton registrarButton = new JButton("Registrar");
+private void desenhaBotoes() {
+    JButton registrarButton = new JButton("Registrar");
 
-        registrarButton.addActionListener((ActionEvent e) -> {
-            // tratar cadastro
-            JOptionPane.showMessageDialog(Tela, "Cadastro realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            // tratar erro
-            // JOptionPane.showMessageDialog(Tela, "Erro ao cadastrar!", "Erro", JOptionPane.ERROR_MESSAGE);
-        });
+    CadastrarUser cadastrarUser = new CadastrarUser(userField, cpfField, loginField, senhaField, cargoComboBox);
+    registrarButton.addActionListener(cadastrarUser);
 
-        JPanel panelBotoes = new JPanel();
-        panelBotoes.add(registrarButton);
+    JPanel panelBotoes = new JPanel();
+    panelBotoes.add(registrarButton);
 
-        posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
-    }
+    posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
+}
+
 
     public RegisterScreen() {
         configuraTela();
