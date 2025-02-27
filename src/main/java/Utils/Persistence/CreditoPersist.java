@@ -1,4 +1,4 @@
-package Persistence;
+package Utils.Persistence;
 
 import Models.Credito;
 import java.util.List;

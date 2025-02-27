@@ -1,4 +1,4 @@
-package Controller;
+package Controller.ClickHandlers;
 
 import Exception.LoginException;
 import Models.Login;

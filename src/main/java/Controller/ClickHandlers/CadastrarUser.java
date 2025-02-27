@@ -1,13 +1,14 @@
-package Controller;
+package Controller.ClickHandlers;
 
 import Exception.CPFException;
 import Models.*;
-import Persistence.UsuarioDAO;
 import Utils.CPF;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+import Controller.DataAcessObjects.UsuarioDAO;
 
 public class CadastrarUser implements ActionListener {
 
