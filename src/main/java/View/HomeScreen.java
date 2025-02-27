@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HomeScreen {
+
     private JFrame tela;
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
@@ -28,13 +29,34 @@ public class HomeScreen {
         menuSuperior.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuSuperior.setBackground(Color.LIGHT_GRAY);
 
-        if ("Cliente".equals(tipoUsuario)) {
-            menuSuperior.add(new JButton("Transferências"));
-            menuSuperior.add(new JButton("Pedir Crédito"));
-            menuSuperior.add(new JButton("Ver Investimentos"));
+        // 
+        switch (tipoUsuario) {
+            case "Cliente":
+                menuSuperior.add(new JButton("Sair"));
+                menuSuperior.add(new JButton("Editar Usuário"));
+                menuSuperior.add(new JButton("Saldo e Extrato"));
+                menuSuperior.add(new JButton("Transferir"));
+                menuSuperior.add(new JButton("Ver Investimentos"));
+
+                break;
+            case "Caixa":
+                menuSuperior.add(new JButton("Sair"));
+                menuSuperior.add(new JButton("Editar Usuário"));
+                menuSuperior.add(new JButton("Saque"));
+                menuSuperior.add(new JButton("Depósito"));
+                menuSuperior.add(new JButton("Transferência"));
+
+                break;
+            case "Gerente":
+                menuSuperior.add(new JButton("Sair"));
+                menuSuperior.add(new JButton("Editar Usuário"));
+                menuSuperior.add(new JButton("Saque Gerente"));
+                menuSuperior.add(new JButton("Transferência Gerente"));
+                menuSuperior.add(new JButton("Cadastrar Investimentos"));
+                menuSuperior.add(new JButton("Analisar Crédito"));
+                break;
         }
-        // menus diferentes para caixa e gerente aqui
-        
+
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
 
@@ -42,16 +64,16 @@ public class HomeScreen {
         conteudoCentral = new JPanel();
         conteudoCentral.setLayout(new GridLayout(1, 2, 20, 20));
         conteudoCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        
+
         if ("Cliente".equals(tipoUsuario)) {
             JPanel saldoPanel = new JPanel();
             saldoPanel.setBorder(BorderFactory.createTitledBorder("Saldo"));
             saldoPanel.add(new JLabel("R$ 0,00"));
-            
+
             JPanel historicoPanel = new JPanel();
             historicoPanel.setBorder(BorderFactory.createTitledBorder("Histórico de Transações"));
             historicoPanel.add(new JTextArea(10, 30));
-            
+
             conteudoCentral.add(saldoPanel);
             conteudoCentral.add(historicoPanel);
         }
