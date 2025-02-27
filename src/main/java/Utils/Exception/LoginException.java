@@ -1,4 +1,4 @@
-package Exception;
+package Utils.Exception;
 
 public class LoginException extends Exception {
 
