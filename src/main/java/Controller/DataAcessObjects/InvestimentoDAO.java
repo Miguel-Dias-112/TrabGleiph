@@ -1,9 +1,9 @@
 package Controller.DataAcessObjects;
 
 import Models.Investimento;
-import Persistence.InvestimentoPersist;
+import Utils.Persistence.InvestimentoPersist;
 import Utils.GsonUtil;
-import Utils.Arquivo;
+import Models.Arquivo;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;

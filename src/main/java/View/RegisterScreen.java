@@ -1,6 +1,6 @@
 package View;
 
-import Controller.CadastrarUser;
+import Controller.ClickHandlers.CadastrarUser;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

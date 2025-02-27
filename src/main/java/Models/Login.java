@@ -1,7 +1,7 @@
 package Models;
 
-import Exception.LoginException;
-import Persistence.UsuarioDAO;
+import Utils.Exception.LoginException;
+import Controller.DataAcessObjects.UsuarioDAO;
 import static java.time.Clock.system;
 import java.util.List;
 import static javax.swing.text.html.HTML.Tag.U;

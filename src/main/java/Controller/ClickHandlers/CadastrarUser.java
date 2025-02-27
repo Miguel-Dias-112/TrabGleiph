@@ -1,6 +1,7 @@
 package Controller.ClickHandlers;
 
-import Exception.CPFException;
+import Utils.Exception.CPFException;
+import Utils.Exception.CadastroException;
 import Models.*;
 import Utils.CPF;
 
@@ -35,33 +36,31 @@ public class CadastrarUser implements ActionListener {
         String cargo = (String) cargoBox.getSelectedItem();
 
         Usuario novoUsuario = null;
+        
         try {
             // Verifica se o CPF está cadastrado
+            /*
             if (CPF.isCPFCadastrado(cpf)) {
                 JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            */
 
             switch (cargo) {
-                case "Cliente":
-                    novoUsuario = new Cliente(login, senha, nome, cpf);
-                    break;
-                case "Caixa":
-                    novoUsuario = new Caixa(login, senha, nome, cpf);
-                    break;
-                case "Gerente":
-                    novoUsuario = new Gerente(login, senha, nome, cpf);
-                    break;
-                default:
+                case "Cliente" -> novoUsuario = new Cliente(login, senha, nome, cpf);
+                case "Caixa" -> novoUsuario = new Caixa(login, senha, nome, cpf);
+                case "Gerente" -> novoUsuario = new Gerente(login, senha, nome, cpf);
+                default -> {
                     JOptionPane.showMessageDialog(null, "Cargo inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
+                }
             }
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.adicionarNovoUsuario(novoUsuario);
             JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        } catch (CPFException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar usuário: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (CPFException | CadastroException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 

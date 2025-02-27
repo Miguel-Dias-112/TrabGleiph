@@ -1,8 +1,10 @@
 package Models; 
 
-import Utils.CPF;
 import Utils.Exception.CPFException;
-
+import Utils.Exception.CadastroException;
+import Controller.DataAcessObjects.UsuarioDAO;
+import Utils.CPF;
+import java.util.List;
 
 public class Usuario {
     private String login;
@@ -11,13 +13,17 @@ public class Usuario {
     final private String cpf;
     final private String cargo;
 
-    public Usuario(String login, String senha, String nome, String cpf, String cargo) throws CPFException {
+    public Usuario(String login, String senha, String nome, String cpf, String cargo) throws CPFException, CadastroException {
         if(!CPF.isCPFValido(cpf)){
             throw new CPFException("Nao foi possivel cria o usuario.");
         }
         
-        if(cargo != "Caixa" && cargo != "Gerente" && cargo != "Cliente"){
-            throw new Error("Erro Criacao de Usuario: Cargo invalido");
+        if(!"Caixa".equals(cargo) && !"Gerente".equals(cargo) && !"Cliente".equals(cargo)){
+            throw new CadastroException("Cargo invalido");
+        }
+        
+        if(!checkLoginAvailable(login)){ 
+            throw new CadastroException("Este login ja esta em uso.");
         }
         
         this.login = login;
@@ -42,16 +48,32 @@ public class Usuario {
     public String getSenha() {
         return senha;
     }
+    
+    public String getCargo(){
+        return cargo;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
     
     public void setSenha(String novaSenha) {
-        if(novaSenha == this.senha){
+        if(novaSenha.equals(this.senha)){
             throw new Error("Error: A nova senha não pode ser igual a antiga.");
         }else{
             this.senha = novaSenha;
         }
+    }
+    
+    private boolean checkLoginAvailable(String login){
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        List<Usuario> usuarios = usuarioDAO.findAll();
+        
+        for(Usuario usuario: usuarios){
+            if(usuario.login.equals(login)){
+                return false;
+            }
+        }
+        return true;
     }
 }

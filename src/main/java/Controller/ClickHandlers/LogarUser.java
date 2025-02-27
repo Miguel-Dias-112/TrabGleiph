@@ -1,6 +1,6 @@
 package Controller.ClickHandlers;
 
-import Exception.LoginException;
+import Utils.Exception.LoginException;
 import Models.Login;
 import Models.Usuario;
 import View.LoginScreen;
