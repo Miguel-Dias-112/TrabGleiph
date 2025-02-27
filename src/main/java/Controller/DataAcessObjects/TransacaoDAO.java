@@ -1,13 +1,14 @@
 package Controller.DataAcessObjects;
 
+import Models.Arquivo;
 import Models.Conta;
 import Models.Deposito;
 import Models.Saque;
 import Models.Transacao;
 import Models.Transferencia;
-import Persistence.TransacaoPersist;
 import Utils.GsonUtil;
-import Utils.Arquivo;
+import Utils.Persistence.TransacaoPersist;
+
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;

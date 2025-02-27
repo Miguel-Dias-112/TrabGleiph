@@ -2,19 +2,12 @@ package br.ufjf.trabfinal;
 
 import javax.swing.JFrame;
 
-/**
- * @authors 
- * Eduarda Nunes
- * Gabriel Giácomo
- * Miguel Dias
- */
-
-import Controller.TransacaoController;
-import Exception.CPFException;
+import Controller.ClickHandlers.TransacaoController;
+import Controller.DataAcessObjects.UsuarioDAO;
 import Models.Conta;
 import Models.Login;
 import Models.Usuario;
-import Persistence.UsuarioDAO;
+import Utils.Exception.CPFException;
 import View.LoginScreen;
 
 public class Main {

@@ -1,7 +1,7 @@
 package Models; 
 
-import Exception.CPFException;
 import Utils.CPF;
+import Utils.Exception.CPFException;
 
 
 public class Usuario {

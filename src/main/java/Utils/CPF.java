@@ -1,7 +1,7 @@
 package Utils;
 
-import Exception.CPFException;
 import Models.Usuario;
+import Utils.Exception.CPFException;
 
 import java.util.List;
 

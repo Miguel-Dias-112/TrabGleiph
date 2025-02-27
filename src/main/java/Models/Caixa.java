@@ -1,6 +1,6 @@
 package Models;
 
-import Exception.CPFException;
+import Utils.Exception.CPFException;
 
 public class Caixa extends Usuario {
 
