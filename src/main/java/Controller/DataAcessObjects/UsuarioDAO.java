@@ -1,6 +1,7 @@
-package Persistence;
+package Controller.DataAcessObjects;
 
 import Models.Usuario;
+import Persistence.UsuarioPersist;
 import Utils.GsonUtil;
 import Utils.Arquivo;
 import java.io.File;

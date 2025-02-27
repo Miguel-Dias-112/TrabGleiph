@@ -2,8 +2,10 @@ package Utils;
 
 import Exception.CPFException;
 import Models.Usuario;
-import Persistence.UsuarioDAO;
+
 import java.util.List;
+
+import Controller.DataAcessObjects.UsuarioDAO;
 
 public class CPF {
     public static boolean isCPFValido(String cpf) throws CPFException {

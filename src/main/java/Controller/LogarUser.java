@@ -3,16 +3,15 @@ package Controller;
 import Exception.LoginException;
 import Models.Login;
 import Models.Usuario;
-import Persistence.UsuarioDAO;
 import View.LoginScreen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JTextField;
+
+import Controller.DataAcessObjects.UsuarioDAO;
 
 public class LogarUser implements ActionListener {
 
