@@ -51,7 +51,7 @@ public class HomeCliente extends Screen {
         conteudoCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         JPanel saldoPanel = new JPanel();
         saldoPanel.setBorder(BorderFactory.createTitledBorder("Saldo"));
-        saldoPanel.add();
+        saldoPanel.add(saldoLabel);
         JPanel historicoPanel = new JPanel();
         historicoPanel.setBorder(BorderFactory.createTitledBorder("Histórico de Transações"));
         historicoPanel.add(new JTextArea(10, 30));
