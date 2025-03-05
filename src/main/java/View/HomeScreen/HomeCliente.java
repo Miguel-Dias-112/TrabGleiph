@@ -22,8 +22,8 @@ public class HomeCliente extends Screen {
     private List<Transacao> transacoes;
 
     public HomeCliente(Cliente user) {
-        int saldo = user.getConta().getSaldo();
-        saldoLabel = new JLabel("R$ 0,00");
+        double saldo = user.getSaldo();
+        saldoLabel = new JLabel("R$ "+ saldo);
     }
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
