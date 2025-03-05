@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginScreen {
+public class LoginScreen extends Screen {
     private JFrame Tela;
     private JTextField userField;
     private JPasswordField passField;
@@ -85,6 +85,6 @@ public class LoginScreen {
         desenhaMensagem();
         desenhaInputs();
         desenhaBotoes();
-        Tela.setVisible(true);
     }
+ 
 }

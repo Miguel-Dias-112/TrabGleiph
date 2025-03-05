@@ -2,17 +2,18 @@ package View;
 
 import javax.swing.*;
 
-import Controller.ClickHandlers.changeWindow;
+import Controller.ClickHandlers.trocarScreen;
 
 import java.awt.*;
 
-public class HomeScreen {
+public class HomeScreen extends Screen {
 
     private JFrame tela;
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
 
     public HomeScreen(String tipoUsuario) {
+        
         configuraTela();
         desenhaMenuSuperior(tipoUsuario);
         desenhaConteudoCentral(tipoUsuario);
@@ -34,7 +35,7 @@ public class HomeScreen {
 
         // 
         JButton botaoSair = new JButton("Sair");
-        botaoSair.addActionListener(new changeWindow(tela));
+        botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
 
         switch (tipoUsuario) {
@@ -88,7 +89,5 @@ public class HomeScreen {
     public static void main(String[] args) {
         new HomeScreen("Cliente"); // mockup Cliente
     }
-    public void show() {
-        tela.setVisible(true);
-    }
+
 }

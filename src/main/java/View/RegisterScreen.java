@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class RegisterScreen {
+public class RegisterScreen extends Screen {
     private JFrame Tela;
     private JTextField userField;
     private JTextField loginField;
@@ -98,7 +98,5 @@ public class RegisterScreen {
         desenhaInputs();
         desenhaBotoes();
     }
-    public void show() {
-        Tela.setVisible(true);
-    }
+  
 }
