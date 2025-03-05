@@ -6,8 +6,7 @@ import Controller.ClickHandlers.LogarUser;
 import Controller.ClickHandlers.trocarScreen;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class LoginScreen extends Screen {
     private JTextField userField;
@@ -75,7 +74,7 @@ public class LoginScreen extends Screen {
         JPanel panelCargo = new JPanel();
         JLabel cargoLabel = new JLabel("Cargo: ");
         String[] cargos = {"Cliente", "Caixa", "Gerente"};
-        cargoComboBox = new JComboBox<>(cargos);
+        this.cargoComboBox = new JComboBox<String>(cargos);
         panelCargo.add(cargoLabel);
         panelCargo.add(cargoComboBox);
         posicionaElemento(panelCargo, 0, 6, new Insets(0, 0, 20, 0));
@@ -90,8 +89,8 @@ public class LoginScreen extends Screen {
         desenhaTitulo();
         desenhaMensagem();
         desenhaInputs();
-        desenhaBotoes();
         desenhaCargo();
+        desenhaBotoes();
         tela.setVisible(true);
     }
 }
