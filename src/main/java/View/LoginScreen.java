@@ -2,15 +2,16 @@ package View;
 
 import javax.swing.*;
 
+import Controller.ClickHandlers.LogarUser;
 import Controller.ClickHandlers.trocarScreen;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class LoginScreen extends Screen {
     private JTextField userField;
     private JPasswordField passField;
+    private JComboBox<String> cargoComboBox;
 
     private void configuraTela() {
         
@@ -61,14 +62,24 @@ public class LoginScreen extends Screen {
     private void desenhaBotoes() {
         JButton loginButton = new JButton("Acessar");
         JButton registrarButton = new JButton("Registrar");
-        loginButton.addActionListener(new trocarScreen(this,new HomeScreen("Cliente")));
+        loginButton.addActionListener(new LogarUser(userField, passField,cargoComboBox));
         registrarButton.addActionListener(new trocarScreen(this,new RegisterScreen()));
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(registrarButton);
         panelBotoes.add(loginButton);
         posicionaElemento(panelBotoes, 0, 4, new Insets(20, 0, 0, 0));
     }
+    public void desenhaCargo(){
+        
+        JPanel panelCargo = new JPanel();
+        JLabel cargoLabel = new JLabel("Cargo: ");
+        String[] cargos = {"Cliente", "Caixa", "Gerente"};
+        this.cargoComboBox = new JComboBox<String>(cargos);
+        panelCargo.add(cargoLabel);
+        panelCargo.add(cargoComboBox);
+        posicionaElemento(panelCargo, 0, 6, new Insets(0, 0, 20, 0));
 
+    }
     public LoginScreen() {
        
     }
@@ -78,6 +89,7 @@ public class LoginScreen extends Screen {
         desenhaTitulo();
         desenhaMensagem();
         desenhaInputs();
+        desenhaCargo();
         desenhaBotoes();
         tela.setVisible(true);
     }

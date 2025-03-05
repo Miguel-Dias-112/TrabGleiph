@@ -3,7 +3,6 @@ package Controller.ClickHandlers;
 import Utils.Exception.CPFException;
 import Utils.Exception.CadastroException;
 import Models.*;
-import Utils.CPF;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

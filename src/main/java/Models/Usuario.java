@@ -12,7 +12,6 @@ public class Usuario {
     private String nome;
     final private String cpf;
     final private String cargo;
-
     public Usuario(String login, String senha, String nome, String cpf, String cargo) throws CPFException, CadastroException {
         if(!CPF.isCPFValido(cpf)){
             throw new CPFException("Nao foi possivel cria o usuario.");
