@@ -1,6 +1,9 @@
 package View;
 
 import javax.swing.*;
+
+import Controller.ClickHandlers.CloseWindow;
+
 import java.awt.*;
 
 public class HomeScreen {
@@ -30,9 +33,12 @@ public class HomeScreen {
         menuSuperior.setBackground(Color.LIGHT_GRAY);
 
         // 
+        JButton botaoSair = new JButton("Sair");
+        botaoSair.addActionListener(new CloseWindow(tela));
+        menuSuperior.add(new JButton("Sair"));
+
         switch (tipoUsuario) {
             case "Cliente":
-                menuSuperior.add(new JButton("Sair"));
                 menuSuperior.add(new JButton("Editar Usuário"));
                 menuSuperior.add(new JButton("Saldo e Extrato"));
                 menuSuperior.add(new JButton("Transferir"));
@@ -40,7 +46,6 @@ public class HomeScreen {
 
                 break;
             case "Caixa":
-                menuSuperior.add(new JButton("Sair"));
                 menuSuperior.add(new JButton("Editar Usuário"));
                 menuSuperior.add(new JButton("Saque"));
                 menuSuperior.add(new JButton("Depósito"));
@@ -48,7 +53,6 @@ public class HomeScreen {
 
                 break;
             case "Gerente":
-                menuSuperior.add(new JButton("Sair"));
                 menuSuperior.add(new JButton("Editar Usuário"));
                 menuSuperior.add(new JButton("Saque Gerente"));
                 menuSuperior.add(new JButton("Transferência Gerente"));
