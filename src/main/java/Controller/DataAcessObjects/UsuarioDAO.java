@@ -1,6 +1,7 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
+import Models.Cliente;
 import Models.Usuario;
 import Utils.GsonUtil;
 import Utils.Persistence.UsuarioPersist;
@@ -48,7 +49,20 @@ public class UsuarioDAO implements UsuarioPersist {
                 usuarios = new ArrayList<>();
             }
         }
-
         return usuarios;
+    }
+    public List<Cliente> findClients() {
+        String json = Arquivo.read(PATH);
+
+        List<Cliente> clientes = new ArrayList<>();
+        if (!json.trim().isEmpty()) {
+            Type tipoLista = new TypeToken<List<Cliente>>() {
+            }.getType();
+            clientes = GsonUtil.fromJson(json, tipoLista);
+            if (clientes == null) {
+                clientes = new ArrayList<>();
+            }
+        }
+        return clientes;
     }
 }

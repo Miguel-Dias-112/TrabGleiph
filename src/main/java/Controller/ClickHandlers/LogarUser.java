@@ -32,23 +32,18 @@ public class LogarUser implements ActionListener {
         String senha = senhaField.getText();
         String cargo = (String) cargoBox.getSelectedItem();
         Login novoLogin = new Login();
-        
-        try {
-            Cliente cpf = (Cliente) novoLogin.validarlogin(login, senha);
-            if(cpf.equals("")){
-                return;
-            }
-            if (novoLogin.user.getCargo().equals("Cliente")) {
-                Cliente user = (Cliente) novoLogin.user;
-                Screen newScreen = new HomeCliente(user);
+        if (cargo.equals("Cliente")) {
+            try {
+                Cliente cliente = (Cliente) novoLogin.validarlogin(login, senha);
+                Screen newScreen = new HomeCliente(cliente);
                 newScreen.show();
                 
+            } catch (LoginException error) {
+                error.printStackTrace(); 
             }
-      
             
-        } catch (LoginException error) {
-            error.printStackTrace(); 
         }
+        
 
     }
 }

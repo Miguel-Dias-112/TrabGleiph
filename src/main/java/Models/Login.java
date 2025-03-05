@@ -12,15 +12,13 @@ public class Login {
     public Login(){
        
     }
-    
     public void setLogin(Usuario user){
         Login.user = user;
     }
-    
     public Cliente validarlogin(String login, String senha) throws LoginException{
         boolean fezLogin = false;
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        List<Cliente> usuarios = usuarioDAO.findAll();
+        List<Cliente> usuarios = usuarioDAO.findClients();
         for(Cliente usuario : usuarios){
             if(usuario.getLogin().equals(login)){
                 if(usuario.getSenha().equals(senha)){
