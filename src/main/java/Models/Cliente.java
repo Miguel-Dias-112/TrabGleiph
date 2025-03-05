@@ -18,4 +18,7 @@ public class Cliente extends Usuario {
     public Conta getConta() {
         return conta;
     }
+    public void getSaldo(int saldo) {
+        this.saldo = saldo;
+    }
 }

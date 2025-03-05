@@ -3,9 +3,10 @@ package Controller.ClickHandlers;
 import Utils.Exception.LoginException;
 import Models.Login;
 import Models.Usuario;
-import View.HomeScreen;
+import View.HomeScreen.*;
 import View.LoginScreen;
 import View.Screen;
+import View.HomeScreen.HomeCliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +35,7 @@ public class LogarUser implements ActionListener {
                 return;
             }
             Usuario user = novoLogin.user;
-            Screen newScreen = new HomeScreen(user.getCargo());
+            Screen newScreen = new HomeCliente(user);
             newScreen.show();
             
         } catch (LoginException error) {
