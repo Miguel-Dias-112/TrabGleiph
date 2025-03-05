@@ -3,11 +3,14 @@ package View;
 import javax.swing.*;
 
 public class Screen {
-    private JFrame Tela;
+    public JFrame tela;
+    public Screen() {
+        tela = new JFrame();
+    }
     public void show() {
-        Tela.setVisible(true);
+        tela.setVisible(true);
     }
     public void close() {
-        Tela.dispose();
+        tela.dispose();
     }
 }

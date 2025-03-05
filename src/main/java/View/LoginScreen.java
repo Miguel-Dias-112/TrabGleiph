@@ -6,16 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginScreen extends Screen {
-    private JFrame Tela;
     private JTextField userField;
     private JPasswordField passField;
 
     private void configuraTela() {
-        Tela = new JFrame("BANCO JAVA");
-        Tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Tela.setSize(700, 550);
-        Tela.setLayout(new GridBagLayout());
-        Tela.setLocationRelativeTo(null);
+        
+        tela = new JFrame("BANCO JAVA");
+        tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        tela.setSize(700, 550);
+        tela.setLayout(new GridBagLayout());
+        tela.setLocationRelativeTo(null);
     }
 
     private void posicionaElemento(JComponent elemento, int x, int y, Insets margens) {
@@ -24,7 +24,7 @@ public class LoginScreen extends Screen {
         gbc.gridy = y;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = margens;
-        Tela.add(elemento, gbc);
+        tela.add(elemento, gbc);
     }
 
     private void desenhaTitulo() {
@@ -62,13 +62,13 @@ public class LoginScreen extends Screen {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Tela.dispose();
+                tela.dispose();
                 new HomeScreen("Cliente");
             }
         });
 
         registrarButton.addActionListener((ActionEvent e) -> {
-            Tela.dispose();
+            tela.dispose();
             new RegisterScreen();
         });
 

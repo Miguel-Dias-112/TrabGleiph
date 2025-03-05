@@ -8,12 +8,11 @@ import java.awt.*;
 
 public class HomeScreen extends Screen {
 
-    private JFrame tela;
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
 
     public HomeScreen(String tipoUsuario) {
-        
+
         configuraTela();
         desenhaMenuSuperior(tipoUsuario);
         desenhaConteudoCentral(tipoUsuario);
