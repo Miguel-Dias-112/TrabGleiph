@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class LoginScreen extends Screen {
     private JTextField userField;
     private JPasswordField passField;
+    private JComboBox<String> cargoComboBox;
 
     private void configuraTela() {
         
@@ -62,14 +63,24 @@ public class LoginScreen extends Screen {
     private void desenhaBotoes() {
         JButton loginButton = new JButton("Acessar");
         JButton registrarButton = new JButton("Registrar");
-        loginButton.addActionListener(new LogarUser(userField, passField));
+        loginButton.addActionListener(new LogarUser(userField, passField,cargoComboBox));
         registrarButton.addActionListener(new trocarScreen(this,new RegisterScreen()));
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(registrarButton);
         panelBotoes.add(loginButton);
         posicionaElemento(panelBotoes, 0, 4, new Insets(20, 0, 0, 0));
     }
+    public void desenhaCargo(){
+        
+        JPanel panelCargo = new JPanel();
+        JLabel cargoLabel = new JLabel("Cargo: ");
+        String[] cargos = {"Cliente", "Caixa", "Gerente"};
+        cargoComboBox = new JComboBox<>(cargos);
+        panelCargo.add(cargoLabel);
+        panelCargo.add(cargoComboBox);
+        posicionaElemento(panelCargo, 0, 6, new Insets(0, 0, 20, 0));
 
+    }
     public LoginScreen() {
        
     }
@@ -80,6 +91,7 @@ public class LoginScreen extends Screen {
         desenhaMensagem();
         desenhaInputs();
         desenhaBotoes();
+        desenhaCargo();
         tela.setVisible(true);
     }
 }
