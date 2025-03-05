@@ -12,32 +12,26 @@ public class Login {
     public Login(){
        
     }
-    
     public void setLogin(Usuario user){
         Login.user = user;
     }
-    
-    public String validarlogin(String login, String senha) throws LoginException{
-        
+    public Cliente validarlogin(String login, String senha) throws LoginException{
         boolean fezLogin = false;
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        List<Usuario> usuarios = usuarioDAO.findAll();
-        
-        for(Usuario usuario : usuarios){
+        List<Cliente> usuarios = usuarioDAO.findClients();
+        for(Cliente usuario : usuarios){
             if(usuario.getLogin().equals(login)){
                 if(usuario.getSenha().equals(senha)){
                     setLogin(usuario);
                     fezLogin = true;
                     System.out.println("logou");
-                    return usuario.getCpf();
+                    return usuario;
                 }
             }
         }
-       
-
         if(!fezLogin){
            throw new LoginException();
         }
-        return "";
+        return null;
     }
 }
