@@ -9,12 +9,7 @@ import View.Screen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 import javax.swing.JTextField;
-
-import Controller.DataAcessObjects.UsuarioDAO;
-
 public class LogarUser implements ActionListener {
 
     private JTextField loginField;
@@ -39,10 +34,7 @@ public class LogarUser implements ActionListener {
                 return;
             }
             Usuario user = novoLogin.user;
-          
             Screen newScreen = new HomeScreen(user.getCargo());
-     
-      
             newScreen.show();
             
         } catch (LoginException error) {

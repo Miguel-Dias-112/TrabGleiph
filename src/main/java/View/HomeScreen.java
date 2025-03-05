@@ -3,6 +3,9 @@ package View;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
+import Models.Usuario;
+import Models.Transacao;
+import java.util.List;
 
 import java.awt.*;
 
@@ -12,9 +15,17 @@ public class HomeScreen extends Screen {
     private JPanel conteudoCentral;
     private String tipoUsuario;
 
-    public HomeScreen(String tipoUsuario) {
+    private int saldo;
+    private List<Transacao> transacoes;
 
-        this.tipoUsuario = tipoUsuario;
+    public HomeScreen(Usuario user) {
+
+        this.tipoUsuario = user.getCargo();
+        if (this.tipoUsuario.equals("Cliente")) {
+
+           
+            
+        }
     }
    
     private void configuraTela() {
