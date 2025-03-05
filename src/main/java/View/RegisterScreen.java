@@ -5,8 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class RegisterScreen {
-    private JFrame Tela;
+public class RegisterScreen extends Screen {
     private JTextField userField;
     private JTextField loginField;
     private JPasswordField senhaField;
@@ -14,11 +13,11 @@ public class RegisterScreen {
     private JComboBox<String> cargoComboBox;
 
     private void configuraTela() {
-        Tela = new JFrame("BANCO JAVA");
-        Tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Tela.setSize(700, 550);
-        Tela.setLayout(new GridBagLayout());
-        Tela.setLocationRelativeTo(null);
+        tela = new JFrame("BANCO JAVA");
+        tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        tela.setSize(700, 550);
+        tela.setLayout(new GridBagLayout());
+        tela.setLocationRelativeTo(null);
     }
 
     private void posicionaElemento(JComponent elemento, int x, int y, Insets margens) {
@@ -27,7 +26,7 @@ public class RegisterScreen {
         gbc.gridy = y;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = margens;
-        Tela.add(elemento, gbc);
+        tela.add(elemento, gbc);
     }
 
     private void desenhaTitulo() {
@@ -80,25 +79,27 @@ public class RegisterScreen {
         posicionaElemento(panelCargo, 0, 6, new Insets(0, 0, 20, 0));
     }
 
-private void desenhaBotoes() {
-    JButton registrarButton = new JButton("Registrar");
+    private void desenhaBotoes() {
+        JButton registrarButton = new JButton("Registrar");
 
-    CadastrarUser cadastrarUser = new CadastrarUser(userField, cpfField, loginField, senhaField, cargoComboBox);
-    registrarButton.addActionListener(cadastrarUser);
+        CadastrarUser cadastrarUser = new CadastrarUser(userField, cpfField, loginField, senhaField, cargoComboBox);
+        registrarButton.addActionListener(cadastrarUser);
 
-    JPanel panelBotoes = new JPanel();
-    panelBotoes.add(registrarButton);
+        JPanel panelBotoes = new JPanel();
+        panelBotoes.add(registrarButton);
 
-    posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
-}
-
-
+        posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
+    }
     public RegisterScreen() {
+        
+    }
+    @Override
+    public void show() {
         configuraTela();
         desenhaTitulo();
         desenhaMensagem();
         desenhaInputs();
         desenhaBotoes();
-        Tela.setVisible(true);
+        tela.setVisible(true);
     }
 }

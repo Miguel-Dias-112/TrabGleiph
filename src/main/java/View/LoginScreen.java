@@ -1,21 +1,24 @@
 package View;
 
 import javax.swing.*;
+
+import Controller.ClickHandlers.trocarScreen;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginScreen {
-    private JFrame Tela;
+public class LoginScreen extends Screen {
     private JTextField userField;
     private JPasswordField passField;
 
     private void configuraTela() {
-        Tela = new JFrame("BANCO JAVA");
-        Tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Tela.setSize(700, 550);
-        Tela.setLayout(new GridBagLayout());
-        Tela.setLocationRelativeTo(null);
+        
+        tela = new JFrame("BANCO JAVA");
+        tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        tela.setSize(700, 550);
+        tela.setLayout(new GridBagLayout());
+        tela.setLocationRelativeTo(null);
     }
 
     private void posicionaElemento(JComponent elemento, int x, int y, Insets margens) {
@@ -24,7 +27,7 @@ public class LoginScreen {
         gbc.gridy = y;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = margens;
-        Tela.add(elemento, gbc);
+        tela.add(elemento, gbc);
     }
 
     private void desenhaTitulo() {
@@ -58,34 +61,24 @@ public class LoginScreen {
     private void desenhaBotoes() {
         JButton loginButton = new JButton("Acessar");
         JButton registrarButton = new JButton("Registrar");
-
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Tela.dispose();
-                // logica de login LogarUser aqui
-                new HomeScreen("Cliente");
-            }
-        });
-
-        registrarButton.addActionListener((ActionEvent e) -> {
-            Tela.dispose();
-            new RegisterScreen();
-        });
-
+        loginButton.addActionListener(new trocarScreen(this,new HomeScreen("Cliente")));
+        registrarButton.addActionListener(new trocarScreen(this,new RegisterScreen()));
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(registrarButton);
         panelBotoes.add(loginButton);
-
         posicionaElemento(panelBotoes, 0, 4, new Insets(20, 0, 0, 0));
     }
 
     public LoginScreen() {
+       
+    }
+    @Override
+    public void show() {
         configuraTela();
         desenhaTitulo();
         desenhaMensagem();
         desenhaInputs();
         desenhaBotoes();
-        Tela.setVisible(true);
+        tela.setVisible(true);
     }
 }

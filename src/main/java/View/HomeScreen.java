@@ -1,21 +1,22 @@
 package View;
 
 import javax.swing.*;
+
+import Controller.ClickHandlers.trocarScreen;
+
 import java.awt.*;
 
-public class HomeScreen {
+public class HomeScreen extends Screen {
 
-    private JFrame tela;
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
+    private String tipoUsuario;
 
     public HomeScreen(String tipoUsuario) {
-        configuraTela();
-        desenhaMenuSuperior(tipoUsuario);
-        desenhaConteudoCentral(tipoUsuario);
-        tela.setVisible(true);
-    }
 
+        this.tipoUsuario = tipoUsuario;
+    }
+   
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,15 +25,18 @@ public class HomeScreen {
         tela.setLocationRelativeTo(null);
     }
 
-    private void desenhaMenuSuperior(String tipoUsuario) {
+    private void desenhaMenuSuperior() {
         menuSuperior = new JPanel();
         menuSuperior.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuSuperior.setBackground(Color.LIGHT_GRAY);
 
         // 
+        JButton botaoSair = new JButton("Sair");
+        botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
+        menuSuperior.add(botaoSair);
+
         switch (tipoUsuario) {
             case "Cliente":
-                menuSuperior.add(new JButton("Sair"));
                 menuSuperior.add(new JButton("Editar Usuário"));
                 menuSuperior.add(new JButton("Saldo e Extrato"));
                 menuSuperior.add(new JButton("Transferir"));
@@ -40,7 +44,6 @@ public class HomeScreen {
 
                 break;
             case "Caixa":
-                menuSuperior.add(new JButton("Sair"));
                 menuSuperior.add(new JButton("Editar Usuário"));
                 menuSuperior.add(new JButton("Saque"));
                 menuSuperior.add(new JButton("Depósito"));
@@ -48,7 +51,6 @@ public class HomeScreen {
 
                 break;
             case "Gerente":
-                menuSuperior.add(new JButton("Sair"));
                 menuSuperior.add(new JButton("Editar Usuário"));
                 menuSuperior.add(new JButton("Saque Gerente"));
                 menuSuperior.add(new JButton("Transferência Gerente"));
@@ -60,7 +62,7 @@ public class HomeScreen {
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
 
-    private void desenhaConteudoCentral(String tipoUsuario) {
+    private void desenhaConteudoCentral() {
         conteudoCentral = new JPanel();
         conteudoCentral.setLayout(new GridLayout(1, 2, 20, 20));
         conteudoCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -81,7 +83,12 @@ public class HomeScreen {
         tela.add(conteudoCentral, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        new HomeScreen("Cliente"); // mockup Cliente
+    @Override
+    public void show() {
+        
+        configuraTela();
+        desenhaMenuSuperior();
+        desenhaConteudoCentral();
+        tela.setVisible(true);
     }
 }
