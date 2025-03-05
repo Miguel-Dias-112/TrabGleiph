@@ -91,11 +91,15 @@ public class RegisterScreen extends Screen {
         posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
     }
     public RegisterScreen() {
+        
+    }
+    @Override
+    public void show() {
         configuraTela();
         desenhaTitulo();
         desenhaMensagem();
         desenhaInputs();
         desenhaBotoes();
+        tela.setVisible(true);
     }
-  
 }

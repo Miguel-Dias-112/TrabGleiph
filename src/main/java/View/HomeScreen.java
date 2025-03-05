@@ -10,15 +10,13 @@ public class HomeScreen extends Screen {
 
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
+    private String tipoUsuario;
 
     public HomeScreen(String tipoUsuario) {
 
-        configuraTela();
-        desenhaMenuSuperior(tipoUsuario);
-        desenhaConteudoCentral(tipoUsuario);
-        tela.setVisible(true);
+        this.tipoUsuario = tipoUsuario;
     }
-
+   
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +25,7 @@ public class HomeScreen extends Screen {
         tela.setLocationRelativeTo(null);
     }
 
-    private void desenhaMenuSuperior(String tipoUsuario) {
+    private void desenhaMenuSuperior() {
         menuSuperior = new JPanel();
         menuSuperior.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuSuperior.setBackground(Color.LIGHT_GRAY);
@@ -64,7 +62,7 @@ public class HomeScreen extends Screen {
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
 
-    private void desenhaConteudoCentral(String tipoUsuario) {
+    private void desenhaConteudoCentral() {
         conteudoCentral = new JPanel();
         conteudoCentral.setLayout(new GridLayout(1, 2, 20, 20));
         conteudoCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -85,8 +83,12 @@ public class HomeScreen extends Screen {
         tela.add(conteudoCentral, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        new HomeScreen("Cliente"); // mockup Cliente
+    @Override
+    public void show() {
+        
+        configuraTela();
+        desenhaMenuSuperior();
+        desenhaConteudoCentral();
+        tela.setVisible(true);
     }
-
 }

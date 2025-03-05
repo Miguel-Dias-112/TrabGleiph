@@ -32,6 +32,6 @@ public class Main {
         // transacaoController.consultarExtrato(conta);
 
         LoginScreen loginScreen = new LoginScreen();
-     
+        loginScreen.show();
     }
 }

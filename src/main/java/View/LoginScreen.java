@@ -1,6 +1,9 @@
 package View;
 
 import javax.swing.*;
+
+import Controller.ClickHandlers.trocarScreen;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,33 +61,24 @@ public class LoginScreen extends Screen {
     private void desenhaBotoes() {
         JButton loginButton = new JButton("Acessar");
         JButton registrarButton = new JButton("Registrar");
-
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tela.dispose();
-                new HomeScreen("Cliente");
-            }
-        });
-
-        registrarButton.addActionListener((ActionEvent e) -> {
-            tela.dispose();
-            new RegisterScreen();
-        });
-
+        loginButton.addActionListener(new trocarScreen(this,new HomeScreen("Cliente")));
+        registrarButton.addActionListener(new trocarScreen(this,new RegisterScreen()));
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(registrarButton);
         panelBotoes.add(loginButton);
-
         posicionaElemento(panelBotoes, 0, 4, new Insets(20, 0, 0, 0));
     }
 
     public LoginScreen() {
+       
+    }
+    @Override
+    public void show() {
         configuraTela();
         desenhaTitulo();
         desenhaMensagem();
         desenhaInputs();
         desenhaBotoes();
+        tela.setVisible(true);
     }
- 
 }
