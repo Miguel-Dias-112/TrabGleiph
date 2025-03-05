@@ -35,7 +35,7 @@ public class HomeScreen {
         // 
         JButton botaoSair = new JButton("Sair");
         botaoSair.addActionListener(new CloseWindow(tela));
-        menuSuperior.add(new JButton("Sair"));
+        menuSuperior.add(botaoSair);
 
         switch (tipoUsuario) {
             case "Cliente":

@@ -63,7 +63,6 @@ public class LoginScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Tela.dispose();
-                // logica de login LogarUser aqui
                 new HomeScreen("Cliente");
             }
         });
