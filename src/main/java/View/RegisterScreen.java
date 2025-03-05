@@ -80,25 +80,25 @@ public class RegisterScreen {
         posicionaElemento(panelCargo, 0, 6, new Insets(0, 0, 20, 0));
     }
 
-private void desenhaBotoes() {
-    JButton registrarButton = new JButton("Registrar");
+    private void desenhaBotoes() {
+        JButton registrarButton = new JButton("Registrar");
 
-    CadastrarUser cadastrarUser = new CadastrarUser(userField, cpfField, loginField, senhaField, cargoComboBox);
-    registrarButton.addActionListener(cadastrarUser);
+        CadastrarUser cadastrarUser = new CadastrarUser(userField, cpfField, loginField, senhaField, cargoComboBox);
+        registrarButton.addActionListener(cadastrarUser);
 
-    JPanel panelBotoes = new JPanel();
-    panelBotoes.add(registrarButton);
+        JPanel panelBotoes = new JPanel();
+        panelBotoes.add(registrarButton);
 
-    posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
-}
-
-
+        posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
+    }
     public RegisterScreen() {
         configuraTela();
         desenhaTitulo();
         desenhaMensagem();
         desenhaInputs();
         desenhaBotoes();
+    }
+    public void show() {
         Tela.setVisible(true);
     }
 }

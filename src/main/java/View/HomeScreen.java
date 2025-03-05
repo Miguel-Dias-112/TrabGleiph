@@ -2,7 +2,7 @@ package View;
 
 import javax.swing.*;
 
-import Controller.ClickHandlers.CloseWindow;
+import Controller.ClickHandlers.changeWindow;
 
 import java.awt.*;
 
@@ -34,7 +34,7 @@ public class HomeScreen {
 
         // 
         JButton botaoSair = new JButton("Sair");
-        botaoSair.addActionListener(new CloseWindow(tela));
+        botaoSair.addActionListener(new changeWindow(tela));
         menuSuperior.add(botaoSair);
 
         switch (tipoUsuario) {
@@ -87,5 +87,8 @@ public class HomeScreen {
 
     public static void main(String[] args) {
         new HomeScreen("Cliente"); // mockup Cliente
+    }
+    public void show() {
+        tela.setVisible(true);
     }
 }
