@@ -17,7 +17,7 @@ public class Login {
         Login.user = user;
     }
     
-    public void validarlogin(String login, String senha) throws LoginException{
+    public String validarlogin(String login, String senha) throws LoginException{
         
         boolean fezLogin = false;
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -29,13 +29,15 @@ public class Login {
                     setLogin(usuario);
                     fezLogin = true;
                     System.out.println("logou");
-                    return;
+                    return usuario.getCpf();
                 }
             }
         }
-        
+       
+
         if(!fezLogin){
            throw new LoginException();
         }
+        return "";
     }
 }

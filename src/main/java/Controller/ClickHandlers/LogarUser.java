@@ -3,7 +3,9 @@ package Controller.ClickHandlers;
 import Utils.Exception.LoginException;
 import Models.Login;
 import Models.Usuario;
+import View.HomeScreen;
 import View.LoginScreen;
+import View.Screen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +33,18 @@ public class LogarUser implements ActionListener {
         Login novoLogin = new Login();
         
         try {
-            novoLogin.validarlogin(login, senha);
+            String cpf = novoLogin.validarlogin(login, senha);
+         
+            if(cpf.equals("")){
+                return;
+            }
+            Usuario user = novoLogin.user;
+          
+            Screen newScreen = new HomeScreen(user.getCargo());
+     
+      
+            newScreen.show();
+            
         } catch (LoginException error) {
             error.printStackTrace(); 
         }

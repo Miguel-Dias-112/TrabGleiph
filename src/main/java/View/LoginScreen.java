@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 
+import Controller.ClickHandlers.LogarUser;
 import Controller.ClickHandlers.trocarScreen;
 
 import java.awt.*;
@@ -61,7 +62,7 @@ public class LoginScreen extends Screen {
     private void desenhaBotoes() {
         JButton loginButton = new JButton("Acessar");
         JButton registrarButton = new JButton("Registrar");
-        loginButton.addActionListener(new trocarScreen(this,new HomeScreen("Cliente")));
+        loginButton.addActionListener(new LogarUser(userField, passField));
         registrarButton.addActionListener(new trocarScreen(this,new RegisterScreen()));
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(registrarButton);
