@@ -14,6 +14,7 @@ import View.Auth.LoginScreen;
 import View.PopUps.DeletarContaScreen;
 import View.PopUps.DepositoCaixa;
 import View.PopUps.EditarScreen;
+import View.PopUps.InvestimentosGerenteScreen;
 import View.PopUps.SaqueCaixa;
 import View.PopUps.TransferenciaCaixa;
 
@@ -48,15 +49,22 @@ public class HomeGerente extends Screen {
         JButton botaoSair = new JButton("Sair");
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
-        
+
         JButton botaoEditar = new JButton("Editar Usuário");
-        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen(gerente)));
+        botaoEditar.addActionListener(new trocarScreen(this, new EditarScreen(gerente)));
         menuSuperior.add(botaoEditar);
-        
+
+        JButton gerenciarInvestimentosButton = new JButton("Gerenciar Investimentos");
+        gerenciarInvestimentosButton.addActionListener(e -> {
+            new InvestimentosGerenteScreen(gerente).show();
+
+        });
+        menuSuperior.add(gerenciarInvestimentosButton);
+
         JButton botaoDeletar = new JButton("Deletar");
-        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen(gerente)));
+        botaoDeletar.addActionListener(new trocarScreen(this, new DeletarContaScreen(gerente)));
         menuSuperior.add(botaoDeletar);
-       
+
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
 
