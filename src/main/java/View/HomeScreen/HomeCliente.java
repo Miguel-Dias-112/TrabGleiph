@@ -13,7 +13,6 @@ import View.InvestimentosScreen;
 import View.RegisterScreen;
 import java.util.List;
 import java.awt.*;
-
 public class HomeCliente extends Screen {
 
     private JPanel menuSuperior;
@@ -47,15 +46,11 @@ public class HomeCliente extends Screen {
         botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
         menuSuperior.add(botaoEditar);
         JButton botaoTransferir = new JButton("Transferir");
-        botaoTransferir.addActionListener(e -> {
-            new TransferenciaView(Cliente).show();
-        });
+        botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaView(Cliente)));
         menuSuperior.add(botaoTransferir);
 
         JButton botaoInvestimentos = new JButton("Ver Investimentos");
-        botaoInvestimentos.addActionListener(e -> {
-            new InvestimentosScreen().show();
-        });
+        botaoInvestimentos.addActionListener(new trocarScreen(this, new InvestimentosScreen()));
         menuSuperior.add(botaoInvestimentos);
 
         tela.add(menuSuperior, BorderLayout.NORTH);
@@ -72,7 +67,6 @@ public class HomeCliente extends Screen {
         historicoPanel.add(historico);
         conteudoCentral.add(saldoPanel);
         conteudoCentral.add(historicoPanel);
-        // telas especificas para caixa e gerente aqui        
         tela.add(conteudoCentral, BorderLayout.CENTER);
     }
 

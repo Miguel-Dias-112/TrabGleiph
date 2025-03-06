@@ -5,6 +5,7 @@ import Models.Cliente;
 import Models.Conta;
 import Models.Transacao;
 import Models.Usuario;
+import Utils.CPF;
 import Utils.GsonUtil;
 import Utils.Persistence.ClientePersist;
 
@@ -71,27 +72,35 @@ public class ClienteDao implements ClientePersist {
             }
         }
     }
-    public void realizarTransferencia(Cliente user, String cpfDestino, double valor) {
+    public void realizarTransferencia(Cliente origem, String cpfDestino, double valor, String senha) {
+        if (!origem.getSenha().equals(senha)) {
+            System.out.println("Senha incorreta!");
+            return;
+        }
+       
         List<Cliente> usuarios = findAll();
         for (Cliente usuario : usuarios) {
-            if (usuario.getCpf().equals(user.getCpf())) {
-                double saldo = (double) usuario.getConta().getSaldo();
-                saldo -= valor;
+            double saldo;
+            if (usuario.getCpf().equals(cpfDestino)) {
+                saldo = (double) usuario.getConta().getSaldo();
+                saldo = usuario.getConta().getSaldo();
+                saldo += valor;
                 usuario.getConta().setSaldo(saldo);
                 usuario.getConta().adicionarTransacao(new Transacao(valor));
-                for (Cliente usuarioDestino : usuarios) {
-                    if (usuarioDestino.getCpf().equals(cpfDestino)) {
-                        saldo = usuarioDestino.getConta().getSaldo();
-                        saldo += valor;
-                        usuarioDestino.getConta().setSaldo(saldo);
-                        usuarioDestino.getConta().adicionarTransacao(new Transacao(valor));
-                        save(usuarios);
-                        return;
-                    }
-                }
+               
+            }
+            if (usuario.getCpf().equals(origem.getCpf())) {
+                saldo = (double) origem.getConta().getSaldo();
+                saldo = origem.getConta().getSaldo();
+                saldo -= valor;
+                origem.getConta().setSaldo(saldo);
+                origem.getConta().adicionarTransacao(new Transacao(valor));
+                
+                
             }
         }
-        
+        save(usuarios);
+        return;
     }
     @Override
     public List<Cliente> findAll() {

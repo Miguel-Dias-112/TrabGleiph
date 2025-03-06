@@ -3,8 +3,11 @@ package View;
 
 import javax.swing.*;
 
+import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDao;
 import Models.Cliente;
+import View.HomeScreen.HomeCliente;
+
 import java.awt.*;
 
 public class TransferenciaView extends Screen {
@@ -41,10 +44,12 @@ public class TransferenciaView extends Screen {
         transferButton.addActionListener(e -> {
             // Transferir
             ClienteDao clienteDao = new ClienteDao();
-            clienteDao.realizarTransferencia(cliente, "206.872.847-83", Double.parseDouble(valorField.getText()));
-            
+            clienteDao.realizarTransferencia(cliente,destinoCpfField.getText(), Double.parseDouble(valorField.getText()), senhaField.getText());
             JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            
             tela.dispose();
+            HomeCliente home = new HomeCliente(cliente);
+            home.show();
         });
         cancelButton = new JButton("Cancelar");
         panel.add(transferButton);

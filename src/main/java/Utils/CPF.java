@@ -1,5 +1,6 @@
 package Utils;
 
+import Models.Cliente;
 import Models.Usuario;
 import Utils.Exception.CPFException;
 
@@ -71,14 +72,14 @@ public class CPF {
     public static boolean isCPFCadastrado(String cpf) throws CPFException{
         cpf = formatarCPF(cpf);
         
-        ClienteDao usuarioDAO = new ClienteDao();
-       // List<Usuario> usuarios = usuarioDAO.findAll();
+        ClienteDao clientesDAO = new ClienteDao();
+       List<Cliente> clientess = clientesDAO.findAll();
         
-        //for (Usuario usuario : usuarios) {
-       //     if (usuario.getCpf().equals(cpf)) {
-        //        return true;
-        //    }
-        //}
+        for (Cliente clientes : clientess) {
+           if (clientes.getCpf().equals(cpf)) {
+               return true;
+           }
+        }
 
         return false;
     }
