@@ -28,9 +28,13 @@ public class TransChecker {
     public static boolean isTransValida(String cpfOrigem, String cpDestino, Double valor, String Senha) throws CPFException, TransacaoException, LoginException {
         //todo
         isPasswordValid(cpfOrigem, Senha);
-        CPF.isCPFCadastrado(cpfOrigem);
-        CPF.isCPFCadastrado(cpDestino);
+        boolean cadastrado1 = CPF.isCPFCadastrado(cpfOrigem);
+        boolean cadastrado2 =CPF.isCPFCadastrado(cpDestino);
+        if (!cadastrado1 || !cadastrado2) {
+            throw new CPFException("CPF não cadastrado");
+        }
         isSaldoAvaible(cpfOrigem, valor);
+
         return true;
     }
 

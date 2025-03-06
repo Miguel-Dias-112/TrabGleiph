@@ -1,5 +1,6 @@
 package Controller.ClickHandlers;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -24,7 +25,8 @@ public class TransferenciaCaixaHandle implements ActionListener {
         this.origemCpfField = cpf;
         this.destinoCpField = cpfDestino;
         this.valorField = valor;
-        this.senhaField = senha;
+        this.senhaField = senha;    
+        this.tela = telaAtual;
     }
 
     @Override

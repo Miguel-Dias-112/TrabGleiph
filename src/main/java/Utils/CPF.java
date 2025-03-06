@@ -78,7 +78,8 @@ public class CPF {
                return true;
            }
         }
-        throw new CPFException("CPF não cadastrado.");
-        // return false;
+        return false;
+        //throw new CPFException("CPF não cadastrado.");
+       
     }
 }

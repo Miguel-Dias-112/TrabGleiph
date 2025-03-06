@@ -22,9 +22,10 @@ public class TransferenciaCaixa  extends Screen {
     private JPasswordField senhaField;
     private JButton transferButton, cancelButton;
     private Caixa   caixa;
-
+    
     public TransferenciaCaixa(Caixa caixa) {
         this.caixa = caixa;
+        
         initialize();
     }
     

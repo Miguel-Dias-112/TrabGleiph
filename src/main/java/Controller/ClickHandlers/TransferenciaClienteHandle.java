@@ -24,6 +24,7 @@ public class TransferenciaClienteHandle implements ActionListener {
         this.destinoCpField = cpfDestino;
         this.valorField = valor;
         this.senhaField = senha;
+        this.tela = telaAtual;
     }
 
     @Override
