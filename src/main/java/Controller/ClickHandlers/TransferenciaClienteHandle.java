@@ -19,7 +19,7 @@ public class TransferenciaClienteHandle implements ActionListener {
     private JPasswordField senhaField;
     private Screen tela;
     private Cliente cliente;
-    public TransferenciaClienteHandle(Screen telaAtual,JTextField cpf, JTextField cpfDestino, JTextField valor, JPasswordField senha, Cliente cliente) {
+    public TransferenciaClienteHandle(Screen telaAtual, JTextField cpfDestino, JTextField valor, JPasswordField senha, Cliente cliente) {
         
         this.destinoCpField = cpfDestino;
         this.valorField = valor;
@@ -44,7 +44,8 @@ public class TransferenciaClienteHandle implements ActionListener {
             JOptionPane.showMessageDialog(null, "Transferência não realizada, verifique os dados e tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         tela.close();
-        HomeCliente home = new HomeCliente(cliente);
+
+        HomeCliente home = new HomeCliente(clienteDAO.findByCpf(cpfOrigem));
         home.show();
 
     }

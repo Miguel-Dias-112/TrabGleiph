@@ -42,7 +42,7 @@ public class TransferenciaCliente extends Screen {
         
         transferButton = new JButton("Transferir");
         transferButton.addActionListener(
-           new TransferenciaClienteHandle(this, destinoCpfField, valorField, senhaField, senhaField, cliente)
+           new TransferenciaClienteHandle(this,  destinoCpfField, valorField, senhaField, cliente)
         );
         cancelButton = new JButton("Cancelar");
         panel.add(transferButton);
