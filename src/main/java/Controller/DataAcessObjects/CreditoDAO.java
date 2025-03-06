@@ -41,4 +41,21 @@ public class CreditoDAO implements CreditoPersist {
 
         return creditos;
     }
+
+    public void adicionarCredito(Credito novoCredito) {
+        List<Credito> creditos = findAll();
+        creditos.add(novoCredito);
+        save(creditos);
+    }
+
+    public void atualizarCredito(Credito creditoAtualizado) {
+        List<Credito> creditos = findAll();
+        for (int i = 0; i < creditos.size(); i++) {
+            if (creditos.get(i).getId().equals(creditoAtualizado.getId())) {
+                creditos.set(i, creditoAtualizado);
+                break;
+            }
+        }
+        save(creditos);
+    }
 }

@@ -19,8 +19,12 @@ public class Cliente extends Usuario {
     public Conta getConta() {
         return conta;
     }
+
     public double getSaldo() {
-        
         return conta.getSaldo();
+    }
+
+    public String getId() {
+        return conta.getId();
     }
 }

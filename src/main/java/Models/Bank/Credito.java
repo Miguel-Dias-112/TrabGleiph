@@ -6,12 +6,14 @@ public class Credito {
     private static int ultimoId = 1;
     private String id;
     private double valor;
-    private String status; 
+    private String status;
+    private String clienteId;
 
-    public Credito(String id, double valor) {
+    public Credito(String clienteId, double valor) {
         this.id = "CRED" + df.format(ultimoId++);
         this.valor = valor;
         this.status = "Pendente";
+        this.clienteId = clienteId;
     }
 
     public String getId() {
@@ -36,5 +38,13 @@ public class Credito {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(String clienteId) {
+        this.clienteId = clienteId;
     }
 }

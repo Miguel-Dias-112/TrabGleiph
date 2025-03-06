@@ -49,4 +49,8 @@ public class Conta {
     public void setTransacoes(List<Transacao> transacoes) {
         this.transacoes = transacoes;
     }
+
+    public String getClientId() {
+        return id;
+    }
 }

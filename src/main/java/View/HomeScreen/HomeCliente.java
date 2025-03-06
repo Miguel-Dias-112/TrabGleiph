@@ -10,6 +10,7 @@ import View.PopUps.DeletarContaScreen;
 import View.PopUps.EditarScreen;
 import View.PopUps.InvestimentosScreen;
 import View.PopUps.TransferenciaCliente;
+import View.PopUps.CreditoClienteScreen;
 import Models.Usuarios.Cliente;
 
 import java.awt.*;
@@ -68,6 +69,12 @@ public class HomeCliente extends Screen {
         JButton botaoDeletar = new JButton("Deletar");
         botaoDeletar.addActionListener(new trocarScreen(this, new DeletarContaScreen(Cliente)));
         menuSuperior.add(botaoDeletar);
+
+        JButton solicitarCreditoButton = new JButton("Solicitar Crédito");
+        solicitarCreditoButton.addActionListener(e -> {
+            new CreditoClienteScreen(Cliente).show();
+        });
+        menuSuperior.add(solicitarCreditoButton);
 
         tela.add(menuSuperior, BorderLayout.NORTH);
     }

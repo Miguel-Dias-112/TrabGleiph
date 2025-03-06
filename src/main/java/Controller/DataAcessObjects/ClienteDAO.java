@@ -173,6 +173,23 @@ public class ClienteDAO implements ClientePersist {
         return false;
     }
 
+    public boolean aprovarCredito(String clienteId, double valor) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getId().equals(clienteId)) {
+                double saldoAtual = cliente.getConta().getSaldo();
+                cliente.getConta().setSaldo(saldoAtual + valor);
+
+                Transacao credito = new Transacao(valor, "Crédito aprovado");
+                cliente.getConta().adicionarTransacao(credito);
+
+                save(clientes);
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public List<Cliente> findAll() {
         String json = Arquivo.read(PATH);
