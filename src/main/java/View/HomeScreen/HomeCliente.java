@@ -46,7 +46,7 @@ public class HomeCliente extends Screen {
         menuSuperior.add(botaoSair);
         
         JButton botaoEditar = new JButton("Editar Usuário");
-        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
+        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen(Cliente)));
         menuSuperior.add(botaoEditar);
         
         JButton botaoTransferir = new JButton("Transferir");
@@ -58,7 +58,7 @@ public class HomeCliente extends Screen {
         menuSuperior.add(botaoInvestimentos);
         
         JButton botaoDeletar = new JButton("Deletar");
-        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen()));
+        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen(Cliente)));
         menuSuperior.add(botaoDeletar);
 
         tela.add(menuSuperior, BorderLayout.NORTH);

@@ -47,11 +47,11 @@ public class HomeGerente extends Screen {
         menuSuperior.add(botaoSair);
         
         JButton botaoEditar = new JButton("Editar Usuário");
-        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
+        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen(gerente)));
         menuSuperior.add(botaoEditar);
         
         JButton botaoDeletar = new JButton("Deletar");
-        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen()));
+        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen(gerente)));
         menuSuperior.add(botaoDeletar);
        
         tela.add(menuSuperior, BorderLayout.NORTH);

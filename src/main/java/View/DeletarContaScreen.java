@@ -4,7 +4,6 @@ import Controller.DataAcessObjects.CaixaDAO;
 import javax.swing.*;
 import Controller.DataAcessObjects.ClienteDAO;
 import Controller.DataAcessObjects.GerenteDAO;
-import Models.Login;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
@@ -20,8 +19,8 @@ public class DeletarContaScreen extends Screen {
     private JButton confirmarButton, cancelarButton;
     private final Usuario usuario;
   
-    public DeletarContaScreen() {
-        this.usuario = Login.user;
+    public DeletarContaScreen(Usuario usuario) {
+        this.usuario = usuario;
         initialize();
     }
     

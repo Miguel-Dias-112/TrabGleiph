@@ -5,6 +5,7 @@ import Controller.DataAcessObjects.ClienteDAO;
 import Controller.DataAcessObjects.GerenteDAO;
 import Utils.Exception.EditarException;
 import Models.*;
+import Models.Usuarios.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,11 +18,12 @@ public class EditarUser implements ActionListener {
     private JTextField nomeField;
     private JTextField loginField;
     private JPasswordField senhaField;
-
-    public EditarUser(JTextField nome, JTextField login, JPasswordField senha) {
+    private Usuario user;
+    public EditarUser(JTextField nome, JTextField login, JPasswordField senha, Usuario user) {
         this.nomeField = nome;
         this.loginField = login;
         this.senhaField = senha;
+        this.user = user;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class EditarUser implements ActionListener {
         String nome = nomeField.getText();
         String login = loginField.getText();
         String senha = new String(senhaField.getPassword());
-        String cpf = Login.user.getCpf();
+        String cpf = user.getCpf();
         
         try {
             editarUserPersist(cpf, nome, login, senha);
@@ -40,7 +42,7 @@ public class EditarUser implements ActionListener {
     }
     
     public void editarUserPersist(String cpf, String nome, String login, String senha) throws EditarException{
-        switch(Login.user.getCargo()){
+        switch(user.getCargo()){
             case "Cliente":
                 ClienteDAO clienteDAO =  new ClienteDAO();
                 clienteDAO.editarCliente(cpf, nome, login, senha);
