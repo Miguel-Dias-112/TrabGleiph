@@ -1,1 +1,16 @@
-[{"conta":{"df":"#000","id":"CONT001","saldo":100.0,"transacoes":[{"valor":100.0}],"investimentos":[]},"login":"cliente1.1","senha":"1234","nome":"cliente1.1","cpf":"696.720.310-09","cargo":"Cliente"},{"conta":{"df":"#000","id":"CONT002","saldo":0.0,"transacoes":[],"investimentos":[]},"login":"cliente2","senha":"123","nome":"cliente2","cpf":"738.031.720-20","cargo":"Cliente"},{"conta":{"df":"#000","id":"CONT003","saldo":-123.0,"transacoes":[{"valor":123.0}],"investimentos":[]},"login":"teste1","senha":"123","nome":"teste1","cpf":"169.763.857-03","cargo":"Cliente"},{"conta":{"df":"#000","id":"CONT009","saldo":699667.0,"transacoes":[{"valor":123.0},{"valor":456.0},{"valor":300000.0},{"valor":1000000.5}],"investimentos":[]},"login":"teste2","senha":"123","nome":"teste2","cpf":"206.872.847-83","cargo":"Cliente"}]
+[
+  {
+    "conta": {
+      "df": "#000",
+      "id": "CONT001",
+      "saldo": 100.0,
+      "transacoes": [{ "valor": 100.0 }],
+      "investimentos": []
+    },
+    "login": "cliente1.1",
+    "senha": "1234",
+    "nome": "cliente1.1",
+    "cpf": "696.720.310-09",
+    "cargo": "Cliente"
+  }
+]

@@ -1,6 +1,7 @@
 
 /*
 
+- verificar valor negativo antes de transferir e fazer saque
 - adicionar botão de voltar na tela de registrar
 - verificaçoes de inputs negativos em transacoes
 - verificar se existe dinheiro suficiente na conta origem para transferência e saque

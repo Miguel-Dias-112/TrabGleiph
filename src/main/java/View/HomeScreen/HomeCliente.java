@@ -8,6 +8,7 @@ import View.Screen;
 import View.TransferenciaCliente;
 import Models.Cliente;
 import Models.Transacao;
+import View.DeletarContaScreen;
 import View.EditarScreen;
 import View.InvestimentosScreen;
 import View.RegisterScreen;
@@ -39,12 +40,15 @@ public class HomeCliente extends Screen {
         menuSuperior = new JPanel();
         menuSuperior.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuSuperior.setBackground(Color.LIGHT_GRAY);
+        
         JButton botaoSair = new JButton("Sair");
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
+        
         JButton botaoEditar = new JButton("Editar Usuário");
         botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
         menuSuperior.add(botaoEditar);
+        
         JButton botaoTransferir = new JButton("Transferir");
         botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaCliente(Cliente)));
         menuSuperior.add(botaoTransferir);
@@ -52,6 +56,10 @@ public class HomeCliente extends Screen {
         JButton botaoInvestimentos = new JButton("Ver Investimentos");
         botaoInvestimentos.addActionListener(new trocarScreen(this, new InvestimentosScreen()));
         menuSuperior.add(botaoInvestimentos);
+        
+        JButton botaoDeletar = new JButton("Deletar");
+        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen()));
+        menuSuperior.add(botaoDeletar);
 
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
