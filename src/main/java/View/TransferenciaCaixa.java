@@ -33,7 +33,7 @@ public class TransferenciaCaixa  extends Screen {
         tela.setLocationRelativeTo(null);
         tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        JPanel panel = new JPanel(new GridLayout(4,2,10,10));
+        JPanel panel = new JPanel(new GridLayout(5,1,10,10));
         panel.add(new JLabel("CPF da conta origem:"));
         origemCpfField = new JTextField();
         panel.add(origemCpfField);
@@ -69,8 +69,8 @@ public class TransferenciaCaixa  extends Screen {
             home.show();
         });
         cancelButton = new JButton("Cancelar");
-        panel.add(transferButton);
         panel.add(cancelButton);
+        panel.add(transferButton);
         tela.add(panel);
         cancelButton.addActionListener(e -> tela.dispose());
     }
