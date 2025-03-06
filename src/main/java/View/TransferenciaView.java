@@ -12,9 +12,7 @@ public class TransferenciaView extends Screen {
     private JPasswordField senhaField;
     private JButton transferButton, cancelButton;
     private Cliente cliente;
-    public TransferenciaView() {
-        initialize();
-    }
+  
     public TransferenciaView(Cliente cliente) {
         this.cliente = cliente;
         initialize();
@@ -43,7 +41,8 @@ public class TransferenciaView extends Screen {
         transferButton.addActionListener(e -> {
             // Transferir
             ClienteDao clienteDao = new ClienteDao();
-            clienteDao.realizarTransferencia(cliente, "206.872.847-83");
+            clienteDao.realizarTransferencia(cliente, "206.872.847-83", Double.parseDouble(valorField.getText()));
+            
             JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             tela.dispose();
         });

@@ -19,11 +19,12 @@ public class HomeCliente extends Screen {
     private JPanel conteudoCentral;
     private JLabel saldoLabel;
     private JTextArea historico ;
-
+    private Cliente Cliente;
 
     public HomeCliente(Cliente user) {
         double saldo = user.getSaldo();
         saldoLabel = new JLabel("R$ "+ saldo);
+        this.Cliente = user;
         historico = new JTextArea(10, 30);
         historico.setText(user.getConta().consultarExtrato());
     }
@@ -46,7 +47,7 @@ public class HomeCliente extends Screen {
         menuSuperior.add(botaoEditar);
         JButton botaoTransferir = new JButton("Transferir");
         botaoTransferir.addActionListener(e -> {
-            new TransferenciaView().show();
+            new TransferenciaView(Cliente).show();
         });
         menuSuperior.add(botaoTransferir);
         menuSuperior.add(new JButton("Ver Investimentos"));
