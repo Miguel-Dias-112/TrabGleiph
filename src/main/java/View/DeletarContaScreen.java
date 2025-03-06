@@ -9,8 +9,6 @@ import Models.Cliente;
 import Models.Gerente;
 import Models.Login;
 import Models.Usuario;
-import View.HomeScreen.HomeCliente;
-import java.util.ArrayList;
 import java.util.List;
 
 import java.awt.*;
