@@ -1,4 +1,4 @@
-package View;
+package View.PopUps;
 
 import java.awt.GridLayout;
 
@@ -10,8 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
+import View.Screen;
 import View.HomeScreen.HomeCaixa;
 
 public class DepositoCaixa  extends Screen {
@@ -64,9 +66,10 @@ public class DepositoCaixa  extends Screen {
             home.show();
         });
         cancelButton = new JButton("Cancelar");
-        panel.add(transferButton);
         panel.add(cancelButton);
+
+        panel.add(transferButton);
         tela.add(panel);
-        cancelButton.addActionListener(e -> tela.dispose());
+        cancelButton.addActionListener(new trocarScreen(this, new HomeCaixa(caixa.getCpf())));
     }
 }

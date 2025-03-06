@@ -1,31 +1,26 @@
-package View;
+package View.PopUps;
 
-import java.awt.GridLayout;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-import Controller.ClickHandlers.TransferenciaCaixaHandle;
+import Controller.ClickHandlers.TransferenciaClienteHandle;
+import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
+import View.Screen;
 import View.HomeScreen.HomeCaixa;
 import View.HomeScreen.HomeCliente;
 
-public class TransferenciaCaixa  extends Screen {
-    private JTextField destinoCpfField,origemCpfField, valorField;
+import java.awt.*;
+
+public class TransferenciaCliente extends Screen {
+    private JTextField destinoCpfField, valorField;
     private JPasswordField senhaField;
     private JButton transferButton, cancelButton;
-    private Caixa   caixa;
-    
-    public TransferenciaCaixa(Caixa caixa) {
-        this.caixa = caixa;
-        
+    private Cliente cliente;
+  
+    public TransferenciaCliente(Cliente cliente) {
+        this.cliente = cliente;
         initialize();
     }
     
@@ -35,12 +30,7 @@ public class TransferenciaCaixa  extends Screen {
         tela.setLocationRelativeTo(null);
         tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        JPanel panel = new JPanel(new GridLayout(5,1,10,10));
-        panel.add(new JLabel("CPF da conta origem:"));
-        origemCpfField = new JTextField();
-        panel.add(origemCpfField);
-        
-
+        JPanel panel = new JPanel(new GridLayout(4,2,10,10));
         panel.add(new JLabel("CPF da conta destino:"));
         destinoCpfField = new JTextField();
         panel.add(destinoCpfField);
@@ -55,13 +45,16 @@ public class TransferenciaCaixa  extends Screen {
         
         transferButton = new JButton("Transferir");
         transferButton.addActionListener(
-            new TransferenciaCaixaHandle(this, origemCpfField, destinoCpfField, valorField, senhaField, caixa)
+           new TransferenciaClienteHandle(this,  destinoCpfField, valorField, senhaField, cliente)
         );
         cancelButton = new JButton("Cancelar");
-        panel.add(cancelButton);
         panel.add(transferButton);
+        panel.add(cancelButton);
         tela.add(panel);
-        cancelButton.addActionListener(e -> tela.dispose());
-    }
+        cancelButton.addActionListener(
+            new trocarScreen(this, new HomeCliente(cliente.getCpf()))
+        );  
+      }
+    
     
 }

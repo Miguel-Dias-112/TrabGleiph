@@ -1,9 +1,10 @@
-package View;
+package View.Auth;
 
 import javax.swing.*;
 
 import Controller.ClickHandlers.LogarUser;
 import Controller.ClickHandlers.trocarScreen;
+import View.Screen;
 
 import java.awt.*;
 
