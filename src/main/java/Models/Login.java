@@ -1,7 +1,7 @@
 package Models;
 
 import Utils.Exception.LoginException;
-import Controller.DataAcessObjects.ClienteDao;
+import Controller.DataAcessObjects.ClienteDAO;
 import static java.time.Clock.system;
 import java.util.List;
 import static javax.swing.text.html.HTML.Tag.U;
@@ -17,7 +17,7 @@ public class Login {
     }
     public Cliente validarlogin(String login, String senha) throws LoginException{
         boolean fezLogin = false;
-        ClienteDao usuarioDAO = new ClienteDao();
+        ClienteDAO usuarioDAO = new ClienteDAO();
         List<Cliente> usuarios = usuarioDAO.findAll();
         for(Cliente usuario : usuarios){
             if(usuario.getLogin().equals(login)){

@@ -2,7 +2,7 @@ package br.ufjf.trabfinal;
 
 import javax.swing.JFrame;
 
-import Controller.DataAcessObjects.ClienteDao;
+import Controller.DataAcessObjects.ClienteDAO;
 import Models.Cliente;
 import Models.Conta;
 import Models.Login;
@@ -15,7 +15,7 @@ import View.Screen;
 
 public class Main {
     public static void main(String[] args) throws CPFException {
-        ClienteDao usuarioDAO = new ClienteDao();
+        ClienteDAO usuarioDAO = new ClienteDAO();
         Cliente novoUsuario;
      
     

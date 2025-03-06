@@ -1,5 +1,6 @@
 package Controller.ClickHandlers;
 
+import Controller.DataAcessObjects.CaixaDAO;
 import Utils.Exception.CPFException;
 import Utils.Exception.CadastroException;
 import Models.*;
@@ -8,7 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import Controller.DataAcessObjects.ClienteDao;
+import Controller.DataAcessObjects.ClienteDAO;
+import Controller.DataAcessObjects.GerenteDAO;
 
 public class CadastrarUser implements ActionListener {
 
@@ -46,8 +48,18 @@ public class CadastrarUser implements ActionListener {
             switch (cargo) {
                 case "Cliente" ->{
                      Cliente novoUsuario = new Cliente(login, senha, nome, cpf);
-                     ClienteDao clienteDao = new ClienteDao();
-                     clienteDao.adicionarNovoUsuario(novoUsuario);
+                     ClienteDAO clienteDAO = new ClienteDAO();
+                     clienteDAO.adicionarNovoCliente(novoUsuario);
+                    }
+                case "Gerente" ->{
+                     Gerente novoGerente = new Gerente(login, senha, nome, cpf);
+                     GerenteDAO gerenteDAO = new GerenteDAO();
+                     gerenteDAO.adicionarNovoGerente(novoGerente);
+                    }
+                case "Caixa" ->{
+                     Caixa novoCaixa = new Caixa(login, senha, nome, cpf);
+                     CaixaDAO caixaDAO = new CaixaDAO();
+                     caixaDAO.adicionarNovoCaixa(novoCaixa);
                     }
                
                 default -> {
