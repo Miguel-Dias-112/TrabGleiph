@@ -10,17 +10,19 @@ public class Conta {
     final private String id;
     private double saldo;
     private List<Transacao> transacoes;
+    private List<Investimento> investimentos;
 
     public Conta() {
         this.id = "CONT" + df.format(ultimoId++);
         this.saldo = 0.0;
         this.transacoes = new ArrayList<>();
+        this.investimentos = new ArrayList<>();
     }
 
     public void adicionarTransacao(Transacao transacao) {
         transacoes.add(transacao);
-
     }
+    
     public String consultarExtrato() {
         String extrato = "Extrato da conta " + getId() + ":";
         for (Transacao transacao : getTransacoes()) {

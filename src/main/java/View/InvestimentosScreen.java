@@ -1,17 +1,22 @@
 package View;
 
-import Controller.ClickHandlers.trocarScreen;
-import Models.Cliente;
-import Models.Login;
-import View.HomeScreen.HomeCliente;
+import Controller.DataAcessObjects.InvestimentoDAO;
+import Models.Investimento;
+import Utils.Persistence.InvestimentoPersist;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class InvestimentosScreen extends Screen {
 
     private JList<String> listaInvestimentos;
     private DefaultListModel<String> modeloInvestimentos;
+    private InvestimentoPersist investimentoDAO;
+
+    public InvestimentosScreen() {
+        investimentoDAO = new InvestimentoDAO(); 
+    }
 
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Visualizar Investimentos");
@@ -39,17 +44,12 @@ public class InvestimentosScreen extends Screen {
     }
 
     private void desenhaListaInvestimentos() {
-        modeloInvestimentos = new DefaultListModel<>(); // recebe a lista do gson
-        modeloInvestimentos.addElement("Investimento A - Ano: 2025 - Retorno: 10%");
-        modeloInvestimentos.addElement("Investimento B - Ano: 2026 - Retorno: 12%");
-        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento D - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento E - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento F - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento G - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento H - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento I - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos = new DefaultListModel<>();
 
+        List<Investimento> investimentos = investimentoDAO.findAll();
+        for (Investimento investimento : investimentos) {
+            modeloInvestimentos.addElement(investimento.toString()); 
+        }
 
         listaInvestimentos = new JList<>(modeloInvestimentos);
         listaInvestimentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -68,7 +68,7 @@ public class InvestimentosScreen extends Screen {
             if (selecionado == null || selecionado.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(
                     null,
-                    "{erro de select}",
+                    "Selecione um investimento para continuar.",
                     "Erro",
                     JOptionPane.ERROR_MESSAGE
                 );
@@ -105,12 +105,8 @@ public class InvestimentosScreen extends Screen {
             }
         });
 
-        JButton cancelarButton = new JButton("Cancelar");
-        switch (Login.user.getCargo()) {
-            case ("Cliente") -> cancelarButton.addActionListener(
-                    new trocarScreen(this, new HomeCliente((Cliente) Login.user))
-            );
-        }
+        JButton cancelarButton = new JButton("Voltar");
+        cancelarButton.addActionListener(e -> tela.dispose());
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(investirButton);
