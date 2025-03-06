@@ -11,6 +11,8 @@ import View.HomeScreen.HomeCliente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Window;
+import javax.swing.SwingUtilities;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -37,15 +39,16 @@ public class LogarUser implements ActionListener {
             try {
                 Cliente cliente = (Cliente) novoLogin.validarlogin(login, senha);
                 Screen newScreen = new HomeCliente(cliente);
+
+                Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
+                if (oldWindow != null) {
+                    oldWindow.dispose();
+                }
+
                 newScreen.show();
-                
             } catch (LoginException error) {
-                //error.printStackTrace();
                 JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-            
         }
-        
-
     }
 }
