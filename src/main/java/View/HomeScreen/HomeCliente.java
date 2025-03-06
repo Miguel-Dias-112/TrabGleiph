@@ -19,10 +19,14 @@ public class HomeCliente extends Screen {
     private String tipoUsuario;
     private JLabel saldoLabel;
     private List<Transacao> transacoes;
+    private JTextArea historico ;
+
 
     public HomeCliente(Cliente user) {
         double saldo = user.getSaldo();
         saldoLabel = new JLabel("R$ "+ saldo);
+        historico = new JTextArea(10, 30);
+        historico.setText(user.getConta().consultarExtrato());
     }
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
@@ -53,7 +57,7 @@ public class HomeCliente extends Screen {
         saldoPanel.add(saldoLabel);
         JPanel historicoPanel = new JPanel();
         historicoPanel.setBorder(BorderFactory.createTitledBorder("Histórico de Transações"));
-        historicoPanel.add(new JTextArea(10, 30));
+        historicoPanel.add(historico);
         conteudoCentral.add(saldoPanel);
         conteudoCentral.add(historicoPanel);
         // telas especificas para caixa e gerente aqui        

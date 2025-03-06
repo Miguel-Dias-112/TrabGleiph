@@ -27,16 +27,7 @@ public class Main {
         //     e.printStackTrace();
         // }
 
-        try {
-            Login novoLogin = new Login();
-            UsuarioDAO trasDao = new UsuarioDAO();
-            Cliente cliente = (Cliente) novoLogin.validarlogin("jose", "Miguel@123");
-            trasDao.realizarSaque(cliente, 100.0);
-
-        } catch (LoginException error) {
-            error.printStackTrace(); 
-        }
-            
+    
         
         // Usuario user2 = new Usuario("joao.silva", "senha123", "João Silva", "12345678909");
         // usuarioDAO.adicionarNovoUsuario(user2);
@@ -56,6 +47,6 @@ public class Main {
         // transacaoController.consultarExtrato(conta);
 
         LoginScreen loginScreen = new LoginScreen();
-        //loginScreen.show();
+        loginScreen.show();
     }
 }
