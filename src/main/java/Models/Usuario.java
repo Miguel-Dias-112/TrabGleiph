@@ -1,10 +1,12 @@
 package Models; 
 
+import Utils.Checkers.CpfChecker;
+import Utils.Checkers.LoginChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.Exception.CadastroException;
 import Controller.DataAcessObjects.ClienteDAO;
-import Utils.CPF;
+
 import java.util.List;
 
 public class Usuario {
@@ -19,7 +21,7 @@ public class Usuario {
             throw new CadastroException("O campo cpf nao pode ficar vazio.");
         }
         
-        if(!CPF.isCPFValido(cpf)){
+        if(!CpfChecker.isCPFValido(cpf)){
             throw new CPFException("Nao foi possivel cria o usuario.");
         }
         
@@ -27,7 +29,7 @@ public class Usuario {
             throw new CadastroException("Cargo invalido");
         }
         
-        if(!checkLoginAvailable(login)){ 
+        if(!LoginChecker.checkLoginAvailable(login)){ 
             throw new CadastroException("Este login ja esta em uso.");
         }
         
@@ -47,7 +49,7 @@ public class Usuario {
         this.login = login;
         this.nome = nome;
         this.senha = senha;
-        this.cpf = CPF.formatarCPF(cpf); //verifica se é válido antes de formatar
+        this.cpf = CpfChecker.formatarCPF(cpf); //verifica se é válido antes de formatar
         this.cargo = cargo;
     }
     
@@ -97,15 +99,5 @@ public class Usuario {
         }
     }
     
-    private boolean checkLoginAvailable(String login){
-        ClienteDAO usuarioDAO = new ClienteDAO();
-        //List<Usuario> usuarios = usuarioDAO.findAll();
-        
-        // for(Usuario usuario: usuarios){
-        //     if(usuario.login.equals(login)){
-        //         return false;
-        //     }
-        // }
-        return true;
-    }
+    
 }

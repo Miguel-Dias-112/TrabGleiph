@@ -1,4 +1,4 @@
-package Utils;
+package Utils.Checkers;
 
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Cliente;
@@ -6,7 +6,7 @@ import Utils.Exception.CPFException;
 
 import java.util.List;
 
-public class CPF {
+public class CpfChecker {
     public static boolean isCPFValido(String cpf) throws CPFException {
         cpf = cpf.replaceAll("[^0-9]", "");
 

@@ -97,4 +97,13 @@ public class CaixaDAO implements CaixaPersist {
         }
         return null;
     }
+    public Caixa findByLogin(String login) {
+        List<Caixa> caixas = findAll();
+        for (Caixa caixa : caixas) {
+            if (caixa.getLogin().equals(login)) {
+                return caixa;
+            }
+        }
+        return null;
+    }
 }

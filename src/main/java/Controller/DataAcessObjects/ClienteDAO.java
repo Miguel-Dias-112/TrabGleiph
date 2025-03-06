@@ -8,7 +8,7 @@ import Utils.Exception.EditarException;
 import Utils.Exception.LoginException;
 import Utils.Exception.TransacaoException;
 import Utils.GsonUtil;
-import Utils.TransChecker;
+import Utils.Checkers.TransChecker;
 import Utils.Persistence.ClientePersist;
 
 import java.io.File;
@@ -159,6 +159,15 @@ public class ClienteDAO implements ClientePersist {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+    public Cliente findByLogin(String login) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getLogin().equals(login)) {
                 return cliente;
             }
         }
