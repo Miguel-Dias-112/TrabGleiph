@@ -1,4 +1,4 @@
-package Utils;
+package Utils.Checkers;
 
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;

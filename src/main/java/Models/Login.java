@@ -1,6 +1,6 @@
 package Models;
 
-import Utils.LoginChecker;
+import Utils.Checkers.LoginChecker;
 import Utils.Exception.LoginException;
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;

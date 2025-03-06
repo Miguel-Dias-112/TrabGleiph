@@ -8,7 +8,7 @@ import Utils.Exception.EditarException;
 import Utils.Exception.LoginException;
 import Utils.Exception.TransacaoException;
 import Utils.GsonUtil;
-import Utils.TransChecker;
+import Utils.Checkers.TransChecker;
 import Utils.Persistence.ClientePersist;
 
 import java.io.File;

@@ -1,4 +1,4 @@
-package Utils;
+package Utils.Checkers;
 
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Cliente;
@@ -28,8 +28,8 @@ public class TransChecker {
         if(LoginChecker.isPasswordValid(cpfOrigem, Senha)){
             throw new LoginException();
         }
-        boolean cadastrado1 = CPF.isCPFCadastrado(cpfOrigem);
-        boolean cadastrado2 =CPF.isCPFCadastrado(cpDestino);
+        boolean cadastrado1 = CpfChecker.isCPFCadastrado(cpfOrigem);
+        boolean cadastrado2 =CpfChecker.isCPFCadastrado(cpDestino);
         if (!cadastrado1 || !cadastrado2) {
             throw new CPFException("CPF não cadastrado");
         }
