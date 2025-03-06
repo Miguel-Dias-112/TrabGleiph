@@ -4,8 +4,13 @@ import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
 import Models.Usuario;
+import View.DepositoCaixa;
+import View.DepositoCaixa;
 import View.LoginScreen;
+import View.SaqueCaixa;
 import View.Screen;
+import View.TransferenciaCaixa;
+import Models.Caixa;
 import Models.Transacao;
 import java.util.List;
 
@@ -15,19 +20,12 @@ public class HomeCaixa extends Screen {
 
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
-    private String tipoUsuario;
-    private int saldo;
-    private List<Transacao> transacoes;
-    public HomeCaixa(Usuario user) {
+    private Caixa caixa;
 
-        this.tipoUsuario = user.getCargo();
-        if (this.tipoUsuario.equals("Cliente")) {
-
-           
-            
-        }
+    public HomeCaixa(Caixa user) {
+        this.caixa = user;
     }
-   
+
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,14 +42,17 @@ public class HomeCaixa extends Screen {
         JButton botaoSair = new JButton("Sair");
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
-
+        JButton botaoSaque = new JButton("Saque");
+        botaoSaque.addActionListener(new trocarScreen(this, new SaqueCaixa(caixa)));
+        JButton botaoTransferir = new JButton("Transferir");
+        botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaCaixa(caixa)));
+        JButton botaoDeposito = new JButton("Deposito");
+        botaoDeposito.addActionListener(new trocarScreen(this, new DepositoCaixa(caixa)));
+       
+        menuSuperior.add(botaoTransferir);
         menuSuperior.add(new JButton("Editar Usuário"));
-        menuSuperior.add(new JButton("Saque"));
-        menuSuperior.add(new JButton("Depósito"));
-        menuSuperior.add(new JButton("Transferência"));
-
-          
-
+        menuSuperior.add(botaoSaque);
+        menuSuperior.add(botaoDeposito);
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
 
@@ -60,19 +61,12 @@ public class HomeCaixa extends Screen {
         conteudoCentral.setLayout(new GridLayout(1, 2, 20, 20));
         conteudoCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        if ("Cliente".equals(tipoUsuario)) {
-            JPanel saldoPanel = new JPanel();
-            saldoPanel.setBorder(BorderFactory.createTitledBorder("Saldo"));
-            saldoPanel.add(new JLabel("R$ 0,00"));
+        JPanel saldoPanel = new JPanel();
+        saldoPanel.add(new JLabel("Você é um caixa"));
 
-            JPanel historicoPanel = new JPanel();
-            historicoPanel.setBorder(BorderFactory.createTitledBorder("Histórico de Transações"));
-            historicoPanel.add(new JTextArea(10, 30));
+        conteudoCentral.add(saldoPanel);
 
-            conteudoCentral.add(saldoPanel);
-            conteudoCentral.add(historicoPanel);
-        }
-        // telas especificas para caixa e gerente aqui        
+        // telas especificas para caixa e gerente aqui
         tela.add(conteudoCentral, BorderLayout.CENTER);
     }
 

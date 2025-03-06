@@ -1,6 +1,7 @@
 package Models;
 
 import Utils.Exception.LoginException;
+import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
 import static java.time.Clock.system;
 import java.util.List;
@@ -34,8 +35,23 @@ public class Login {
         }
         return null;
     }
-    public Caixa validarlogin(String login, String senha) throws LoginException{
-        
+    public Caixa validarLoginCaixa(String login, String senha) throws LoginException{
+        boolean fezLogin = false;
+        CaixaDAO caixaDAO = new CaixaDAO();
+        List<Caixa> usuarios = caixaDAO.findAll();
+        for(Caixa caixa : usuarios){
+            if(caixa.getLogin().equals(login)){
+                if(caixa.getSenha().equals(senha)){
+                    setLogin(caixa);
+                    fezLogin = true;
+                    return caixa;
+                }
+            }
+        }
+        if(!fezLogin){
+           throw new LoginException();
+        }
         return null;
     }
+  
 }

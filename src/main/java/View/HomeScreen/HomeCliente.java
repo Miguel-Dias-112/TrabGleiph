@@ -5,7 +5,7 @@ import javax.swing.*;
 import Controller.ClickHandlers.trocarScreen;
 import View.LoginScreen;
 import View.Screen;
-import View.TransferenciaView;
+import View.TransferenciaCliente;
 import Models.Cliente;
 import Models.Transacao;
 import View.EditarScreen;
@@ -46,7 +46,7 @@ public class HomeCliente extends Screen {
         botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
         menuSuperior.add(botaoEditar);
         JButton botaoTransferir = new JButton("Transferir");
-        botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaView(Cliente)));
+        botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaCliente(Cliente)));
         menuSuperior.add(botaoTransferir);
 
         JButton botaoInvestimentos = new JButton("Ver Investimentos");

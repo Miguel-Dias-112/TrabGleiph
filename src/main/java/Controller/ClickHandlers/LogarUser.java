@@ -1,6 +1,7 @@
 package Controller.ClickHandlers;
 
 import Utils.Exception.LoginException;
+import Models.Caixa;
 import Models.Cliente;
 import Models.Login;
 import Models.Usuario;
@@ -49,7 +50,17 @@ public class LogarUser implements ActionListener {
                 }
                 break;
             case "Caixa":
-                
+                try {
+                    Caixa cliente = novoLogin.validarLoginCaixa(login, senha);
+                    Screen newScreen = new HomeCaixa(cliente);
+                    Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
+                    if (oldWindow != null) {
+                        oldWindow.dispose();
+                    }
+                    newScreen.show();
+                } catch (LoginException error) {
+                    JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             default:
                 break;
         }

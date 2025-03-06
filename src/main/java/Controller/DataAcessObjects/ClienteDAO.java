@@ -76,39 +76,49 @@ public class ClienteDAO implements ClientePersist {
         }
     }
 
-    public void realizarSaque(Cliente user, double valor) {
+    public boolean realizarSaque(String cpf, double valor, String senha) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equals(user.getCpf())) {
+            if (cliente.getCpf().equals(cpf)) {
                 int saldo = (int) cliente.getConta().getSaldo();
                 saldo -= valor;
                 cliente.getConta().setSaldo(saldo);
                 cliente.getConta().adicionarTransacao(new Transacao(valor));
                 save(clientes); 
-                return;
+                return true;
             }
         }
+        return false;
     }
-    public void realizarDeposito(Cliente user, double valor) {
+    public boolean realizarDeposito(String cpf, double valor, String senha) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equals(user.getCpf())) {
+            if (cliente.getCpf().equals(cpf)) {
                 int saldo = (int) cliente.getConta().getSaldo();
                 saldo += valor;
                 cliente.getConta().setSaldo(saldo);
                 cliente.getConta().adicionarTransacao(new Transacao(valor));
                 save(clientes); 
-                return;
+                return true;
             }
         }
+        return false;
     }
-    public void realizarTransferencia(Cliente origem, String cpfDestino, double valor, String senha) {
-        if (!origem.getSenha().equals(senha)) {
-            System.out.println("Senha incorreta!");
-            return;
-        }
+    public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
+        
 
         List<Cliente> usuarios = findAll();
+        boolean achou = false;
+        
+        for (Cliente usuario : usuarios) {
+            if(usuario.getCpf().equals(cpfOrigem)){
+                achou = true;
+            }
+           
+        }
+        if(!achou){
+            System.out.println("CPF destino não encontrado!");
+        }
         for (Cliente usuario : usuarios) {
             double saldo;
             if (usuario.getCpf().equals(cpfDestino)) {
@@ -119,18 +129,16 @@ public class ClienteDAO implements ClientePersist {
                 usuario.getConta().adicionarTransacao(new Transacao(valor));
 
             }
-            if (usuario.getCpf().equals(origem.getCpf())) {
-                saldo = (double) origem.getConta().getSaldo();
-                saldo = origem.getConta().getSaldo();
+            if (usuario.getCpf().equals(cpfOrigem)) {
+                saldo = (double) usuario.getConta().getSaldo();
+                saldo = usuario.getConta().getSaldo();
                 saldo -= valor;
-                origem.getConta().setSaldo(saldo);
-                origem.getConta().adicionarTransacao(new Transacao(valor));
-
-
+                usuario.getConta().setSaldo(saldo);
+                usuario.getConta().adicionarTransacao(new Transacao(valor));
             }
         }
         save(usuarios);
-        return;
+        return true;
     }
     @Override
     public List<Cliente> findAll() {
