@@ -65,14 +65,12 @@ public class UsuarioDAO implements UsuarioPersist {
             }
         }
     }
-    public void realizarTransferencia(Cliente user, double valor) {
+    public void realizarTransferencia(Cliente Origem, String cpfDestino) {
         List<Cliente> usuarios = findClients();
         for (Cliente usuario : usuarios) {
-            if (usuario.getCpf().equals(user.getCpf())) {
-                int saldo = (int) usuario.getConta().getSaldo();
-                saldo -= valor;
-                usuario.getConta().setSaldo(saldo);
-                usuario.getConta().adicionarTransacao(new Transacao(valor));
+            if (usuario.getCpf().equals(cpfDestino)) {
+                realizarSaque(Origem, 100);
+                realizarDeposito(usuario, 100);
                 saveClientes(usuarios); 
                 return;
             }
