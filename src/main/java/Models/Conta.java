@@ -27,7 +27,13 @@ public class Conta {
             saldo -= transacao.getValor();
         }
     }
-
+    public String consultarExtrato() {
+        String extrato = "Extrato da conta " + getId() + ":";
+        for (Transacao transacao : getTransacoes()) {
+            extrato += "\n" + transacao;
+        }
+        return extrato;
+    }
     public String getId() {
         return id;
     }

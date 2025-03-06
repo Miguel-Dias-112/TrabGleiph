@@ -49,13 +49,7 @@ public class TransacaoDAO implements TransacaoPersist {
     //     System.out.println("Transferência realizada com sucesso!");
     // }
 
-    public String consultarExtrato(Conta conta) {
-        String extrato = "Extrato da conta " + conta.getId() + ":";
-        for (Transacao transacao : conta.getTransacoes()) {
-            extrato += "\n" + transacao;
-        }
-        return extrato;
-    }
+    
 
 
     @Override
