@@ -105,11 +105,8 @@ public class ClienteDAO implements ClientePersist {
         return false;
     }
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
-        
-
         List<Cliente> usuarios = findAll();
         boolean achou = false;
-        
         for (Cliente usuario : usuarios) {
             if(usuario.getCpf().equals(cpfOrigem)){
                 achou = true;
@@ -153,5 +150,14 @@ public class ClienteDAO implements ClientePersist {
             }
         }
         return clientes;
+    }
+    public Cliente findByCpf(String cpf) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                return cliente;
+            }
+        }
+        return null;
     }
 }
