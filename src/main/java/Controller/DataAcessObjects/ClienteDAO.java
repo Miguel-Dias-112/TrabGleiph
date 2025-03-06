@@ -90,7 +90,7 @@ public class ClienteDAO implements ClientePersist {
         }
         return false;
     }
-    public void realizarDeposito(String cpf, double valor) {
+    public boolean realizarDeposito(String cpf, double valor, String senha) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
@@ -99,9 +99,10 @@ public class ClienteDAO implements ClientePersist {
                 cliente.getConta().setSaldo(saldo);
                 cliente.getConta().adicionarTransacao(new Transacao(valor));
                 save(clientes); 
-                return;
+                return true;
             }
         }
+        return false;
     }
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
         
