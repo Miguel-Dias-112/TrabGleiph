@@ -15,7 +15,7 @@ public class Login {
     public void setLogin(Usuario user){
         Login.user = user;
     }
-    public Cliente validarlogin(String login, String senha) throws LoginException{
+    public Cliente validarLoginCliente(String login, String senha) throws LoginException{
         boolean fezLogin = false;
         ClienteDao usuarioDAO = new ClienteDao();
         List<Cliente> usuarios = usuarioDAO.findAll();
@@ -32,6 +32,10 @@ public class Login {
         if(!fezLogin){
            throw new LoginException();
         }
+        return null;
+    }
+    public Caixa validarlogin(String login, String senha) throws LoginException{
+        
         return null;
     }
 }
