@@ -1,5 +1,6 @@
-package Models;
+package Models.Usuarios;
 
+import Models.Bank.Conta;
 import Utils.Exception.CPFException;
 import Utils.Exception.CadastroException;
 

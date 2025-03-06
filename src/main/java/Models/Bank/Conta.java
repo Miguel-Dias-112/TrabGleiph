@@ -1,4 +1,4 @@
-package Models;
+package Models.Bank;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

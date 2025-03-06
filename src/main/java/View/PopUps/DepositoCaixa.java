@@ -1,4 +1,4 @@
-package View;
+package View.PopUps;
 
 import java.awt.GridLayout;
 
@@ -10,17 +10,19 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Caixa;
+import Models.Usuarios.Caixa;
+import View.Screen;
 import View.HomeScreen.HomeCaixa;
 
-public class SaqueCaixa extends Screen {
+public class DepositoCaixa  extends Screen {
     private JTextField destinoCpfField,origemCpfField, valorField;
     private JPasswordField senhaField;
     private JButton transferButton, cancelButton;
     private Caixa   caixa;
 
-    public SaqueCaixa(Caixa caixa) {
+    public DepositoCaixa(Caixa caixa) {
         this.caixa = caixa;
         initialize();
     }
@@ -52,7 +54,7 @@ public class SaqueCaixa extends Screen {
             String cpfOrigem = origemCpfField.getText();
             Double valorTrans = Double.parseDouble(valorField.getText());
             String senha = senhaField.getText();
-            boolean sucess = clienteDAO.realizarSaque(cpfOrigem, valorTrans,senha );
+            boolean sucess = clienteDAO.realizarDeposito(cpfOrigem, valorTrans,senha );
             
             if (sucess) {
                 JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -60,14 +62,14 @@ public class SaqueCaixa extends Screen {
                 JOptionPane.showMessageDialog(null, "Transferência não realizada!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
             tela.dispose();
-            Screen home = new HomeCaixa(caixa);
+            Screen home = new HomeCaixa(caixa.getCpf());
             home.show();
         });
         cancelButton = new JButton("Cancelar");
-        panel.add(transferButton);
         panel.add(cancelButton);
+
+        panel.add(transferButton);
         tela.add(panel);
-        cancelButton.addActionListener(e -> tela.dispose());
+        cancelButton.addActionListener(new trocarScreen(this, new HomeCaixa(caixa.getCpf())));
     }
-    
 }

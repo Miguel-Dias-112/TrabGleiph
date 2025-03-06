@@ -1,14 +1,20 @@
-package View;
+package View.PopUps;
 
+import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.CaixaDAO;
 import javax.swing.*;
 import Controller.DataAcessObjects.ClienteDAO;
 import Controller.DataAcessObjects.GerenteDAO;
-import Models.Caixa;
-import Models.Cliente;
-import Models.Gerente;
-import Models.Login;
-import Models.Usuario;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Cliente;
+import Models.Usuarios.Gerente;
+import Models.Usuarios.Usuario;
+import View.Screen;
+import View.Auth.LoginScreen;
+import View.HomeScreen.HomeCaixa;
+import View.HomeScreen.HomeCliente;
+import View.HomeScreen.HomeGerente;
+
 import java.util.List;
 
 import java.awt.*;
@@ -19,8 +25,8 @@ public class DeletarContaScreen extends Screen {
     private JButton confirmarButton, cancelarButton;
     private final Usuario usuario;
   
-    public DeletarContaScreen() {
-        this.usuario = Login.user;
+    public DeletarContaScreen(Usuario usuario) {
+        this.usuario = usuario;
         initialize();
     }
     
@@ -99,7 +105,21 @@ JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
             }
         });
 
-        cancelarButton.addActionListener(e -> tela.dispose());
+        switch (usuario.getCargo()) {
+            case "Gerente":
+                    cancelarButton.addActionListener(
+                    new trocarScreen(this, new HomeGerente((Gerente)usuario)));
+                break;
+            case "Caixa":
+                    cancelarButton.addActionListener(
+                    new trocarScreen(this, new HomeCaixa(usuario.getCpf())));
+                break;
+            case "Cliente":
+                    cancelarButton.addActionListener(
+                    new trocarScreen(this, new HomeCliente(usuario.getCpf())));
+            default:
+                break;
+        }
 
         tela.add(panel);
     }

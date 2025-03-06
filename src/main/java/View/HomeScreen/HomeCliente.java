@@ -3,11 +3,13 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
+import Controller.DataAcessObjects.CaixaDAO;
+import Controller.DataAcessObjects.ClienteDAO;
 import View.LoginScreen;
 import View.Screen;
 import View.TransferenciaCliente;
-import Models.Cliente;
-import Models.Transacao;
+import Models.Bank.Transacao;
+import Models.Usuarios.Cliente;
 import View.DeletarContaScreen;
 import View.EditarScreen;
 import View.InvestimentosScreen;
@@ -22,12 +24,14 @@ public class HomeCliente extends Screen {
     private JTextArea historico ;
     private Cliente Cliente;
 
-    public HomeCliente(Cliente user) {
-        double saldo = user.getSaldo();
+    public HomeCliente(String cpf) {
+        ClienteDAO clientes = new ClienteDAO();
+        this.Cliente = clientes.findByCpf(cpf);
+
+        double saldo = Cliente.getSaldo();
         saldoLabel = new JLabel("R$ "+ saldo);
-        this.Cliente = user;
         historico = new JTextArea(10, 30);
-        historico.setText(user.getConta().consultarExtrato());
+        historico.setText(Cliente.getConta().consultarExtrato());
     }
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
@@ -46,7 +50,7 @@ public class HomeCliente extends Screen {
         menuSuperior.add(botaoSair);
         
         JButton botaoEditar = new JButton("Editar Usuário");
-        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
+        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen(Cliente)));
         menuSuperior.add(botaoEditar);
         
         JButton botaoTransferir = new JButton("Transferir");
@@ -54,11 +58,11 @@ public class HomeCliente extends Screen {
         menuSuperior.add(botaoTransferir);
 
         JButton botaoInvestimentos = new JButton("Ver Investimentos");
-        botaoInvestimentos.addActionListener(new trocarScreen(this, new InvestimentosScreen()));
+        botaoInvestimentos.addActionListener(new trocarScreen(this, new InvestimentosScreen(Cliente)));
         menuSuperior.add(botaoInvestimentos);
         
         JButton botaoDeletar = new JButton("Deletar");
-        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen()));
+        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen(Cliente)));
         menuSuperior.add(botaoDeletar);
 
         tela.add(menuSuperior, BorderLayout.NORTH);

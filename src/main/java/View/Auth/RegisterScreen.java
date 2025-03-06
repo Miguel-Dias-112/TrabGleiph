@@ -1,21 +1,18 @@
-package View;
+package View.Auth;
 
-import Controller.ClickHandlers.EditarUser;
-import Controller.ClickHandlers.trocarScreen;
-import Models.Caixa;
-import Models.Cliente;
-import Models.Gerente;
-import Models.Login;
-import View.HomeScreen.HomeCaixa;
+import Controller.ClickHandlers.CadastrarUser;
+import View.Screen;
+
 import javax.swing.*;
 import java.awt.*;
-import View.HomeScreen.HomeCliente;
-import View.HomeScreen.HomeGerente;
+import java.awt.event.ActionEvent;
 
-public class EditarScreen extends Screen {
-    private JTextField nomeField;
+public class RegisterScreen extends Screen {
+    private JTextField userField;
     private JTextField loginField;
     private JPasswordField senhaField;
+    private JTextField cpfField;
+    private JComboBox<String> cargoComboBox;
 
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA");
@@ -35,22 +32,22 @@ public class EditarScreen extends Screen {
     }
 
     private void desenhaTitulo() {
-        JLabel titulo = new JLabel("Editar Usuário", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Cadastre-se", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 36)); 
         posicionaElemento(titulo, 0, 0, new Insets(40, 0, 40, 0));
     }
 
     private void desenhaMensagem() {
-        JLabel messageLabel = new JLabel("Preencha os dados que deseja editar", SwingConstants.CENTER);
+        JLabel messageLabel = new JLabel("Preencha os dados abaixo para registrar", SwingConstants.CENTER);
         posicionaElemento(messageLabel, 0, 1, new Insets(0, 0, 20, 0));
     }
 
     private void desenhaInputs() {
         JPanel panelUser = new JPanel();
         JLabel userLabel = new JLabel("Nome:  ");
-        nomeField = new JTextField(20);
+        userField = new JTextField(20);
         panelUser.add(userLabel);
-        panelUser.add(nomeField);
+        panelUser.add(userField);
 
         JPanel panelLogin = new JPanel();
         JLabel loginLabel = new JLabel("Login:  ");
@@ -64,30 +61,45 @@ public class EditarScreen extends Screen {
         panelSenha.add(senhaLabel);
         panelSenha.add(senhaField);
 
+        JPanel panelCpf = new JPanel();
+        JLabel cpfLabel = new JLabel("CPF:     ");
+        cpfField = new JTextField(20);
+        panelCpf.add(cpfLabel);
+        panelCpf.add(cpfField);
+
+        JPanel panelCargo = new JPanel();
+        JLabel cargoLabel = new JLabel("Cargo: ");
+        String[] cargos = {"Cliente", "Caixa", "Gerente"};
+        cargoComboBox = new JComboBox<>(cargos);
+        panelCargo.add(cargoLabel);
+        panelCargo.add(cargoComboBox);
+
         posicionaElemento(panelUser, 0, 2, new Insets(0, 0, 10, 0));
         posicionaElemento(panelLogin, 0, 3, new Insets(0, 0, 10, 0));
         posicionaElemento(panelSenha, 0, 4, new Insets(0, 0, 10, 0));
+        posicionaElemento(panelCpf, 0, 5, new Insets(0, 0, 10, 0));
+        posicionaElemento(panelCargo, 0, 6, new Insets(0, 0, 20, 0));
     }
 
     private void desenhaBotoes() {
-        JButton editarButton = new JButton("Editar");
-        EditarUser editarUser = new EditarUser(nomeField, loginField, senhaField);
-        editarButton.addActionListener(editarUser);
-        
-        JButton cancelarButton = new JButton("Cancelar");
-        switch(Login.user.getCargo()){
-            case("Cliente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCliente((Cliente)Login.user)));
-            case("Caixa") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa((Caixa)Login.user)));
-            case("Gerente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente((Gerente)Login.user))); 
-        }
-
+        JButton registrarButton = new JButton("Registrar");
+        CadastrarUser cadastrarUser = new CadastrarUser(userField, cpfField, loginField, senhaField, cargoComboBox);
+        registrarButton.addActionListener(cadastrarUser);
+    
+        JButton voltarButton = new JButton("Voltar");
+        voltarButton.addActionListener(e -> {
+            new LoginScreen().show();
+            tela.dispose();
+        });
+    
         JPanel panelBotoes = new JPanel();
-        panelBotoes.add(editarButton);
-        panelBotoes.add(cancelarButton);
-
+        panelBotoes.add(registrarButton);
+        panelBotoes.add(voltarButton);
+    
         posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
     }
-    public EditarScreen() {
+    
+    public RegisterScreen() {
         
     }
     @Override

@@ -1,7 +1,8 @@
 package Utils.Persistence;
 
-import Models.Gerente;
 import java.util.List;
+
+import Models.Usuarios.Gerente;
 
 public interface GerentePersist {
     public void save(List<Gerente> usuario);

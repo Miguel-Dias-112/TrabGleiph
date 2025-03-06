@@ -1,7 +1,7 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
-import Models.Caixa;
+import Models.Usuarios.Caixa;
 import Utils.Exception.EditarException;
 import Utils.GsonUtil;
 import Utils.Persistence.CaixaPersist;
@@ -87,5 +87,23 @@ public class CaixaDAO implements CaixaPersist {
             }
         }
         return caixas;
+    }
+    public Caixa findByCpf(String cpf) {
+        List<Caixa> caixas = findAll();
+        for (Caixa caixa : caixas) {
+            if (caixa.getCpf().equals(cpf)) {
+                return caixa;
+            }
+        }
+        return null;
+    }
+    public Caixa findByLogin(String login) {
+        List<Caixa> caixas = findAll();
+        for (Caixa caixa : caixas) {
+            if (caixa.getLogin().equals(login)) {
+                return caixa;
+            }
+        }
+        return null;
     }
 }

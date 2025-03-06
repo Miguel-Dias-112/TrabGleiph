@@ -1,4 +1,4 @@
-package Models;
+package Models.Usuarios;
 
 import Utils.Exception.CPFException;
 import Utils.Exception.CadastroException;

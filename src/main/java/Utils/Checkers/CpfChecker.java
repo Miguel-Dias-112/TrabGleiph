@@ -1,12 +1,12 @@
-package Utils;
+package Utils.Checkers;
 
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Cliente;
+import Models.Usuarios.Cliente;
 import Utils.Exception.CPFException;
 
 import java.util.List;
 
-public class CPF {
+public class CpfChecker {
     public static boolean isCPFValido(String cpf) throws CPFException {
         cpf = cpf.replaceAll("[^0-9]", "");
 
@@ -70,7 +70,7 @@ public class CPF {
     public static boolean isCPFCadastrado(String cpf) throws CPFException{
         cpf = formatarCPF(cpf);
         
-        ClienteDAO clientesDAO = new ClienteDAO();
+       ClienteDAO clientesDAO = new ClienteDAO();
        List<Cliente> clientess = clientesDAO.findAll();
         
         for (Cliente clientes : clientess) {
@@ -78,7 +78,8 @@ public class CPF {
                return true;
            }
         }
-
         return false;
+        //throw new CPFException("CPF não cadastrado.");
+       
     }
 }

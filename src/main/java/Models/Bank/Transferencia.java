@@ -1,4 +1,4 @@
-package Models;
+package Models.Bank;
 
 public class Transferencia extends Transacao {
     private String contaDestino;

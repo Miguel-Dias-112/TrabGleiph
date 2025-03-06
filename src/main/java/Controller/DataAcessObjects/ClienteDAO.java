@@ -1,10 +1,14 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
-import Models.Cliente;
-import Models.Transacao;
+import Models.Bank.Transacao;
+import Models.Usuarios.Cliente;
+import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
+import Utils.Exception.LoginException;
+import Utils.Exception.TransacaoException;
 import Utils.GsonUtil;
+import Utils.Checkers.TransChecker;
 import Utils.Persistence.ClientePersist;
 
 import java.io.File;
@@ -105,40 +109,37 @@ public class ClienteDAO implements ClientePersist {
         return false;
     }
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
-        
-
         List<Cliente> usuarios = findAll();
-        boolean achou = false;
-        
-        for (Cliente usuario : usuarios) {
-            if(usuario.getCpf().equals(cpfOrigem)){
-                achou = true;
+        try {
+            TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);
+            for (Cliente usuario : usuarios) {
+                double saldo;
+                if (usuario.getCpf().equals(cpfDestino)) {
+                    saldo = (double) usuario.getConta().getSaldo();
+                    saldo = usuario.getConta().getSaldo();
+                    saldo += valor;
+                    usuario.getConta().setSaldo(saldo);
+                    usuario.getConta().adicionarTransacao(new Transacao(valor));
+    
+                }
+                if (usuario.getCpf().equals(cpfOrigem)) {
+                    saldo = (double) usuario.getConta().getSaldo();
+                    saldo = usuario.getConta().getSaldo();
+                    saldo -= valor;
+                    usuario.getConta().setSaldo(saldo);
+                    usuario.getConta().adicionarTransacao(new Transacao(valor));
+                }
             }
-           
+            save(usuarios);
+            return true;
+        } catch (CPFException e) {
+            e.printStackTrace();
+        } catch (TransacaoException e) {
+            e.printStackTrace();
+        } catch (LoginException e) {
+            e.printStackTrace();
         }
-        if(!achou){
-            System.out.println("CPF destino não encontrado!");
-        }
-        for (Cliente usuario : usuarios) {
-            double saldo;
-            if (usuario.getCpf().equals(cpfDestino)) {
-                saldo = (double) usuario.getConta().getSaldo();
-                saldo = usuario.getConta().getSaldo();
-                saldo += valor;
-                usuario.getConta().setSaldo(saldo);
-                usuario.getConta().adicionarTransacao(new Transacao(valor));
-
-            }
-            if (usuario.getCpf().equals(cpfOrigem)) {
-                saldo = (double) usuario.getConta().getSaldo();
-                saldo = usuario.getConta().getSaldo();
-                saldo -= valor;
-                usuario.getConta().setSaldo(saldo);
-                usuario.getConta().adicionarTransacao(new Transacao(valor));
-            }
-        }
-        save(usuarios);
-        return true;
+        return false;
     }
     @Override
     public List<Cliente> findAll() {
@@ -153,5 +154,23 @@ public class ClienteDAO implements ClientePersist {
             }
         }
         return clientes;
+    }
+    public Cliente findByCpf(String cpf) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+    public Cliente findByLogin(String login) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getLogin().equals(login)) {
+                return cliente;
+            }
+        }
+        return null;
     }
 }

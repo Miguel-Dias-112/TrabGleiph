@@ -3,15 +3,16 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
-import Models.Usuario;
+import Controller.DataAcessObjects.CaixaDAO;
+import Models.Bank.Transacao;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Usuario;
 import View.DepositoCaixa;
 import View.DepositoCaixa;
 import View.LoginScreen;
 import View.SaqueCaixa;
 import View.Screen;
 import View.TransferenciaCaixa;
-import Models.Caixa;
-import Models.Transacao;
 import View.DeletarContaScreen;
 import View.EditarScreen;
 import java.util.List;
@@ -24,8 +25,9 @@ public class HomeCaixa extends Screen {
     private JPanel conteudoCentral;
     private Caixa caixa;
 
-    public HomeCaixa(Caixa user) {
-        this.caixa = user;
+    public HomeCaixa(String cpf) {
+        CaixaDAO caixas = new CaixaDAO();
+        this.caixa = caixas.findByCpf(cpf);
     }
 
     private void configuraTela() {
@@ -58,11 +60,11 @@ public class HomeCaixa extends Screen {
         menuSuperior.add(botaoDeposito);
         
         JButton botaoEditar = new JButton("Editar Usuário");
-        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
+        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen(caixa)));
         menuSuperior.add(botaoEditar);
         
         JButton botaoDeletar = new JButton("Deletar");
-        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen()));
+        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen(caixa)));
         menuSuperior.add(botaoDeletar);
        
         tela.add(menuSuperior, BorderLayout.NORTH);
