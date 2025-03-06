@@ -1,8 +1,12 @@
 package View;
 
 import Controller.ClickHandlers.EditarUser;
+import Controller.ClickHandlers.trocarScreen;
+import Models.Cliente;
+import Models.Login;
 import javax.swing.*;
 import java.awt.*;
+import View.HomeScreen.HomeCliente;
 
 public class EditarScreen extends Screen {
     private JTextField nomeField;
@@ -63,12 +67,29 @@ public class EditarScreen extends Screen {
 
     private void desenhaBotoes() {
         JButton editarButton = new JButton("Editar");
-
         EditarUser editarUser = new EditarUser(nomeField, loginField, senhaField);
         editarButton.addActionListener(editarUser);
+        
+        JButton cancelarButton = new JButton("Cancelar");
+        switch(Login.user.getCargo()){
+            case("Cliente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCliente((Cliente)Login.user)));
+            /*case("Caixa"):
+            cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa()));
+            break;
+            case("Gerente"):
+            cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente()));
+            break;*/
+            /*case("Caixa"):
+                cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa()));
+                break;
+            case("Gerente"):
+                cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente()));
+                break;*/  
+        }
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(editarButton);
+        panelBotoes.add(cancelarButton);
 
         posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
     }
