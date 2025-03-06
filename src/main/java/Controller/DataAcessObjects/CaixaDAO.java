@@ -88,4 +88,13 @@ public class CaixaDAO implements CaixaPersist {
         }
         return caixas;
     }
+    public Caixa findByCpf(String cpf) {
+        List<Caixa> caixas = findAll();
+        for (Caixa caixa : caixas) {
+            if (caixa.getCpf().equals(cpf)) {
+                return caixa;
+            }
+        }
+        return null;
+    }
 }

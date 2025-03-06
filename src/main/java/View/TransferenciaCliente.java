@@ -2,6 +2,8 @@ package View;
 
 
 import javax.swing.*;
+
+import Controller.ClickHandlers.TransferenciaClienteHandle;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Cliente;
 import View.HomeScreen.HomeCliente;
@@ -39,23 +41,9 @@ public class TransferenciaCliente extends Screen {
         panel.add(senhaField);
         
         transferButton = new JButton("Transferir");
-        transferButton.addActionListener(e -> {
-            // Transferir
-            ClienteDAO clienteDAO = new ClienteDAO();
-            String cpfOrigem = cliente.getCpf();
-            String cpfDestino = destinoCpfField.getText();
-            Double valorTrans = Double.parseDouble(valorField.getText());
-            String senha = senhaField.getText();
-
-            boolean sucess = clienteDAO.realizarTransferencia(cpfOrigem,cpfDestino, valorTrans,senha );
-            
-            if (sucess) {
-                JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            }
-            tela.dispose();
-            HomeCliente home = new HomeCliente(cliente);
-            home.show();
-        });
+        transferButton.addActionListener(
+           new TransferenciaClienteHandle(this,  destinoCpfField, valorField, senhaField, cliente)
+        );
         cancelButton = new JButton("Cancelar");
         panel.add(transferButton);
         panel.add(cancelButton);
