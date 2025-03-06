@@ -88,4 +88,13 @@ public class GerenteDAO implements GerentePersist {
         }
         return gerentes;
     }
+        public Gerente findByLogin(String login) {
+        List<Gerente> gerentes = findAll();
+        for (Gerente gerente : gerentes) {
+            if (gerente.getLogin().equals(login)) {
+                return gerente;
+            }
+        }
+        return null;
+    }
 }

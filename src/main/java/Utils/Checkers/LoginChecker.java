@@ -26,21 +26,21 @@ public class LoginChecker {
        
         return true;
     }
-    public static boolean checkLoginCliente(String login, String senha) {
+    public static boolean checkLoginCliente(String login, String senha) throws LoginException {
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente cliente = clienteDAO.findByLogin(login);
         if (cliente == null) {
-            return false;   
+            throw new LoginException();   
         }
         String senhaCliente = cliente.getSenha();
         boolean valido = senhaCliente.equals(senha);
         return valido;
     }
-    public static boolean checkLoginCaixa(String login, String senha) {
+    public static boolean checkLoginCaixa(String login, String senha) throws LoginException {
         CaixaDAO caixaDAO = new CaixaDAO();
         Caixa cliente = caixaDAO.findByLogin(login);
         if (cliente == null) {
-            return false;   
+            throw new LoginException();    
         }
         String senhaCaixa= cliente.getSenha();
         boolean valido = senhaCaixa.equals(senha);

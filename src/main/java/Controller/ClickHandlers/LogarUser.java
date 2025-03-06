@@ -17,8 +17,11 @@ import javax.swing.SwingUtilities;
 
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
+import Controller.DataAcessObjects.GerenteDAO;
+import Models.Usuarios.Gerente;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 public class LogarUser implements ActionListener {
 
@@ -38,28 +41,44 @@ public class LogarUser implements ActionListener {
         String cargo = (String) cargoBox.getSelectedItem();
         Screen newScreen = null;
         String cpf;
-        switch (cargo) {
-            case "Cliente":
-                ClienteDAO clientes = new ClienteDAO();
-                LoginChecker.checkLoginCliente(login, senha);
-                Cliente cliente = clientes.findByLogin(login);
-                cpf = cliente.getCpf();
-                newScreen = new HomeCliente(cpf);
-               
-                break;
-            case "Caixa":
-                CaixaDAO caixas = new CaixaDAO();
-                LoginChecker.checkLoginCaixa(login, senha);
-                Caixa caixa = caixas.findByLogin(login);
-                cpf = caixa.getCpf();
-                newScreen = new HomeCaixa(cpf);
-            default:
-                break;
+        
+        try{
+            switch (cargo) {
+                case "Cliente":
+                    ClienteDAO clientes = new ClienteDAO();
+                    LoginChecker.checkLoginCliente(login, senha);
+                    Cliente cliente = clientes.findByLogin(login);
+                    cpf = cliente.getCpf();
+                    newScreen = new HomeCliente(cpf);
+
+                    break;
+                case "Caixa":
+                    CaixaDAO caixas = new CaixaDAO();
+                    LoginChecker.checkLoginCaixa(login, senha);
+                    Caixa caixa = caixas.findByLogin(login);
+                    cpf = caixa.getCpf();
+                    newScreen = new HomeCaixa(cpf);
+                    break;
+                case "Gerente":
+                    GerenteDAO gerentes = new GerenteDAO();
+                    LoginChecker.checkLoginCaixa(login, senha);
+                    Gerente gerente = gerentes.findByLogin(login);
+                    cpf = gerente.getCpf();
+                    newScreen = new HomeCaixa(cpf);
+                    break;
+                default:
+                    break;
+            }
+            
+            Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
+            if (oldWindow != null) {
+                oldWindow.dispose();
+            }
+            newScreen.show();
+            
+        }catch(LoginException error){
+            JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);   
         }
-        Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
-        if (oldWindow != null) {
-            oldWindow.dispose();
-        }
-        newScreen.show();
+        
     }
 }
