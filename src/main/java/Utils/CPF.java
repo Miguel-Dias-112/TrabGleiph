@@ -1,12 +1,11 @@
 package Utils;
 
+import Controller.DataAcessObjects.ClienteDAO;
 import Models.Cliente;
 import Models.Usuario;
 import Utils.Exception.CPFException;
 
 import java.util.List;
-
-import Controller.DataAcessObjects.ClienteDao;
 
 public class CPF {
     public static boolean isCPFValido(String cpf) throws CPFException {
@@ -72,7 +71,7 @@ public class CPF {
     public static boolean isCPFCadastrado(String cpf) throws CPFException{
         cpf = formatarCPF(cpf);
         
-        ClienteDao clientesDAO = new ClienteDao();
+        ClienteDAO clientesDAO = new ClienteDAO();
        List<Cliente> clientess = clientesDAO.findAll();
         
         for (Cliente clientes : clientess) {
