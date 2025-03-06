@@ -8,13 +8,13 @@ import View.HomeScreen.HomeCliente;
 
 import java.awt.*;
 
-public class TransferenciaView extends Screen {
+public class TransferenciaCliente extends Screen {
     private JTextField destinoCpfField, valorField;
     private JPasswordField senhaField;
     private JButton transferButton, cancelButton;
     private Cliente cliente;
   
-    public TransferenciaView(Cliente cliente) {
+    public TransferenciaCliente(Cliente cliente) {
         this.cliente = cliente;
         initialize();
     }

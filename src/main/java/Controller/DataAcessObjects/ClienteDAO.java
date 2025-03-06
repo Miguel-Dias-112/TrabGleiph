@@ -106,15 +106,16 @@ public class ClienteDAO implements ClientePersist {
         
 
         List<Cliente> usuarios = findAll();
+        boolean achou = false;
+        
         for (Cliente usuario : usuarios) {
-            boolean achou = false;
             if(usuario.getCpf().equals(cpfOrigem)){
                 achou = true;
             }
-            if(!achou){
-                System.out.println("CPF destino não encontrado!");
-                return false;
-            }
+           
+        }
+        if(!achou){
+            System.out.println("CPF destino não encontrado!");
         }
         for (Cliente usuario : usuarios) {
             double saldo;
