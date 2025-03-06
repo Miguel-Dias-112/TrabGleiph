@@ -15,8 +15,8 @@ import View.Screen;
 
 public class Main {
     public static void main(String[] args) throws CPFException {
-        ClienteDAO usuarioDAO = new ClienteDAO();
-        Cliente novoUsuario;
+        //ClienteDAO usuarioDAO = new ClienteDAO();
+        //Cliente novoUsuario;
      
     
         LoginScreen loginScreen = new LoginScreen();

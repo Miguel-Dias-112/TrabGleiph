@@ -102,27 +102,34 @@ public class ClienteDAO implements ClientePersist {
             }
         }
     }
-    public void realizarTransferencia(Cliente user, String cpfDestino, double valor) {
-        List<Cliente> clientes = findAll();
-        for (Cliente cliente : clientes) {
-            if (cliente.getCpf().equals(user.getCpf())) {
-                int saldo = (int) cliente.getConta().getSaldo();
+    public void realizarTransferencia(Cliente origem, String cpfDestino, double valor, String senha) {
+        if (!origem.getSenha().equals(senha)) {
+            System.out.println("Senha incorreta!");
+            return;
+        }
+
+        List<Cliente> usuarios = findAll();
+        for (Cliente usuario : usuarios) {
+            double saldo;
+            if (usuario.getCpf().equals(cpfDestino)) {
+                saldo = (double) usuario.getConta().getSaldo();
+                saldo = usuario.getConta().getSaldo();
+                saldo += valor;
+                usuario.getConta().setSaldo(saldo);
+                usuario.getConta().adicionarTransacao(new Transacao(valor));
+
+            }
+            if (usuario.getCpf().equals(origem.getCpf())) {
+                saldo = (double) origem.getConta().getSaldo();
+                saldo = origem.getConta().getSaldo();
                 saldo -= valor;
-                cliente.getConta().setSaldo(saldo);
-                cliente.getConta().adicionarTransacao(new Transacao(valor));
-                for (Cliente clienteDestino : clientes) {
-                    if (clienteDestino.getCpf().equals(cpfDestino)) {
-                        saldo = (int) clienteDestino.getConta().getSaldo();
-                        saldo += valor;
-                        clienteDestino.getConta().setSaldo(saldo);
-                        clienteDestino.getConta().adicionarTransacao(new Transacao(valor));
-                        save(clientes);
-                        return;
-                    }
-                }
+                origem.getConta().setSaldo(saldo);
+                origem.getConta().adicionarTransacao(new Transacao(valor));
+
+
             }
         }
-        save(clientes);
+        save(usuarios);
         return;
     }
     @Override

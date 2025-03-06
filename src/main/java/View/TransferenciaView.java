@@ -2,9 +2,7 @@ package View;
 
 
 import javax.swing.*;
-
-import Controller.ClickHandlers.trocarScreen;
-import Controller.DataAcessObjects.ClienteDao;
+import Controller.DataAcessObjects.ClienteDAO;
 import Models.Cliente;
 import View.HomeScreen.HomeCliente;
 
@@ -43,8 +41,8 @@ public class TransferenciaView extends Screen {
         transferButton = new JButton("Transferir");
         transferButton.addActionListener(e -> {
             // Transferir
-            ClienteDao clienteDao = new ClienteDao();
-            clienteDao.realizarTransferencia(cliente,destinoCpfField.getText(), Double.parseDouble(valorField.getText()), senhaField.getText());
+            ClienteDAO clienteDAO = new ClienteDAO();
+            clienteDAO.realizarTransferencia(cliente,destinoCpfField.getText(), Double.parseDouble(valorField.getText()), senhaField.getText());
             JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             
             tela.dispose();
