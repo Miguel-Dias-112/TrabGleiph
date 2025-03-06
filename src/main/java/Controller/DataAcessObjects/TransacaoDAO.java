@@ -6,6 +6,7 @@ import Models.Deposito;
 import Models.Saque;
 import Models.Transacao;
 import Models.Transferencia;
+import Models.Usuario;
 import Utils.GsonUtil;
 import Utils.Persistence.TransacaoPersist;
 
@@ -17,12 +18,12 @@ import com.google.gson.reflect.TypeToken;
 
 public class TransacaoDAO implements TransacaoPersist {
     private static final String DIRECTORY = "data";
-    private static final String PATH = DIRECTORY + File.separator + "transacoes.json";
+    private static final String PATH = DIRECTORY + File.separator + "usuarios.json";
 
     private TransacaoPersist  transacaoPersist; // final?
 
   
-    public void realizarSaque(Conta conta, double valor) {
+    public void realizarSaque(Usuario conta, double valor) {
         Saque saque = new Saque(valor);
         conta.adicionarTransacao(saque);
         transacaoPersist.save(conta.getTransacoes()); 
@@ -50,33 +51,26 @@ public class TransacaoDAO implements TransacaoPersist {
     }
 
 
-
     @Override
-    public void save(List<Transacao> transacoes) {
-        String json = GsonUtil.toJson(transacoes);
-
+    public void save(List<Usuario> usuarios) {
+        String json = GsonUtil.toJson(usuarios);
         File diretorio = new File(DIRECTORY);
         if (!diretorio.exists()) {
             diretorio.mkdirs(); 
         }
-
         Arquivo.save(PATH, json); 
     }
-
     @Override
-    public List<Transacao> findAll() {
+    public List<Usuario> findAll() {
         String json = Arquivo.read(PATH);
-
-        List<Transacao> transacoes = new ArrayList<>();
+        List<Usuario> usuarios = new ArrayList<>();
         if (!json.trim().isEmpty()) {
-            Type tipoLista = new TypeToken<List<Transacao>>() {}.getType();
-            transacoes = GsonUtil.fromJson(json, tipoLista);
-
-            if (transacoes == null) {
-                transacoes = new ArrayList<>();
+            Type tipoLista = new TypeToken<List<Usuario>>() {}.getType();
+            usuarios = GsonUtil.fromJson(json, tipoLista);
+            if (usuarios == null) {
+                usuarios = new ArrayList<>();
             }
         }
-
-        return transacoes;
+        return usuarios;
     }
 }
