@@ -31,7 +31,7 @@ public class Main {
             Login novoLogin = new Login();
             UsuarioDAO trasDao = new UsuarioDAO();
             Cliente cliente = (Cliente) novoLogin.validarlogin("jose", "Miguel@123");
-            trasDao.realizarSaque(cliente, 100.0);
+            //trasDao.realizarSaque(cliente, 100.0);
 
         } catch (LoginException error) {
             error.printStackTrace(); 
@@ -56,6 +56,6 @@ public class Main {
         // transacaoController.consultarExtrato(conta);
 
         LoginScreen loginScreen = new LoginScreen();
-        //loginScreen.show();
+        loginScreen.show();
     }
 }

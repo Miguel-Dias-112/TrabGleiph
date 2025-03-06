@@ -39,7 +39,20 @@ public class UsuarioDAO implements UsuarioPersist {
         usuarios.add(novoUsuario);
         save(usuarios);
     }
-    public void realizarSaque(Cliente user, double valor) {
+    
+    public void deletarUsuario(String cpf) {
+        List<Usuario> usuarios = findAll();
+        boolean removido = usuarios.removeIf(usuario -> usuario.getCpf().equals(cpf));
+
+        if (removido) {
+            save(usuarios);
+            System.out.println("Usuário removido com sucesso!");
+        } else {
+            System.out.println("Usuário não encontrado.");
+        }
+    }
+    
+    /*public void realizarSaque(Cliente user, double valor) {
         List<Cliente> usuarios = findClients();
         for (Cliente usuario : usuarios) {
             if (usuario.getCpf().equals(user.getCpf())) {
@@ -51,7 +64,7 @@ public class UsuarioDAO implements UsuarioPersist {
                 return;
             }
         }
-    }
+    }*/
     @Override
     public List<Usuario> findAll() {
         String json = Arquivo.read(PATH);

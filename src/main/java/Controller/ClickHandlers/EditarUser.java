@@ -13,7 +13,7 @@ public class EditarUser implements ActionListener {
     private JTextField loginField;
     private JPasswordField senhaField;
 
-    public EditarUser(JTextField nome, JTextField login, JPasswordField senha, JComboBox<String> cargo) {
+    public EditarUser(JTextField nome, JTextField login, JPasswordField senha) {
         this.nomeField = nome;
         this.loginField = login;
         this.senhaField = senha;
@@ -33,6 +33,8 @@ public class EditarUser implements ActionListener {
         } catch (EditarException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
     }
 
 }
