@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controller.ClickHandlers.TransferenciaCaixaHandle;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Caixa;
 import Models.Cliente;
@@ -52,22 +53,9 @@ public class TransferenciaCaixa  extends Screen {
         panel.add(senhaField);
         
         transferButton = new JButton("Transferir");
-        transferButton.addActionListener(e -> {
-            // Transferir
-            ClienteDAO clienteDAO = new ClienteDAO();
-            String cpfOrigem = origemCpfField.getText();
-            String cpfDestino = destinoCpfField.getText();
-            Double valorTrans = Double.parseDouble(valorField.getText());
-            String senha = senhaField.getText();
-            boolean sucess = clienteDAO.realizarTransferencia(cpfOrigem,cpfDestino, valorTrans,senha );
-            
-            if (sucess) {
-                JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            }
-            tela.dispose();
-            Screen home = new HomeCaixa(caixa);
-            home.show();
-        });
+        transferButton.addActionListener(
+            new TransferenciaCaixaHandle(this, origemCpfField, destinoCpfField, valorField, senhaField, caixa)
+        );
         cancelButton = new JButton("Cancelar");
         panel.add(cancelButton);
         panel.add(transferButton);
