@@ -3,6 +3,7 @@ package Controller.DataAcessObjects;
 import Models.Arquivo;
 import Models.Bank.Transacao;
 import Models.Usuarios.Cliente;
+import Utils.Checkers.CpfChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.Exception.LoginException;
@@ -171,7 +172,8 @@ public class ClienteDAO implements ClientePersist {
         }
         return clientes;
     }
-    public Cliente findByCpf(String cpf) {
+    public Cliente findByCpf(String cpf) throws CPFException {
+        cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {

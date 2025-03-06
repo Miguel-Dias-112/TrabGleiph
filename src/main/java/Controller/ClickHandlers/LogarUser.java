@@ -19,6 +19,9 @@ import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
 import Controller.DataAcessObjects.GerenteDAO;
 import Models.Usuarios.Gerente;
+import Utils.Exception.CPFException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -78,6 +81,8 @@ public class LogarUser implements ActionListener {
             
         }catch(LoginException error){
             JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);   
+        } catch (CPFException ex) {
+            Logger.getLogger(LogarUser.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

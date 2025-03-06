@@ -9,6 +9,7 @@ import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
 import Models.Usuarios.Usuario;
+import Utils.Exception.CPFException;
 import View.Screen;
 import View.Auth.LoginScreen;
 import View.HomeScreen.HomeCaixa;
@@ -25,12 +26,12 @@ public class DeletarContaScreen extends Screen {
     private JButton confirmarButton, cancelarButton;
     private final Usuario usuario;
   
-    public DeletarContaScreen(Usuario usuario) {
+    public DeletarContaScreen(Usuario usuario) throws CPFException {
         this.usuario = usuario;
         initialize();
     }
     
-    private void initialize() {
+    private void initialize() throws CPFException {
         tela.setTitle("Deletar Conta");
         tela.setSize(400, 250);
         tela.setLocationRelativeTo(null);

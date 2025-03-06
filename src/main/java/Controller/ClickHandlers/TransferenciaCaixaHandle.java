@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
+import Utils.Checkers.CpfChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.LoginException;
 import Utils.Exception.TransacaoException;
@@ -45,6 +46,15 @@ public class TransferenciaCaixaHandle implements ActionListener {
             return;
         }
         
+        try {
+            if (CpfChecker.formatarCPF(cpfOrigem).equals(CpfChecker.formatarCPF(cpfDestino))) {
+                JOptionPane.showMessageDialog(null, "Conta origem e conta destino devem ser diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (CPFException ex) {
+            Logger.getLogger(TransferenciaClienteHandle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         double valorTrans;
         
         try {
@@ -60,12 +70,15 @@ public class TransferenciaCaixaHandle implements ActionListener {
 
         try {
             clienteDAO.realizarTransferencia(cpfOrigem,cpfDestino, valorTrans,senha );
+            JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            
             tela.close();
             String cpf = caixa.getCpf();
             HomeCaixa home = new HomeCaixa(cpf);
             home.show();
+            
         } catch (CPFException | TransacaoException | LoginException ex) {
-            Logger.getLogger(TransferenciaCaixaHandle.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
      

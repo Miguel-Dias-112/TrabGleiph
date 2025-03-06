@@ -4,12 +4,18 @@ import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
+import Utils.Exception.CPFException;
 import Utils.Exception.LoginException;
 
 public class LoginChecker {
-     public static  boolean isPasswordValid(String cpf, String senha) throws LoginException {
+     public static  boolean isPasswordValid(String cpf, String senha) throws LoginException, CPFException {
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente cliente = clienteDAO.findByCpf(cpf);
+        
+        if(cliente == null){
+            throw new CPFException("usuario nao encontrado.");
+        }
+        
         if (cliente.getSenha().equals(senha)) {
             return true;
         }

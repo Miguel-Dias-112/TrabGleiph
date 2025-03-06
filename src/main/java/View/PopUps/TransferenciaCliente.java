@@ -7,6 +7,7 @@ import Controller.ClickHandlers.TransferenciaClienteHandle;
 import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Cliente;
+import Utils.Exception.CPFException;
 import View.Screen;
 import View.HomeScreen.HomeCaixa;
 import View.HomeScreen.HomeCliente;
@@ -19,12 +20,12 @@ public class TransferenciaCliente extends Screen {
     private JButton transferButton, cancelButton;
     private Cliente cliente;
   
-    public TransferenciaCliente(Cliente cliente) {
+    public TransferenciaCliente(Cliente cliente) throws CPFException {
         this.cliente = cliente;
         initialize();
     }
     
-    private void initialize() {
+    private void initialize() throws CPFException {
         tela.setTitle("Transferência");
         tela.setSize(400, 250);
         tela.setLocationRelativeTo(null);

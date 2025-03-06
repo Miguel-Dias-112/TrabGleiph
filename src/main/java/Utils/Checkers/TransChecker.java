@@ -9,7 +9,7 @@ import Utils.Exception.TransacaoException;
 
 public class TransChecker {
    
-    public static  boolean isSaldoAvaible(String cpf, Double valor) throws TransacaoException {
+    public static  boolean isSaldoAvaible(String cpf, Double valor) throws TransacaoException, CPFException {
         ClienteDAO clienteDAO = new ClienteDAO();
         Cliente cliente = clienteDAO.findByCpf(cpf);
         if (cliente.getSaldo() >= valor) {
