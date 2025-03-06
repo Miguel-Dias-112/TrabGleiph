@@ -3,6 +3,7 @@ package View;
 
 import javax.swing.*;
 
+import Controller.DataAcessObjects.ClienteDao;
 import Models.Cliente;
 import java.awt.*;
 
@@ -39,6 +40,13 @@ public class TransferenciaView extends Screen {
         panel.add(senhaField);
         
         transferButton = new JButton("Transferir");
+        transferButton.addActionListener(e -> {
+            // Transferir
+            ClienteDao clienteDao = new ClienteDao();
+            clienteDao.realizarTransferencia(cliente, "206.872.847-83");
+            JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            tela.dispose();
+        });
         cancelButton = new JButton("Cancelar");
         panel.add(transferButton);
         panel.add(cancelButton);
@@ -46,29 +54,5 @@ public class TransferenciaView extends Screen {
         cancelButton.addActionListener(e -> tela.dispose());
     }
     
-    // private void performTransfer() {
-    //     String destinoCpf = destinoCpfField.getText();
-    //     String valorText = valorField.getText();
-    //     String senha = new String(senhaField.getPassword());
-    //     try {
-    //         double valor = Double.parseDouble(valorText);
-    //         User destUser = users.get(destinoCpf);
-    //         if (destUser == null) {
-    //             JOptionPane.showMessageDialog(this, "Conta destino não encontrada.");
-    //             return;
-    //         }
-    //         if (!(destUser instanceof Cliente)) {
-    //             JOptionPane.showMessageDialog(this, "Conta destino inválida.");
-    //             return;
-    //         }
-    //         Cliente destCliente = (Cliente) destUser;
-    //         bankingController.transferir(cliente, destCliente.getConta(), valor, senha);
-    //         JOptionPane.showMessageDialog(this, "Transferência realizada com sucesso.");
-    //         dispose();
-    //     } catch (NumberFormatException ex) {
-    //         JOptionPane.showMessageDialog(this, "Valor inválido.");
-    //     } catch (Exception ex) {
-    //         JOptionPane.showMessageDialog(this, ex.getMessage());
-    //     }
-    // }
+    
 }

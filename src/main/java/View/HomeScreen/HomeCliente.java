@@ -41,8 +41,9 @@ public class HomeCliente extends Screen {
         menuSuperior.add(botaoSair);
         menuSuperior.add(new JButton("Editar Usuário"));
         JButton botaoTransferir = new JButton("Transferir");
-        botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaView()));
-
+        botaoTransferir.addActionListener(e -> {
+            new TransferenciaView().show();
+        });
         menuSuperior.add(botaoTransferir);
         menuSuperior.add(new JButton("Ver Investimentos"));
         tela.add(menuSuperior, BorderLayout.NORTH);
