@@ -105,12 +105,8 @@ public class InvestimentosScreen extends Screen {
             }
         });
 
-        JButton cancelarButton = new JButton("Cancelar");
-        switch (Login.user.getCargo()) {
-            case ("Cliente") -> cancelarButton.addActionListener(
-                    new trocarScreen(this, new HomeCliente((Cliente) Login.user))
-            );
-        }
+        JButton cancelarButton = new JButton("Voltar");
+        cancelarButton.addActionListener(e -> tela.dispose());
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(investirButton);
