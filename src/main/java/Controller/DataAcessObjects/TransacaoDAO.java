@@ -1,6 +1,7 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
+import Models.Cliente;
 import Models.Conta;
 import Models.Deposito;
 import Models.Saque;
@@ -20,27 +21,33 @@ public class TransacaoDAO implements TransacaoPersist {
     private static final String DIRECTORY = "data";
     private static final String PATH = DIRECTORY + File.separator + "usuarios.json";
 
-    private TransacaoPersist  transacaoPersist; // final?
 
   
-    public void realizarSaque(Usuario conta, double valor) {
-        Saque saque = new Saque(valor);
-        conta.adicionarTransacao(saque);
-        transacaoPersist.save(conta.getTransacoes()); 
+    public void realizarSaque(Cliente user, double valor) {
+        List<Usuario> usuarios = findAll();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCpf().equals(user.getCpf())) {
+                Conta conta = user.getConta();
+                Saque saque = new Saque(valor);
+                conta.adicionarTransacao(saque);
+                return;
+            }
+        }
+        save(usuarios); 
     }
 
-    public void realizarDeposito(Conta conta, double valor) {
-        Deposito deposito = new Deposito(valor);
-        conta.adicionarTransacao(deposito);
-        transacaoPersist.save(conta.getTransacoes()); 
-    }
+    // public void realizarDeposito(Conta conta, double valor) {
+    //     Deposito deposito = new Deposito(valor);
+    //     conta.adicionarTransacao(deposito);
+    //     transacaoPersist.save(conta.getTransacoes()); 
+    // }
 
-    public void realizarTransferencia(Conta contaOrigem, String contaDestino, double valor) {
-        Transferencia transferencia = new Transferencia(valor, contaDestino);
-        contaOrigem.adicionarTransacao(transferencia);
-        transacaoPersist.save(contaOrigem.getTransacoes()); 
-        System.out.println("Transferência realizada com sucesso!");
-    }
+    // public void realizarTransferencia(Conta contaOrigem, String contaDestino, double valor) {
+    //     Transferencia transferencia = new Transferencia(valor, contaDestino);
+    //     contaOrigem.adicionarTransacao(transferencia);
+    //     transacaoPersist.save(contaOrigem.getTransacoes()); 
+    //     System.out.println("Transferência realizada com sucesso!");
+    // }
 
     public String consultarExtrato(Conta conta) {
         String extrato = "Extrato da conta " + conta.getId() + ":";
