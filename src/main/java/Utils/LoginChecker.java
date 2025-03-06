@@ -2,8 +2,18 @@ package Utils;
 
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
+import Models.Cliente;
+import Utils.Exception.LoginException;
 
 public class LoginChecker {
+     public static  boolean isPasswordValid(String cpf, String senha) throws LoginException {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Cliente cliente = clienteDAO.findByCpf(cpf);
+        if (cliente.getSenha().equals(senha)) {
+            return true;
+        }
+        return false;
+    }
     public static boolean checkLoginAvailable(String login){
         CaixaDAO caixDAO = new CaixaDAO();
         ClienteDAO clienteDAO = new ClienteDAO();
