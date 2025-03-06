@@ -16,7 +16,7 @@ public class InvestimentosScreen extends Screen {
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Visualizar Investimentos");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        tela.setSize(600, 500);
+        tela.setSize(600, 450);
         tela.setLayout(new GridBagLayout());
         tela.setLocationRelativeTo(null);
     }
@@ -25,7 +25,9 @@ public class InvestimentosScreen extends Screen {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = x;
         gbc.gridy = y;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
         gbc.insets = margens;
         tela.add(elemento, gbc);
     }
@@ -37,17 +39,25 @@ public class InvestimentosScreen extends Screen {
     }
 
     private void desenhaListaInvestimentos() {
-        modeloInvestimentos = new DefaultListModel<>();
-        // Mock de investimentos com ano e % de retorno para demonstração:
+        modeloInvestimentos = new DefaultListModel<>(); // recebe a lista do gson
         modeloInvestimentos.addElement("Investimento A - Ano: 2025 - Retorno: 10%");
         modeloInvestimentos.addElement("Investimento B - Ano: 2026 - Retorno: 12%");
         modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
+
 
         listaInvestimentos = new JList<>(modeloInvestimentos);
         listaInvestimentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listaInvestimentos.setVisibleRowCount(5);
+        listaInvestimentos.setVisibleRowCount(8);
 
         JScrollPane scrollPane = new JScrollPane(listaInvestimentos);
+        scrollPane.setPreferredSize(new Dimension(240, 400));
+
         posicionaElemento(scrollPane, 0, 1, new Insets(0, 0, 20, 0));
     }
 
@@ -55,23 +65,22 @@ public class InvestimentosScreen extends Screen {
         JButton investirButton = new JButton("Investir");
         investirButton.addActionListener(e -> {
             String selecionado = listaInvestimentos.getSelectedValue();
-            if (selecionado == null) {
-                // Exibir erro se nada foi selecionado
+            if (selecionado == null || selecionado.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(
-                    null, 
+                    null,
                     "{erro de select}",
-                    "Erro", 
+                    "Erro",
                     JOptionPane.ERROR_MESSAGE
                 );
                 return;
             }
-            String valor = JOptionPane.showInputDialog("Insira o valor que deseja investir:");
+
+            String valor = JOptionPane.showInputDialog("Quanto deseja investir?");
             if (valor != null && !valor.trim().isEmpty()) {
-                // Mock de sucesso:
                 JOptionPane.showMessageDialog(
-                    null, 
-                    "Investimento em \"" + selecionado + "\" de R$" + valor + "\n{msg de sucesso}",
-                    "Sucesso", 
+                    null,
+                    "Investimento em \"" + selecionado + "\" de R$ " + valor + "\n{msg de sucesso}",
+                    "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE
                 );
             }
