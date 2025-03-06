@@ -5,6 +5,8 @@ import Utils.Exception.EditarException;
 import Utils.Exception.CadastroException;
 import Controller.DataAcessObjects.ClienteDAO;
 import Utils.CPF;
+import Utils.LoginChecker;
+
 import java.util.List;
 
 public class Usuario {
@@ -27,7 +29,7 @@ public class Usuario {
             throw new CadastroException("Cargo invalido");
         }
         
-        if(!checkLoginAvailable(login)){ 
+        if(!LoginChecker.checkLoginAvailable(login)){ 
             throw new CadastroException("Este login ja esta em uso.");
         }
         
@@ -97,15 +99,5 @@ public class Usuario {
         }
     }
     
-    private boolean checkLoginAvailable(String login){
-        ClienteDAO usuarioDAO = new ClienteDAO();
-        //List<Usuario> usuarios = usuarioDAO.findAll();
-        
-        // for(Usuario usuario: usuarios){
-        //     if(usuario.login.equals(login)){
-        //         return false;
-        //     }
-        // }
-        return true;
-    }
+    
 }

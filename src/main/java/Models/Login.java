@@ -1,5 +1,6 @@
 package Models;
 
+import Utils.LoginChecker;
 import Utils.Exception.LoginException;
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
@@ -17,40 +18,11 @@ public class Login {
         Login.user = user;
     }
     public Cliente validarLoginCliente(String login, String senha) throws LoginException{
-        boolean fezLogin = false;
-        ClienteDAO usuarioDAO = new ClienteDAO();
-        List<Cliente> usuarios = usuarioDAO.findAll();
-        for(Cliente usuario : usuarios){
-            if(usuario.getLogin().equals(login)){
-                if(usuario.getSenha().equals(senha)){
-                    setLogin(usuario);
-                    fezLogin = true;
-                    System.out.println("logou");
-                    return usuario;
-                }
-            }
-        }
-        if(!fezLogin){
-           throw new LoginException();
-        }
+        LoginChecker.checkLoginCliente(login, senha);
         return null;
     }
     public Caixa validarLoginCaixa(String login, String senha) throws LoginException{
-        boolean fezLogin = false;
-        CaixaDAO caixaDAO = new CaixaDAO();
-        List<Caixa> usuarios = caixaDAO.findAll();
-        for(Caixa caixa : usuarios){
-            if(caixa.getLogin().equals(login)){
-                if(caixa.getSenha().equals(senha)){
-                    setLogin(caixa);
-                    fezLogin = true;
-                    return caixa;
-                }
-            }
-        }
-        if(!fezLogin){
-           throw new LoginException();
-        }
+        LoginChecker.checkLoginCliente(login, senha);
         return null;
     }
   
