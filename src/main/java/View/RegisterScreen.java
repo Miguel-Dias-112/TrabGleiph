@@ -81,15 +81,22 @@ public class RegisterScreen extends Screen {
 
     private void desenhaBotoes() {
         JButton registrarButton = new JButton("Registrar");
-
         CadastrarUser cadastrarUser = new CadastrarUser(userField, cpfField, loginField, senhaField, cargoComboBox);
         registrarButton.addActionListener(cadastrarUser);
-
+    
+        JButton voltarButton = new JButton("Voltar");
+        voltarButton.addActionListener(e -> {
+            new LoginScreen().show();
+            tela.dispose();
+        });
+    
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(registrarButton);
-
+        panelBotoes.add(voltarButton);
+    
         posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
     }
+    
     public RegisterScreen() {
         
     }
