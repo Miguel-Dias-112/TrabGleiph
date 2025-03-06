@@ -6,6 +6,7 @@ import Controller.ClickHandlers.trocarScreen;
 import Models.Usuario;
 import View.LoginScreen;
 import View.Screen;
+import Models.Caixa;
 import Models.Transacao;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class HomeCaixa extends Screen {
     private String tipoUsuario;
     private int saldo;
     private List<Transacao> transacoes;
-    public HomeCaixa(Usuario user) {
+    public HomeCaixa(Caixa user) {
 
         this.tipoUsuario = user.getCargo();
         if (this.tipoUsuario.equals("Cliente")) {
@@ -60,18 +61,13 @@ public class HomeCaixa extends Screen {
         conteudoCentral.setLayout(new GridLayout(1, 2, 20, 20));
         conteudoCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        if ("Cliente".equals(tipoUsuario)) {
-            JPanel saldoPanel = new JPanel();
-            saldoPanel.setBorder(BorderFactory.createTitledBorder("Saldo"));
-            saldoPanel.add(new JLabel("R$ 0,00"));
+        JPanel saldoPanel = new JPanel();
+        saldoPanel.add(new JLabel("Você é um caixa"));
 
-            JPanel historicoPanel = new JPanel();
-            historicoPanel.setBorder(BorderFactory.createTitledBorder("Histórico de Transações"));
-            historicoPanel.add(new JTextArea(10, 30));
+   
 
-            conteudoCentral.add(saldoPanel);
-            conteudoCentral.add(historicoPanel);
-        }
+        conteudoCentral.add(saldoPanel);
+        
         // telas especificas para caixa e gerente aqui        
         tela.add(conteudoCentral, BorderLayout.CENTER);
     }
