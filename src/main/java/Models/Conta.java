@@ -19,15 +19,15 @@ public class Conta {
 
     public void adicionarTransacao(Transacao transacao) {
         transacoes.add(transacao);
-        if (transacao instanceof Saque) {
-            saldo -= transacao.getValor();
-        } else if (transacao instanceof Deposito) {
-            saldo += transacao.getValor();
-        } else if (transacao instanceof Transferencia) {
-            saldo -= transacao.getValor();
-        }
-    }
 
+    }
+    public String consultarExtrato() {
+        String extrato = "Extrato da conta " + getId() + ":";
+        for (Transacao transacao : getTransacoes()) {
+            extrato += "\n" + transacao;
+        }
+        return extrato;
+    }
     public String getId() {
         return id;
     }
