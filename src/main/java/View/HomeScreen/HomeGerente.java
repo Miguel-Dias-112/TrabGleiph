@@ -3,6 +3,8 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
+import Controller.DataAcessObjects.CaixaDAO;
+import Controller.DataAcessObjects.GerenteDAO;
 import Models.Bank.Transacao;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Gerente;
@@ -25,8 +27,9 @@ public class HomeGerente extends Screen {
     private JPanel conteudoCentral;
     private Gerente gerente;
 
-    public HomeGerente(Gerente user) {
-        this.gerente = user;
+    public HomeGerente(String cpf) {
+        GerenteDAO gerentes = new GerenteDAO();
+        this.gerente = gerentes.findByCpf(cpf);
     }
 
     private void configuraTela() {

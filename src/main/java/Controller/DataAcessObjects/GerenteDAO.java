@@ -1,6 +1,7 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
+import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
 import Utils.Exception.EditarException;
 import Utils.GsonUtil;
@@ -92,6 +93,16 @@ public class GerenteDAO implements GerentePersist {
         List<Gerente> gerentes = findAll();
         for (Gerente gerente : gerentes) {
             if (gerente.getLogin().equals(login)) {
+                return gerente;
+            }
+        }
+        return null;
+    }
+
+        public Gerente findByCpf(String cpf) {
+        List<Gerente> gerentes = findAll();
+        for (Gerente gerente : gerentes) {
+            if (gerente.getCpf().equals(cpf)) {
                 return gerente;
             }
         }

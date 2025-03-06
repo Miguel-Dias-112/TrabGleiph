@@ -61,10 +61,10 @@ public class LogarUser implements ActionListener {
                     break;
                 case "Gerente":
                     GerenteDAO gerentes = new GerenteDAO();
-                    LoginChecker.checkLoginCaixa(login, senha);
+                    LoginChecker.checkLoginGerente(login, senha);
                     Gerente gerente = gerentes.findByLogin(login);
                     cpf = gerente.getCpf();
-                    newScreen = new HomeCaixa(cpf);
+                    newScreen = new HomeGerente(cpf);
                     break;
                 default:
                     break;

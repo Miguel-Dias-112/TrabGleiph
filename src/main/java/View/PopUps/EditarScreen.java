@@ -79,7 +79,7 @@ public class EditarScreen extends Screen {
         switch(user.getCargo()){
             case("Cliente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCliente(user.getCpf())));
             case("Caixa") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa(user.getCpf())));
-            case("Gerente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente((Gerente)user))); 
+            case("Gerente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente(user.getCpf()))); 
         }
 
         JPanel panelBotoes = new JPanel();

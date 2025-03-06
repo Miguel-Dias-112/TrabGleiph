@@ -2,8 +2,10 @@ package Utils.Checkers;
 
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
+import Controller.DataAcessObjects.GerenteDAO;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
+import Models.Usuarios.Gerente;
 import Utils.Exception.LoginException;
 
 public class LoginChecker {
@@ -46,5 +48,18 @@ public class LoginChecker {
         boolean valido = senhaCaixa.equals(senha);
            
         return valido;
+    }
+    
+    public static boolean checkLoginGerente(String login, String senha) throws LoginException {
+        GerenteDAO gerenteDAO = new GerenteDAO();
+        Gerente gerente = gerenteDAO.findByLogin(login);
+        if (gerente == null) {
+            throw new LoginException();
+        }
+        String senhaGerente = gerente.getSenha();
+        boolean valido = senhaGerente.equals(senha);
+        
+        return valido;
+
     }
 }

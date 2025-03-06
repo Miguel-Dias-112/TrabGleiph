@@ -108,7 +108,7 @@ JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
         switch (usuario.getCargo()) {
             case "Gerente":
                     cancelarButton.addActionListener(
-                    new trocarScreen(this, new HomeGerente((Gerente)usuario)));
+                    new trocarScreen(this, new HomeGerente(usuario.getCpf())));
                 break;
             case "Caixa":
                     cancelarButton.addActionListener(
