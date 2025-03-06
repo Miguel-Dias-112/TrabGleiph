@@ -101,13 +101,15 @@ public class InvestimentosScreen extends Screen {
                     );
 
                     if (sucesso) {
-                        this.cliente = clienteDAO.findByCpf(cliente.getCpf()); 
+                        this.cliente = clienteDAO.findByCpf(cliente.getCpf());
 
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Investimento em \"" + selecionado + "\" de R$ " + valorNumerico + " realizado com sucesso.",
                                 "Sucesso",
                                 JOptionPane.INFORMATION_MESSAGE);
+
+                        new trocarScreen(this, new HomeCliente(cliente.getCpf())).actionPerformed(e);
                     } else {
                         JOptionPane.showMessageDialog(
                                 null,

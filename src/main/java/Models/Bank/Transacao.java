@@ -35,9 +35,7 @@ public class Transacao {
     // mockup para testes sem a interface grafica
     @Override
     public String toString() {
-        return "Transacao{" +
-                "id='" + id + '\'' +
-                ", valor=" + valor +
-                '}';
+        return "-> " + descricao + '\'' +
+                ", Valor: " + valor + "\n";
     }
 }
