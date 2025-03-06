@@ -11,10 +11,6 @@ public class TransferenciaView extends Screen {
     private JPasswordField senhaField;
     private JButton transferButton, cancelButton;
     private Cliente cliente;
-
-
-    //private BankingController bankingController;
-    //private Map<String, User> users;
     public TransferenciaView() {
         initialize();
     }
@@ -46,10 +42,7 @@ public class TransferenciaView extends Screen {
         cancelButton = new JButton("Cancelar");
         panel.add(transferButton);
         panel.add(cancelButton);
-        
         tela.add(panel);
-        
-        //transferButton.addActionListener(e -> performTransfer());
         cancelButton.addActionListener(e -> tela.dispose());
     }
     

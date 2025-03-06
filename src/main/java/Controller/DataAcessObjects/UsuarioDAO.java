@@ -52,6 +52,32 @@ public class UsuarioDAO implements UsuarioPersist {
             }
         }
     }
+    public void realizarDeposito(Cliente user, double valor) {
+        List<Cliente> usuarios = findClients();
+        for (Cliente usuario : usuarios) {
+            if (usuario.getCpf().equals(user.getCpf())) {
+                int saldo = (int) usuario.getConta().getSaldo();
+                saldo += valor;
+                usuario.getConta().setSaldo(saldo);
+                usuario.getConta().adicionarTransacao(new Transacao(valor));
+                saveClientes(usuarios); 
+                return;
+            }
+        }
+    }
+    public void realizarTransferencia(Cliente user, double valor) {
+        List<Cliente> usuarios = findClients();
+        for (Cliente usuario : usuarios) {
+            if (usuario.getCpf().equals(user.getCpf())) {
+                int saldo = (int) usuario.getConta().getSaldo();
+                saldo -= valor;
+                usuario.getConta().setSaldo(saldo);
+                usuario.getConta().adicionarTransacao(new Transacao(valor));
+                saveClientes(usuarios); 
+                return;
+            }
+        }
+    }
     @Override
     public List<Usuario> findAll() {
         String json = Arquivo.read(PATH);
