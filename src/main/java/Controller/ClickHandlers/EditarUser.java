@@ -1,6 +1,8 @@
 package Controller.ClickHandlers;
 
+import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
+import Controller.DataAcessObjects.GerenteDAO;
 import Utils.Exception.EditarException;
 import Models.*;
 
@@ -44,12 +46,12 @@ public class EditarUser implements ActionListener {
                 clienteDAO.editarCliente(cpf, nome, login, senha);
                 break;
             case "Gerente":
-                GerenteDAO gerenteDAO =  new gerenteDAO();
+                GerenteDAO gerenteDAO =  new GerenteDAO();
                 gerenteDAO.editarGerente(cpf, nome, login, senha);
                 break;
             case "Caixa":
                 CaixaDAO caixaDAO =  new CaixaDAO();
-                caixaDAO.editarCliente(cpf, nome, login, senha);
+                caixaDAO.editarCaixa(cpf, nome, login, senha);
                 break;
         }
     }
