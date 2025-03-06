@@ -9,7 +9,9 @@ import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
 import Models.Usuarios.Usuario;
+import View.HomeScreen.HomeCaixa;
 import View.HomeScreen.HomeCliente;
+import View.HomeScreen.HomeGerente;
 
 import java.util.List;
 
@@ -104,11 +106,11 @@ JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
         switch (usuario.getCargo()) {
             case "Gerente":
                     cancelarButton.addActionListener(
-                    new trocarScreen(this, new HomeCliente(usuario.getCpf())));
+                    new trocarScreen(this, new HomeGerente((Gerente)usuario)));
                 break;
             case "Caixa":
                     cancelarButton.addActionListener(
-                    new trocarScreen(this, new HomeCliente(usuario.getCpf())));
+                    new trocarScreen(this, new HomeCaixa(usuario.getCpf())));
                 break;
             case "Cliente":
                     cancelarButton.addActionListener(
