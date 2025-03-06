@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import Controller.DataAcessObjects.UsuarioDAO;
+import Controller.DataAcessObjects.ClienteDao;
 
 public class CadastrarUser implements ActionListener {
 
@@ -34,7 +34,6 @@ public class CadastrarUser implements ActionListener {
         String senha = new String(senhaField.getPassword());
         String cargo = (String) cargoBox.getSelectedItem();
 
-        Usuario novoUsuario = null;
         
         try {
             // Verifica se o CPF está cadastrado
@@ -44,19 +43,19 @@ public class CadastrarUser implements ActionListener {
                 return;
             }
             */
-
             switch (cargo) {
-                case "Cliente" -> novoUsuario = new Cliente(login, senha, nome, cpf);
-                case "Caixa" -> novoUsuario = new Caixa(login, senha, nome, cpf);
-                case "Gerente" -> novoUsuario = new Gerente(login, senha, nome, cpf);
+                case "Cliente" ->{
+                     Cliente novoUsuario = new Cliente(login, senha, nome, cpf);
+                     ClienteDao clienteDao = new ClienteDao();
+                     clienteDao.adicionarNovoUsuario(novoUsuario);
+                    }
+               
                 default -> {
                     JOptionPane.showMessageDialog(null, "Cargo inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
-
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.adicionarNovoUsuario(novoUsuario);
+            
             JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } catch (CPFException | CadastroException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

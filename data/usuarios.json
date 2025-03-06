@@ -1,1 +1,1 @@
-[{"conta":{"df":"#000","id":"CONT001","saldo":20.0,"transacoes":[{"valor":100.0}]},"login":"jose","senha":"Miguel@123","nome":"José Miguel","cpf":"123.456.789-09","cargo":"Cliente"}]
+[{"conta":{"df":"#000","id":"CONT001","saldo":0.0,"transacoes":[]},"login":"miguel","senha":"123","nome":"José Miguel","cpf":"169.763.857-03","cargo":"Cliente"}]
