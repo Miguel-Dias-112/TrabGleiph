@@ -1,1 +1,1 @@
-[{"login":"jose","senha":"Miguel@123","nome":"Miguel","cpf":"169.763.857-03","cargo":"Cliente"},{"login":"caixa1","senha":"senha123","nome":"Maria Antonietta","cpf":"303.795.150-83","cargo":"Caixa"},{"saldo":0.0,"login":"teste","senha":"teste","nome":"teste","cpf":"582.075.720-35","cargo":"Cliente"}]
+[{"conta":{"df":"#000","id":"CONT001","saldo":20.0,"transacoes":[{"valor":100.0}]},"login":"jose","senha":"Miguel@123","nome":"José Miguel","cpf":"123.456.789-09","cargo":"Cliente"}]

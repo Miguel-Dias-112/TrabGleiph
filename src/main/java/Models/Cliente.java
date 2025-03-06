@@ -5,10 +5,10 @@ import Utils.Exception.CadastroException;
 
 public class Cliente extends Usuario {
     private Conta conta; 
-    private double saldo;  
+    
     public Cliente(String login, String senha, String nome, String cpf) throws CPFException, CadastroException  {
         super(login, senha, nome, cpf, "Cliente");
-        
+        conta = new Conta();
     }
 
     public void setConta(Conta conta) {
@@ -19,7 +19,7 @@ public class Cliente extends Usuario {
         return conta;
     }
     public double getSaldo() {
-        this.saldo = saldo;
-        return saldo;
+        
+        return conta.getSaldo();
     }
 }

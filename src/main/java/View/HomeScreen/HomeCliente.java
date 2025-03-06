@@ -17,7 +17,6 @@ public class HomeCliente extends Screen {
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
     private String tipoUsuario;
-
     private JLabel saldoLabel;
     private List<Transacao> transacoes;
 

@@ -3,7 +3,7 @@ package Models;
 //tirei data/hora, acredito que nao seja necessario. mas seria interessante
 
 
-public abstract class Transacao {
+public class Transacao {
     private String id;
     private double valor;
 
