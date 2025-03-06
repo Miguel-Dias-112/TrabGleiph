@@ -25,6 +25,18 @@ public class Usuario {
             throw new CadastroException("Este login ja esta em uso.");
         }
         
+        if(login.length() < 1){
+            throw new CadastroException("O campo login nao pode ficar vazio.");
+        }
+        
+        if(senha.length() < 1){
+            throw new CadastroException("O campo senha nao pode ficar vazio.");
+        }
+        
+        if(nome.length() < 1){
+            throw new CadastroException("O campo nome nao pode ficar vazio.");
+        }
+        
         this.login = login;
         this.nome = nome;
         this.senha = senha;

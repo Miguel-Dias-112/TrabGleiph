@@ -1,7 +1,6 @@
 
 /*
 
-- mensagem de erro usuário não existe/ senha ou login incorretos
 - adicionar botão de voltar na tela de registrar
 - verificaçoes de inputs negativos em transacoes
 - verificar se existe dinheiro suficiente na conta origem para transferência e saque
