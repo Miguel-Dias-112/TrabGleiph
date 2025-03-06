@@ -18,12 +18,10 @@ public class CreditoDAO implements CreditoPersist {
     @Override
     public void save(List<Credito> creditos) {
         String json = GsonUtil.toJson(creditos);
-
         File diretorio = new File(DIRECTORY);
         if (!diretorio.exists()) {
             diretorio.mkdirs(); 
         }
-
         Arquivo.save(PATH, json); 
     }
 

@@ -2,7 +2,7 @@ package Models;
 
 import Utils.Exception.CPFException;
 import Utils.Exception.CadastroException;
-import Controller.DataAcessObjects.UsuarioDAO;
+import Controller.DataAcessObjects.ClienteDao;
 import Utils.CPF;
 import java.util.List;
 
@@ -77,14 +77,14 @@ public class Usuario {
     }
     
     private boolean checkLoginAvailable(String login){
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        List<Usuario> usuarios = usuarioDAO.findAll();
+        ClienteDao usuarioDAO = new ClienteDao();
+        //List<Usuario> usuarios = usuarioDAO.findAll();
         
-        for(Usuario usuario: usuarios){
-            if(usuario.login.equals(login)){
-                return false;
-            }
-        }
+        // for(Usuario usuario: usuarios){
+        //     if(usuario.login.equals(login)){
+        //         return false;
+        //     }
+        // }
         return true;
     }
 }

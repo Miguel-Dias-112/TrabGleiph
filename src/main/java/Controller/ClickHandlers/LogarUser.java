@@ -26,7 +26,6 @@ public class LogarUser implements ActionListener {
         this.senhaField = senha;
         this.cargoBox = cargo;
     }   
-    
     @Override
     public void actionPerformed(ActionEvent e){
         String login = loginField.getText();

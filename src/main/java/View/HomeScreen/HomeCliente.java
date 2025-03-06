@@ -3,26 +3,27 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
-import Models.Usuario;
 import View.LoginScreen;
 import View.Screen;
+import View.TransferenciaView;
 import Models.Cliente;
 import Models.Transacao;
 import java.util.List;
-
 import java.awt.*;
 
 public class HomeCliente extends Screen {
 
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
-    private String tipoUsuario;
     private JLabel saldoLabel;
-    private List<Transacao> transacoes;
+    private JTextArea historico ;
+
 
     public HomeCliente(Cliente user) {
         double saldo = user.getSaldo();
         saldoLabel = new JLabel("R$ "+ saldo);
+        historico = new JTextArea(10, 30);
+        historico.setText(user.getConta().consultarExtrato());
     }
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
@@ -39,8 +40,11 @@ public class HomeCliente extends Screen {
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
         menuSuperior.add(new JButton("Editar Usuário"));
-        menuSuperior.add(new JButton("Saldo e Extrato"));
-        menuSuperior.add(new JButton("Transferir"));
+        JButton botaoTransferir = new JButton("Transferir");
+        botaoTransferir.addActionListener(e -> {
+            new TransferenciaView().show();
+        });
+        menuSuperior.add(botaoTransferir);
         menuSuperior.add(new JButton("Ver Investimentos"));
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
@@ -53,7 +57,7 @@ public class HomeCliente extends Screen {
         saldoPanel.add(saldoLabel);
         JPanel historicoPanel = new JPanel();
         historicoPanel.setBorder(BorderFactory.createTitledBorder("Histórico de Transações"));
-        historicoPanel.add(new JTextArea(10, 30));
+        historicoPanel.add(historico);
         conteudoCentral.add(saldoPanel);
         conteudoCentral.add(historicoPanel);
         // telas especificas para caixa e gerente aqui        
