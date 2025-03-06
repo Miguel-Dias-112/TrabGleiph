@@ -11,6 +11,7 @@ import View.SaqueCaixa;
 import View.Screen;
 import View.TransferenciaCaixa;
 import Models.Caixa;
+import Models.Gerente;
 import Models.Transacao;
 import View.DeletarContaScreen;
 import View.EditarScreen;
@@ -18,14 +19,14 @@ import java.util.List;
 
 import java.awt.*;
 
-public class HomeCaixa extends Screen {
+public class HomeGerente extends Screen {
 
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
-    private Caixa caixa;
+    private Gerente gerente;
 
-    public HomeCaixa(Caixa user) {
-        this.caixa = user;
+    public HomeGerente(Gerente user) {
+        this.gerente = user;
     }
 
     private void configuraTela() {
@@ -45,18 +46,6 @@ public class HomeCaixa extends Screen {
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
         
-        JButton botaoSaque = new JButton("Saque");
-        botaoSaque.addActionListener(new trocarScreen(this, new SaqueCaixa(caixa)));
-        menuSuperior.add(botaoSaque);
-        
-        JButton botaoTransferir = new JButton("Transferir");
-        botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaCaixa(caixa)));
-        menuSuperior.add(botaoTransferir);
-        
-        JButton botaoDeposito = new JButton("Deposito");
-        botaoDeposito.addActionListener(new trocarScreen(this, new DepositoCaixa(caixa)));
-        menuSuperior.add(botaoDeposito);
-        
         JButton botaoEditar = new JButton("Editar Usuário");
         botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
         menuSuperior.add(botaoEditar);
@@ -74,7 +63,7 @@ public class HomeCaixa extends Screen {
         conteudoCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JPanel saldoPanel = new JPanel();
-        saldoPanel.add(new JLabel("Você é um caixa"));
+        saldoPanel.add(new JLabel("Você é um gerente"));
 
         conteudoCentral.add(saldoPanel);
 

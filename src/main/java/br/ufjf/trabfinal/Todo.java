@@ -1,6 +1,7 @@
 
 /*
 
+- verificar se o cpf é único em todos os 3 tipos de usuários (n pode ser mais de um ao mesmo tempo)
 - verificar valor negativo antes de transferir e fazer saque
 - adicionar botão de voltar na tela de registrar
 - verificaçoes de inputs negativos em transacoes

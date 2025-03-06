@@ -2,11 +2,15 @@ package View;
 
 import Controller.ClickHandlers.EditarUser;
 import Controller.ClickHandlers.trocarScreen;
+import Models.Caixa;
 import Models.Cliente;
+import Models.Gerente;
 import Models.Login;
+import View.HomeScreen.HomeCaixa;
 import javax.swing.*;
 import java.awt.*;
 import View.HomeScreen.HomeCliente;
+import View.HomeScreen.HomeGerente;
 
 public class EditarScreen extends Screen {
     private JTextField nomeField;
@@ -73,18 +77,8 @@ public class EditarScreen extends Screen {
         JButton cancelarButton = new JButton("Cancelar");
         switch(Login.user.getCargo()){
             case("Cliente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCliente((Cliente)Login.user)));
-            /*case("Caixa"):
-            cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa()));
-            break;
-            case("Gerente"):
-            cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente()));
-            break;*/
-            /*case("Caixa"):
-                cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa()));
-                break;
-            case("Gerente"):
-                cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente()));
-                break;*/  
+            case("Caixa") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa((Caixa)Login.user)));
+            case("Gerente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente((Gerente)Login.user))); 
         }
 
         JPanel panelBotoes = new JPanel();
