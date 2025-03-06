@@ -42,9 +42,16 @@ public class TransferenciaView extends Screen {
         transferButton.addActionListener(e -> {
             // Transferir
             ClienteDAO clienteDAO = new ClienteDAO();
-            clienteDAO.realizarTransferencia(cliente,destinoCpfField.getText(), Double.parseDouble(valorField.getText()), senhaField.getText());
-            JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            String cpfOrigem = cliente.getCpf();
+            String cpfDestino = destinoCpfField.getText();
+            Double valorTrans = Double.parseDouble(valorField.getText());
+            String senha = senhaField.getText();
+
+            boolean sucess = clienteDAO.realizarTransferencia(cpfOrigem,cpfDestino, valorTrans,senha );
             
+            if (sucess) {
+                JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }
             tela.dispose();
             HomeCliente home = new HomeCliente(cliente);
             home.show();

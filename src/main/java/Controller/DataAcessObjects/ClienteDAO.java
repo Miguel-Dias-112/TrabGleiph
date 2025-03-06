@@ -102,7 +102,7 @@ public class ClienteDAO implements ClientePersist {
             }
         }
     }
-    public void realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
+    public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
         
 
         List<Cliente> usuarios = findAll();
@@ -113,7 +113,7 @@ public class ClienteDAO implements ClientePersist {
             }
             if(!achou){
                 System.out.println("CPF destino não encontrado!");
-                return;
+                return false;
             }
         }
         for (Cliente usuario : usuarios) {
@@ -135,7 +135,7 @@ public class ClienteDAO implements ClientePersist {
             }
         }
         save(usuarios);
-        return;
+        return true;
     }
     @Override
     public List<Cliente> findAll() {
