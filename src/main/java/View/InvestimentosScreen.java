@@ -43,12 +43,12 @@ public class InvestimentosScreen extends Screen {
         modeloInvestimentos.addElement("Investimento A - Ano: 2025 - Retorno: 10%");
         modeloInvestimentos.addElement("Investimento B - Ano: 2026 - Retorno: 12%");
         modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
-        modeloInvestimentos.addElement("Investimento C - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento D - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento E - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento F - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento G - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento H - Ano: 2027 - Retorno: 15%");
+        modeloInvestimentos.addElement("Investimento I - Ano: 2027 - Retorno: 15%");
 
 
         listaInvestimentos = new JList<>(modeloInvestimentos);
@@ -91,14 +91,6 @@ public class InvestimentosScreen extends Screen {
             case ("Cliente") -> cancelarButton.addActionListener(
                     new trocarScreen(this, new HomeCliente((Cliente) Login.user))
             );
-            /*
-             * case("Caixa"):
-             *     cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa()));
-             *     break;
-             * case("Gerente"):
-             *     cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente()));
-             *     break;
-             */
         }
 
         JPanel panelBotoes = new JPanel();
