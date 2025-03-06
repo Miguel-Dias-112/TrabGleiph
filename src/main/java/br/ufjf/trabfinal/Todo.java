@@ -11,5 +11,6 @@
 
 - teste de unidade: cpf válido
 - teste de unidade: cpf único
-- teste de unidade: 
+- teste de unidade: login único
+- teste de unidade: campos obrigatórios (nome, login, senha e cpf não podem ficar vazios)
 */

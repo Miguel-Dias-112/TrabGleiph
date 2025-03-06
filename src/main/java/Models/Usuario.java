@@ -13,6 +13,11 @@ public class Usuario {
     final private String cpf;
     final private String cargo;
     public Usuario(String login, String senha, String nome, String cpf, String cargo) throws CPFException, CadastroException {
+        
+        if(cpf.length() < 1){
+            throw new CadastroException("O campo cpf nao pode ficar vazio.");
+        }
+        
         if(!CPF.isCPFValido(cpf)){
             throw new CPFException("Nao foi possivel cria o usuario.");
         }
@@ -24,6 +29,7 @@ public class Usuario {
         if(!checkLoginAvailable(login)){ 
             throw new CadastroException("Este login ja esta em uso.");
         }
+        
         
         if(login.length() < 1){
             throw new CadastroException("O campo login nao pode ficar vazio.");
