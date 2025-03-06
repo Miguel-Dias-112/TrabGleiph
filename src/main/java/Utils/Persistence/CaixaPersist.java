@@ -1,7 +1,8 @@
 package Utils.Persistence;
 
-import Models.Caixa;
 import java.util.List;
+
+import Models.Usuarios.Caixa;
 
 public interface CaixaPersist {
     public void save(List<Caixa> usuario);

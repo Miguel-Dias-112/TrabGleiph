@@ -1,7 +1,7 @@
 package Utils.Checkers;
 
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Cliente;
+import Models.Usuarios.Cliente;
 import Utils.Exception.CPFException;
 import Utils.Exception.LoginException;
 import Utils.Exception.TransacaoException;

@@ -1,7 +1,7 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
-import Models.Credito;
+import Models.Bank.Credito;
 import Utils.GsonUtil;
 import Utils.Persistence.CreditoPersist;
 

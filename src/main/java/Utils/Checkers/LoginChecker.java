@@ -2,7 +2,7 @@ package Utils.Checkers;
 
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Cliente;
+import Models.Usuarios.Cliente;
 import Utils.Exception.LoginException;
 
 public class LoginChecker {

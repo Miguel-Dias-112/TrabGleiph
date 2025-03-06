@@ -4,11 +4,12 @@ import Controller.DataAcessObjects.CaixaDAO;
 import javax.swing.*;
 import Controller.DataAcessObjects.ClienteDAO;
 import Controller.DataAcessObjects.GerenteDAO;
-import Models.Caixa;
-import Models.Cliente;
-import Models.Gerente;
 import Models.Login;
-import Models.Usuario;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Cliente;
+import Models.Usuarios.Gerente;
+import Models.Usuarios.Usuario;
+
 import java.util.List;
 
 import java.awt.*;

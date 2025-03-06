@@ -3,15 +3,15 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
-import Models.Usuario;
+import Models.Bank.Transacao;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Usuario;
 import View.DepositoCaixa;
 import View.DepositoCaixa;
 import View.LoginScreen;
 import View.SaqueCaixa;
 import View.Screen;
 import View.TransferenciaCaixa;
-import Models.Caixa;
-import Models.Transacao;
 import View.DeletarContaScreen;
 import View.EditarScreen;
 import java.util.List;

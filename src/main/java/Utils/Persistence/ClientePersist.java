@@ -1,7 +1,8 @@
 package Utils.Persistence;
 
-import Models.Cliente;
-import Models.Usuario;
+import Models.Usuarios.Cliente;
+import Models.Usuarios.Usuario;
+
 import java.util.List;
 
 public interface ClientePersist {

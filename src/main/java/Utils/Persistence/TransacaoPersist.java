@@ -1,7 +1,7 @@
 package Utils.Persistence;
 
-import Models.Transacao;
-import Models.Usuario;
+import Models.Bank.Transacao;
+import Models.Usuarios.Usuario;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package Models;
+package Models.Bank;
 import java.text.DecimalFormat;
 
 public class Credito {

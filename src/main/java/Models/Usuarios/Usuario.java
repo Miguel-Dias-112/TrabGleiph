@@ -1,4 +1,4 @@
-package Models; 
+package Models.Usuarios; 
 
 import Utils.Checkers.CpfChecker;
 import Utils.Checkers.LoginChecker;

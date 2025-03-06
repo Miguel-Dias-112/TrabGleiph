@@ -1,7 +1,7 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
-import Models.Caixa;
+import Models.Usuarios.Caixa;
 import Utils.Exception.EditarException;
 import Utils.GsonUtil;
 import Utils.Persistence.CaixaPersist;

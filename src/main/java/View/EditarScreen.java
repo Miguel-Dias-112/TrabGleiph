@@ -2,10 +2,10 @@ package View;
 
 import Controller.ClickHandlers.EditarUser;
 import Controller.ClickHandlers.trocarScreen;
-import Models.Caixa;
-import Models.Cliente;
-import Models.Gerente;
 import Models.Login;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Cliente;
+import Models.Usuarios.Gerente;
 import View.HomeScreen.HomeCaixa;
 import javax.swing.*;
 import java.awt.*;

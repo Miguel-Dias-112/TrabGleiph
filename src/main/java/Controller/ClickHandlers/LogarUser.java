@@ -2,9 +2,9 @@ package Controller.ClickHandlers;
 
 import Utils.Exception.LoginException;
 import Models.Caixa;
-import Models.Cliente;
 import Models.Login;
-import Models.Usuario;
+import Models.Usuarios.Cliente;
+import Models.Usuarios.Usuario;
 import View.HomeScreen.*;
 import View.LoginScreen;
 import View.Screen;
@@ -34,7 +34,7 @@ public class LogarUser implements ActionListener {
         String login = loginField.getText();
         String senha = senhaField.getText();
         String cargo = (String) cargoBox.getSelectedItem();
-        Login novoLogin = new Login();
+        
         switch (cargo) {
             case "Cliente":
                 try {

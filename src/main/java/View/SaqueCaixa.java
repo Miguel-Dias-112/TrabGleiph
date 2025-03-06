@@ -11,7 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Caixa;
+import Models.Usuarios.Caixa;
 import View.HomeScreen.HomeCaixa;
 
 public class SaqueCaixa extends Screen {
