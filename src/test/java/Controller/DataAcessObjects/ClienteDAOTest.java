@@ -4,6 +4,7 @@ import Models.Usuarios.Cliente;
 import Utils.Exception.CPFException;
 import Utils.Exception.CadastroException;
 import Utils.Exception.EditarException;
+import Utils.Exception.TransacaoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -82,7 +83,7 @@ class ClienteDAOTest {
     }
 
     @Test
-    void testRealizarTransferencia() throws CPFException, CadastroException {
+    void testRealizarTransferencia() throws CPFException, CadastroException, TransacaoException {
         Cliente origem = new Cliente("login6", "senha6", "Origem", "265.854.230-54");
         origem.getConta().setSaldo(1000.0);
         Cliente destino = new Cliente("login7", "senha7", "Destino", "192.110.360-46");

@@ -9,11 +9,14 @@ import javax.swing.JTextField;
 
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Cliente;
+import Utils.Checkers.CpfChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.LoginException;
 import Utils.Exception.TransacaoException;
 import View.Screen;
 import View.HomeScreen.HomeCliente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TransferenciaClienteHandle implements ActionListener {
     private JTextField destinoCpField, valorField;
@@ -40,6 +43,15 @@ public class TransferenciaClienteHandle implements ActionListener {
         if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || valorField.getText().trim().isEmpty() || senha.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
+        }
+        
+        try {
+            if (CpfChecker.formatarCPF(cpfOrigem).equals(CpfChecker.formatarCPF(cpfDestino))) {
+                JOptionPane.showMessageDialog(null, "Conta origem e conta destino devem ser diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (CPFException ex) {
+            Logger.getLogger(TransferenciaClienteHandle.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         double valorTrans;
