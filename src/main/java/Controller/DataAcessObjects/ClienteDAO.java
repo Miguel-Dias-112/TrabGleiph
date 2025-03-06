@@ -108,7 +108,20 @@ public class ClienteDAO implements ClientePersist {
         }
         return false;
     }
-    public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
+    public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) throws CPFException, TransacaoException, LoginException {
+        
+         if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || senha.isEmpty()) {
+            throw new IllegalArgumentException("CPF de origem, CPF de destino e senha não podem estar vazios.");
+        }   
+
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor da transferência deve ser maior que zero.");
+        }
+        
+        if(cpfOrigem.equals(cpfDestino)){
+            throw new IllegalArgumentException("As contas origem e destino devem ser diferentes.");
+        }
+        
         List<Cliente> usuarios = findAll();
         try {
             boolean valida = TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);
@@ -136,13 +149,13 @@ public class ClienteDAO implements ClientePersist {
             save(usuarios);
             return true;
         } catch (CPFException e) {
-            e.printStackTrace();
+            throw new CPFException(e.getMessage());
         } catch (TransacaoException e) {
-            e.printStackTrace();
+            throw new TransacaoException(e.getMessage());
         } catch (LoginException e) {
-            e.printStackTrace();
+            throw new LoginException();
         }
-        return false;
+        //return false;
     }
     @Override
     public List<Cliente> findAll() {

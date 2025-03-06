@@ -41,13 +41,6 @@ public class CadastrarUser implements ActionListener {
 
         
         try {
-            // Verifica se o CPF está cadastrado
-            /*
-            if (CPF.isCPFCadastrado(cpf)) {
-                JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            */
             switch (cargo) {
                 case "Cliente" ->{
                      Cliente novoUsuario = new Cliente(login, senha, nome, cpf);

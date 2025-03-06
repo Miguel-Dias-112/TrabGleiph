@@ -50,7 +50,7 @@ public class DepositoCaixa  extends Screen {
         transferButton = new JButton("Transferir");
         transferButton.addActionListener(e -> {
             // Transferir
-            ClienteDAO clienteDAO = new ClienteDAO();
+            /*ClienteDAO clienteDAO = new ClienteDAO();
             String cpfOrigem = origemCpfField.getText();
             Double valorTrans = Double.parseDouble(valorField.getText());
             String senha = senhaField.getText();
@@ -63,7 +63,7 @@ public class DepositoCaixa  extends Screen {
             }
             tela.dispose();
             Screen home = new HomeCaixa(caixa.getCpf());
-            home.show();
+            home.show();*/
         });
         cancelButton = new JButton("Cancelar");
         panel.add(cancelButton);
