@@ -20,6 +20,7 @@ import com.google.gson.reflect.TypeToken;
 public class ClienteDAO implements ClientePersist {
     private static final String DIRECTORY = "data";
     private static final String PATH = DIRECTORY + File.separator + "clientes.json";
+
     @Override
     public void save(List<Cliente> clientes) {
         String json = GsonUtil.toJson(clientes);
@@ -29,13 +30,13 @@ public class ClienteDAO implements ClientePersist {
         }
         Arquivo.save(PATH, json);
     }
- 
+
     public void adicionarNovoCliente(Cliente novoCliente) {
         List<Cliente> clientes = findAll();
         clientes.add(novoCliente);
         save(clientes);
     }
-    
+
     public void deletarCliente(String cpf) {
         List<Cliente> clientes = findAll();
         boolean removido = clientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
@@ -47,7 +48,32 @@ public class ClienteDAO implements ClientePersist {
             System.out.println("Cliente não encontrado.");
         }
     }
-    
+
+    // No ClienteDAO
+    public boolean realizarInvestimento(String cpf, double valor, String descricaoInvestimento) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                double saldoAtual = cliente.getConta().getSaldo();
+
+                if (saldoAtual < valor) {
+                    return false; 
+                }
+
+                cliente.getConta().setSaldo(saldoAtual - valor);
+
+                Transacao investimento = new Transacao(
+                        -valor,
+                        "Investimento em " + descricaoInvestimento);
+                cliente.getConta().adicionarTransacao(investimento);
+
+                save(clientes);
+                return true;
+            }
+        }
+        return false; 
+    }
+
     public void editarCliente(String cpf, String nome, String login, String senha) throws EditarException {
         List<Cliente> clientes = findAll();
         boolean encontrado = false;
@@ -56,16 +82,16 @@ public class ClienteDAO implements ClientePersist {
             Cliente cliente = clientes.get(i);
             if (cliente.getCpf().equals(cpf)) {
                 Cliente newCliente = cliente;
-                
-                try{
+
+                try {
                     newCliente.setNome(nome);
                     newCliente.setLogin(login);
                     newCliente.setSenha(senha);
-                    
-                }catch(EditarException error){
+
+                } catch (EditarException error) {
                     throw new EditarException(error.toString());
                 }
-                
+
                 clientes.set(i, newCliente);
                 encontrado = true;
                 break;
@@ -84,30 +110,32 @@ public class ClienteDAO implements ClientePersist {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
-                int saldo = (int) cliente.getConta().getSaldo();
+                double saldo = (double) cliente.getConta().getSaldo();
                 saldo -= valor;
                 cliente.getConta().setSaldo(saldo);
                 cliente.getConta().adicionarTransacao(new Transacao(valor));
-                save(clientes); 
+                save(clientes);
                 return true;
             }
         }
         return false;
     }
+
     public boolean realizarDeposito(String cpf, double valor, String senha) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
-                int saldo = (int) cliente.getConta().getSaldo();
+                double saldo = (double) cliente.getConta().getSaldo();
                 saldo += valor;
                 cliente.getConta().setSaldo(saldo);
                 cliente.getConta().adicionarTransacao(new Transacao(valor));
-                save(clientes); 
+                save(clientes);
                 return true;
             }
         }
         return false;
     }
+
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
         List<Cliente> usuarios = findAll();
         try {
@@ -123,7 +151,7 @@ public class ClienteDAO implements ClientePersist {
                     saldo += valor;
                     usuario.getConta().setSaldo(saldo);
                     usuario.getConta().adicionarTransacao(new Transacao(valor));
-    
+
                 }
                 if (usuario.getCpf().equals(cpfOrigem)) {
                     saldo = (double) usuario.getConta().getSaldo();
@@ -144,6 +172,7 @@ public class ClienteDAO implements ClientePersist {
         }
         return false;
     }
+
     @Override
     public List<Cliente> findAll() {
         String json = Arquivo.read(PATH);
@@ -158,6 +187,7 @@ public class ClienteDAO implements ClientePersist {
         }
         return clientes;
     }
+
     public Cliente findByCpf(String cpf) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
@@ -167,6 +197,7 @@ public class ClienteDAO implements ClientePersist {
         }
         return null;
     }
+
     public Cliente findByLogin(String login) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {

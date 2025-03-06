@@ -3,26 +3,23 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
-import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
 import View.Screen;
 import View.Auth.LoginScreen;
-import View.Auth.RegisterScreen;
 import View.PopUps.DeletarContaScreen;
 import View.PopUps.EditarScreen;
 import View.PopUps.InvestimentosScreen;
 import View.PopUps.TransferenciaCliente;
-import Models.Bank.Transacao;
 import Models.Usuarios.Cliente;
 
-import java.util.List;
 import java.awt.*;
+
 public class HomeCliente extends Screen {
 
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
     private JLabel saldoLabel;
-    private JTextArea historico ;
+    private JTextArea historico;
     private Cliente Cliente;
 
     public HomeCliente(String cpf) {
@@ -30,10 +27,15 @@ public class HomeCliente extends Screen {
         this.Cliente = clientes.findByCpf(cpf);
 
         double saldo = Cliente.getSaldo();
-        saldoLabel = new JLabel("R$ "+ saldo);
+        saldoLabel = new JLabel("R$ " + saldo);
         historico = new JTextArea(10, 30);
         historico.setText(Cliente.getConta().consultarExtrato());
+        historico.setLineWrap(true);
+        historico.setWrapStyleWord(true);
+        historico.setCaretPosition(0);
+        historico.setEditable(false); 
     }
+
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,19 +43,20 @@ public class HomeCliente extends Screen {
         tela.setLayout(new BorderLayout());
         tela.setLocationRelativeTo(null);
     }
+
     private void desenhaMenuSuperior() {
         menuSuperior = new JPanel();
         menuSuperior.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuSuperior.setBackground(Color.LIGHT_GRAY);
-        
+
         JButton botaoSair = new JButton("Sair");
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
-        
+
         JButton botaoEditar = new JButton("Editar Usuário");
-        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen(Cliente)));
+        botaoEditar.addActionListener(new trocarScreen(this, new EditarScreen(Cliente)));
         menuSuperior.add(botaoEditar);
-        
+
         JButton botaoTransferir = new JButton("Transferir");
         botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaCliente(Cliente)));
         menuSuperior.add(botaoTransferir);
@@ -61,25 +64,35 @@ public class HomeCliente extends Screen {
         JButton botaoInvestimentos = new JButton("Ver Investimentos");
         botaoInvestimentos.addActionListener(new trocarScreen(this, new InvestimentosScreen(Cliente)));
         menuSuperior.add(botaoInvestimentos);
-        
+
         JButton botaoDeletar = new JButton("Deletar");
-        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen(Cliente)));
+        botaoDeletar.addActionListener(new trocarScreen(this, new DeletarContaScreen(Cliente)));
         menuSuperior.add(botaoDeletar);
 
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
+
     private void desenhaConteudoCentral() {
         conteudoCentral = new JPanel();
         conteudoCentral.setLayout(new GridLayout(1, 2, 20, 20));
         conteudoCentral.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
         JPanel saldoPanel = new JPanel();
         saldoPanel.setBorder(BorderFactory.createTitledBorder("Saldo"));
         saldoPanel.add(saldoLabel);
+
         JPanel historicoPanel = new JPanel();
         historicoPanel.setBorder(BorderFactory.createTitledBorder("Histórico de Transações"));
-        historicoPanel.add(historico);
+        historicoPanel.setLayout(new BorderLayout()); 
+
+        JScrollPane scrollPane = new JScrollPane(historico);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        historicoPanel.add(scrollPane, BorderLayout.CENTER);
+
         conteudoCentral.add(saldoPanel);
         conteudoCentral.add(historicoPanel);
+
         tela.add(conteudoCentral, BorderLayout.CENTER);
     }
 

@@ -2,13 +2,18 @@ package Models.Bank;
 
 //tirei data/hora, acredito que nao seja necessario. mas seria interessante
 
-
 public class Transacao {
     private String id;
     private double valor;
+    private String descricao;
 
     public Transacao(double valor) {
         this.valor = valor;
+    }
+
+    public Transacao(double valor, String descricao) {
+        this.valor = valor;
+        this.descricao = descricao;
     }
 
     public String getId() {
@@ -30,9 +35,7 @@ public class Transacao {
     // mockup para testes sem a interface grafica
     @Override
     public String toString() {
-        return "Transacao{" +
-                "id='" + id + '\'' +
-                ", valor=" + valor +
-                '}';
+        return "-> " + descricao + '\'' +
+                ", Valor: " + valor + "\n";
     }
 }
