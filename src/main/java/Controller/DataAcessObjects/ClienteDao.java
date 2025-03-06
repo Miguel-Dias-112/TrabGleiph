@@ -122,7 +122,7 @@ public class ClienteDAO implements ClientePersist {
                 }
             }
         }
-        save(usuarios);
+        save(clientes);
         return;
     }
     @Override

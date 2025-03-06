@@ -2,7 +2,6 @@ package Utils;
 
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Cliente;
-import Models.Usuario;
 import Utils.Exception.CPFException;
 
 import java.util.List;
