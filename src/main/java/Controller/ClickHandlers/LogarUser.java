@@ -34,20 +34,25 @@ public class LogarUser implements ActionListener {
         String senha = senhaField.getText();
         String cargo = (String) cargoBox.getSelectedItem();
         Login novoLogin = new Login();
-        if (cargo.equals("Cliente")) {
-            try {
-                Cliente cliente = (Cliente) novoLogin.validarlogin(login, senha);
-                Screen newScreen = new HomeCliente(cliente);
-
-                Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
-                if (oldWindow != null) {
-                    oldWindow.dispose();
+        switch (cargo) {
+            case "Cliente":
+                try {
+                    Cliente cliente = (Cliente) novoLogin.validarLoginCliente(login, senha);
+                    Screen newScreen = new HomeCliente(cliente);
+                    Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
+                    if (oldWindow != null) {
+                        oldWindow.dispose();
+                    }
+                    newScreen.show();
+                } catch (LoginException error) {
+                    JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 }
-
-                newScreen.show();
-            } catch (LoginException error) {
-                JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+                break;
+            case "Caixa":
+                
+            default:
+                break;
         }
+        
     }
 }
