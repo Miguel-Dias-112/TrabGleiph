@@ -31,7 +31,6 @@ public class InvestimentosGerenteScreen extends Screen {
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Painel de formulário
         JPanel formPanel = new JPanel(new GridLayout(3, 2, 5, 5));
         
         nomeField = new JTextField();
@@ -45,7 +44,6 @@ public class InvestimentosGerenteScreen extends Screen {
         formPanel.add(new JLabel("Retorno (%):"));
         formPanel.add(retornoField);
 
-        // Painel de botões
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 10, 10));
         JButton addButton = new JButton("Adicionar");
         JButton removeButton = new JButton("Remover");
@@ -56,7 +54,6 @@ public class InvestimentosGerenteScreen extends Screen {
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
 
-        // Lista de investimentos
         modeloLista = new DefaultListModel<>();
         atualizarListaInvestimentos();
         
@@ -64,7 +61,6 @@ public class InvestimentosGerenteScreen extends Screen {
         listaInvestimentos.setCellRenderer(new InvestimentoListRenderer());
         JScrollPane scrollPane = new JScrollPane(listaInvestimentos);
 
-        // Montagem do layout
         mainPanel.add(formPanel, BorderLayout.NORTH);
         mainPanel.add(buttonPanel, BorderLayout.CENTER);
         mainPanel.add(scrollPane, BorderLayout.SOUTH);
@@ -127,7 +123,6 @@ public class InvestimentosGerenteScreen extends Screen {
         retornoField.setText("");
     }
 
-    // Renderizador personalizado para a lista
     private static class InvestimentoListRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {

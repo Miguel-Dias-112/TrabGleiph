@@ -78,7 +78,6 @@ public class HomeGerente extends Screen {
 
         conteudoCentral.add(saldoPanel);
 
-        // telas especificas para caixa e gerente aqui
         tela.add(conteudoCentral, BorderLayout.CENTER);
     }
 
