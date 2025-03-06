@@ -6,10 +6,11 @@ import Controller.ClickHandlers.trocarScreen;
 import Models.Usuario;
 import View.LoginScreen;
 import View.Screen;
+import View.TransferenciaView;
 import Models.Cliente;
 import Models.Transacao;
 import java.util.List;
-
+import View.TransferenciaView;
 import java.awt.*;
 
 public class HomeCliente extends Screen {
@@ -43,8 +44,10 @@ public class HomeCliente extends Screen {
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
         menuSuperior.add(new JButton("Editar Usuário"));
-        menuSuperior.add(new JButton("Saldo e Extrato"));
-        menuSuperior.add(new JButton("Transferir"));
+        JButton botaoTransferir = new JButton("Transferir");
+        botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaView()));
+
+        menuSuperior.add(botaoTransferir);
         menuSuperior.add(new JButton("Ver Investimentos"));
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
