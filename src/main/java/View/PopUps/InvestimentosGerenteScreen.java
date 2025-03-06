@@ -41,7 +41,7 @@ public class InvestimentosGerenteScreen extends Screen {
         formPanel.add(nomeField);
         formPanel.add(new JLabel("Ano de Vencimento:"));
         formPanel.add(anoField);
-        formPanel.add(new JLabel("Retorno (%):"));
+        formPanel.add(new JLabel("Retorno (Exemplo: 10.5):"));
         formPanel.add(retornoField);
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 10, 10));
