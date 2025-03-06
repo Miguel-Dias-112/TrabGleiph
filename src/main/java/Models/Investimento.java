@@ -1,51 +1,43 @@
 package Models;
 
-import java.text.DecimalFormat;
-
 public class Investimento {
-    final private DecimalFormat df = new DecimalFormat("000");
-    private static int ultimoId;
-    private String id;
-    private String tipo;
-    private double valor;
-    private double taxaRendimento;
+    private String nome;
+    private int ano;
+    private double retorno;
 
-    public Investimento(String id, String tipo, double valor, double taxaRendimento) {
-        this.id = "INVEST" + df.format(ultimoId++);
-        this.tipo = tipo;
-        this.valor = valor;
-        this.taxaRendimento = taxaRendimento;
+    // Construtor, getters e setters
+    public Investimento(String nome, int ano, double retorno) {
+        this.nome = nome;
+        this.ano = ano;
+        this.retorno = retorno;
     }
 
-    public String getId() {
-        return id;
+    public String getNome() {
+        return nome;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getAno() {
+        return ano;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setAno(int ano) {
+        this.ano = ano;
     }
 
-    public double getValor() {
-        return valor;
+    public double getRetorno() {
+        return retorno;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setRetorno(double retorno) {
+        this.retorno = retorno;
     }
 
-    public double getTaxaRendimento() {
-        return taxaRendimento;
-    }
-
-    public void setTaxaRendimento(double taxaRendimento) {
-        this.taxaRendimento = taxaRendimento;
+    @Override
+    public String toString() {
+        return nome + " - Ano: " + ano + " - Retorno: " + retorno + "%";
     }
 }
