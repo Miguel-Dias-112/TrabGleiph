@@ -3,23 +3,19 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
-import Models.Usuario;
 import View.LoginScreen;
 import View.Screen;
 import View.TransferenciaView;
 import Models.Cliente;
 import Models.Transacao;
 import java.util.List;
-import View.TransferenciaView;
 import java.awt.*;
 
 public class HomeCliente extends Screen {
 
     private JPanel menuSuperior;
     private JPanel conteudoCentral;
-    private String tipoUsuario;
     private JLabel saldoLabel;
-    private List<Transacao> transacoes;
     private JTextArea historico ;
 
 
