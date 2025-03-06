@@ -11,6 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Controller.ClickHandlers.TransferenciaCaixaHandle;
+import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
@@ -61,7 +62,9 @@ public class TransferenciaCaixa  extends Screen {
         panel.add(cancelButton);
         panel.add(transferButton);
         tela.add(panel);
-        cancelButton.addActionListener(e -> tela.dispose());
+        cancelButton.addActionListener(
+            new trocarScreen(this, new HomeCaixa(caixa.getCpf()))
+        );
     }
     
 }

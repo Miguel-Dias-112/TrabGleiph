@@ -58,7 +58,7 @@ public class HomeCliente extends Screen {
         menuSuperior.add(botaoTransferir);
 
         JButton botaoInvestimentos = new JButton("Ver Investimentos");
-        botaoInvestimentos.addActionListener(new trocarScreen(this, new InvestimentosScreen()));
+        botaoInvestimentos.addActionListener(new trocarScreen(this, new InvestimentosScreen(Cliente)));
         menuSuperior.add(botaoInvestimentos);
         
         JButton botaoDeletar = new JButton("Deletar");

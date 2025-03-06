@@ -1,8 +1,11 @@
 package View;
 
+import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.InvestimentoDAO;
 import Models.Bank.Investimento;
+import Models.Usuarios.Cliente;
 import Utils.Persistence.InvestimentoPersist;
+import View.HomeScreen.HomeCliente;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +16,10 @@ public class InvestimentosScreen extends Screen {
     private JList<String> listaInvestimentos;
     private DefaultListModel<String> modeloInvestimentos;
     private InvestimentoPersist investimentoDAO;
-
-    public InvestimentosScreen() {
+    private Cliente cliente;
+    public InvestimentosScreen(Cliente cliente) {
         investimentoDAO = new InvestimentoDAO(); 
+        this.cliente = cliente;
     }
 
     private void configuraTela() {
@@ -106,7 +110,9 @@ public class InvestimentosScreen extends Screen {
         });
 
         JButton cancelarButton = new JButton("Voltar");
-        cancelarButton.addActionListener(e -> tela.dispose());
+        cancelarButton.addActionListener(
+            new trocarScreen(this, new HomeCliente(cliente.getCpf()))
+        );
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(investirButton);

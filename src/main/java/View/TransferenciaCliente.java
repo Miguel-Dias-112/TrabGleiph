@@ -4,8 +4,10 @@ package View;
 import javax.swing.*;
 
 import Controller.ClickHandlers.TransferenciaClienteHandle;
+import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Cliente;
+import View.HomeScreen.HomeCaixa;
 import View.HomeScreen.HomeCliente;
 
 import java.awt.*;
@@ -48,8 +50,10 @@ public class TransferenciaCliente extends Screen {
         panel.add(transferButton);
         panel.add(cancelButton);
         tela.add(panel);
-        cancelButton.addActionListener(e -> tela.dispose());
-    }
+        cancelButton.addActionListener(
+            new trocarScreen(this, new HomeCliente(cliente.getCpf()))
+        );  
+      }
     
     
 }
