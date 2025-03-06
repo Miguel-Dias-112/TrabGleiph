@@ -1,10 +1,11 @@
-package View;
+package View.PopUps;
 
 import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.InvestimentoDAO;
 import Models.Bank.Investimento;
 import Models.Usuarios.Cliente;
 import Utils.Persistence.InvestimentoPersist;
+import View.Screen;
 import View.HomeScreen.HomeCliente;
 
 import javax.swing.*;

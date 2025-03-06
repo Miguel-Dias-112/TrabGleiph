@@ -1,4 +1,4 @@
-package View;
+package View.PopUps;
 
 import java.awt.GridLayout;
 
@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
+import View.Screen;
 import View.HomeScreen.HomeCaixa;
 
 public class SaqueCaixa extends Screen {

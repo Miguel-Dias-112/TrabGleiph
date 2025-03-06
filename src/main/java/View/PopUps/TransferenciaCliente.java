@@ -1,4 +1,4 @@
-package View;
+package View.PopUps;
 
 
 import javax.swing.*;
@@ -7,6 +7,7 @@ import Controller.ClickHandlers.TransferenciaClienteHandle;
 import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Cliente;
+import View.Screen;
 import View.HomeScreen.HomeCaixa;
 import View.HomeScreen.HomeCliente;
 

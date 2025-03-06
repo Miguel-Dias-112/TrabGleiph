@@ -1,4 +1,4 @@
-package View;
+package View.PopUps;
 
 import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.CaixaDAO;
@@ -9,6 +9,8 @@ import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
 import Models.Usuarios.Usuario;
+import View.Screen;
+import View.Auth.LoginScreen;
 import View.HomeScreen.HomeCaixa;
 import View.HomeScreen.HomeCliente;
 import View.HomeScreen.HomeGerente;

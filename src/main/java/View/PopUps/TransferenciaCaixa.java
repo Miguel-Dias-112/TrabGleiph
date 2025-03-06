@@ -1,4 +1,4 @@
-package View;
+package View.PopUps;
 
 import java.awt.GridLayout;
 
@@ -10,19 +10,24 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controller.ClickHandlers.TransferenciaCaixaHandle;
 import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
+import Models.Usuarios.Cliente;
+import View.Screen;
 import View.HomeScreen.HomeCaixa;
+import View.HomeScreen.HomeCliente;
 
-public class DepositoCaixa  extends Screen {
+public class TransferenciaCaixa  extends Screen {
     private JTextField destinoCpfField,origemCpfField, valorField;
     private JPasswordField senhaField;
     private JButton transferButton, cancelButton;
     private Caixa   caixa;
-
-    public DepositoCaixa(Caixa caixa) {
+    
+    public TransferenciaCaixa(Caixa caixa) {
         this.caixa = caixa;
+        
         initialize();
     }
     
@@ -32,12 +37,16 @@ public class DepositoCaixa  extends Screen {
         tela.setLocationRelativeTo(null);
         tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        JPanel panel = new JPanel(new GridLayout(4,2,10,10));
+        JPanel panel = new JPanel(new GridLayout(5,1,10,10));
         panel.add(new JLabel("CPF da conta origem:"));
         origemCpfField = new JTextField();
         panel.add(origemCpfField);
         
 
+        panel.add(new JLabel("CPF da conta destino:"));
+        destinoCpfField = new JTextField();
+        panel.add(destinoCpfField);
+        
         panel.add(new JLabel("Valor:"));
         valorField = new JTextField();
         panel.add(valorField);
@@ -47,27 +56,16 @@ public class DepositoCaixa  extends Screen {
         panel.add(senhaField);
         
         transferButton = new JButton("Transferir");
-        transferButton.addActionListener(e -> {
-            // Transferir
-            ClienteDAO clienteDAO = new ClienteDAO();
-            String cpfOrigem = origemCpfField.getText();
-            Double valorTrans = Double.parseDouble(valorField.getText());
-            String senha = senhaField.getText();
-            boolean sucess = clienteDAO.realizarDeposito(cpfOrigem, valorTrans,senha );
-            
-            if (sucess) {
-                JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(null, "Transferência não realizada!", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-            tela.dispose();
-            Screen home = new HomeCaixa(caixa.getCpf());
-            home.show();
-        });
+        transferButton.addActionListener(
+            new TransferenciaCaixaHandle(this, origemCpfField, destinoCpfField, valorField, senhaField, caixa)
+        );
         cancelButton = new JButton("Cancelar");
-        panel.add(transferButton);
         panel.add(cancelButton);
+        panel.add(transferButton);
         tela.add(panel);
-        cancelButton.addActionListener(new trocarScreen(this, new HomeCaixa(caixa.getCpf())));
+        cancelButton.addActionListener(
+            new trocarScreen(this, new HomeCaixa(caixa.getCpf()))
+        );
     }
+    
 }
