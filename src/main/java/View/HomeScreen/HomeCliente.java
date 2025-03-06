@@ -9,6 +9,7 @@ import View.TransferenciaView;
 import Models.Cliente;
 import Models.Transacao;
 import View.EditarScreen;
+import View.InvestimentosScreen;
 import View.RegisterScreen;
 import java.util.List;
 import java.awt.*;
@@ -50,7 +51,13 @@ public class HomeCliente extends Screen {
             new TransferenciaView(Cliente).show();
         });
         menuSuperior.add(botaoTransferir);
-        menuSuperior.add(new JButton("Ver Investimentos"));
+
+        JButton botaoInvestimentos = new JButton("Ver Investimentos");
+        botaoInvestimentos.addActionListener(e -> {
+            new InvestimentosScreen().show();
+        });
+        menuSuperior.add(botaoInvestimentos);
+
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
     private void desenhaConteudoCentral() {
