@@ -5,15 +5,16 @@ import javax.swing.*;
 import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
-import View.LoginScreen;
 import View.Screen;
-import View.TransferenciaCliente;
+import View.Auth.LoginScreen;
+import View.Auth.RegisterScreen;
+import View.PopUps.DeletarContaScreen;
+import View.PopUps.EditarScreen;
+import View.PopUps.InvestimentosScreen;
+import View.PopUps.TransferenciaCliente;
 import Models.Bank.Transacao;
 import Models.Usuarios.Cliente;
-import View.DeletarContaScreen;
-import View.EditarScreen;
-import View.InvestimentosScreen;
-import View.RegisterScreen;
+
 import java.util.List;
 import java.awt.*;
 public class HomeCliente extends Screen {

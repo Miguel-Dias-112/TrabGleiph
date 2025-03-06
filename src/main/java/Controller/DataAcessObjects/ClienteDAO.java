@@ -111,7 +111,10 @@ public class ClienteDAO implements ClientePersist {
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
         List<Cliente> usuarios = findAll();
         try {
-            TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);
+            boolean valida = TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);
+            if (valida == false) {
+                return false;
+            }
             for (Cliente usuario : usuarios) {
                 double saldo;
                 if (usuario.getCpf().equals(cpfDestino)) {

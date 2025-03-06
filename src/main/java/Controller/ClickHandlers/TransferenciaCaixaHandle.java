@@ -24,6 +24,7 @@ public class TransferenciaCaixaHandle implements ActionListener {
         this.valorField = valor;
         this.senhaField = senha;    
         this.tela = telaAtual;
+        this.caixa = caixa;
     }
 
     @Override

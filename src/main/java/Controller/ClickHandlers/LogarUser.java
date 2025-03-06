@@ -6,8 +6,8 @@ import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Usuario;
 import View.HomeScreen.*;
-import View.LoginScreen;
 import View.Screen;
+import View.Auth.LoginScreen;
 import View.HomeScreen.HomeCliente;
 
 import java.awt.event.ActionEvent;

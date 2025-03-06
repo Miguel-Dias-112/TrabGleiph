@@ -7,14 +7,14 @@ import Controller.DataAcessObjects.CaixaDAO;
 import Models.Bank.Transacao;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Usuario;
-import View.DepositoCaixa;
-import View.DepositoCaixa;
-import View.LoginScreen;
-import View.SaqueCaixa;
 import View.Screen;
-import View.TransferenciaCaixa;
-import View.DeletarContaScreen;
-import View.EditarScreen;
+import View.Auth.LoginScreen;
+import View.PopUps.DeletarContaScreen;
+import View.PopUps.DepositoCaixa;
+import View.PopUps.EditarScreen;
+import View.PopUps.SaqueCaixa;
+import View.PopUps.TransferenciaCaixa;
+
 import java.util.List;
 
 import java.awt.*;
