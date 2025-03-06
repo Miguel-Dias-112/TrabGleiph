@@ -8,6 +8,7 @@ import View.Screen;
 import View.TransferenciaView;
 import Models.Cliente;
 import Models.Transacao;
+import View.DeletarContaScreen;
 import View.EditarScreen;
 import View.InvestimentosScreen;
 import View.RegisterScreen;
@@ -57,7 +58,7 @@ public class HomeCliente extends Screen {
         menuSuperior.add(botaoInvestimentos);
         
         JButton botaoDeletar = new JButton("Deletar");
-        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarScreen()));
+        botaoDeletar.addActionListener(new trocarScreen(this,new DeletarContaScreen()));
         menuSuperior.add(botaoDeletar);
 
         tela.add(menuSuperior, BorderLayout.NORTH);

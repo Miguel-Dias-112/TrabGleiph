@@ -1,1 +1,16 @@
-[{"conta":{"df":"#000","id":"CONT001","saldo":100.0,"transacoes":[{"valor":100.0}]},"login":"cliente1.1","senha":"1234","nome":"cliente1.1","cpf":"696.720.310-09","cargo":"Cliente"},{"conta":{"df":"#000","id":"CONT002","saldo":0.0,"transacoes":[]},"login":"cliente2","senha":"123","nome":"cliente2","cpf":"738.031.720-20","cargo":"Cliente"}]
+[
+  {
+    "conta": {
+      "df": "#000",
+      "id": "CONT001",
+      "saldo": 100.0,
+      "transacoes": [{ "valor": 100.0 }],
+      "investimentos": []
+    },
+    "login": "cliente1.1",
+    "senha": "1234",
+    "nome": "cliente1.1",
+    "cpf": "696.720.310-09",
+    "cargo": "Cliente"
+  }
+]
