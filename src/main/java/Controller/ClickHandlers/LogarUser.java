@@ -1,8 +1,8 @@
 package Controller.ClickHandlers;
 
+import Utils.Checkers.LoginChecker;
 import Utils.Exception.LoginException;
-import Models.Caixa;
-import Models.Login;
+import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Usuario;
 import View.HomeScreen.*;
@@ -14,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Window;
 import javax.swing.SwingUtilities;
+
+import Controller.DataAcessObjects.CaixaDAO;
+import Controller.DataAcessObjects.ClienteDAO;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -34,36 +37,27 @@ public class LogarUser implements ActionListener {
         String login = loginField.getText();
         String senha = senhaField.getText();
         String cargo = (String) cargoBox.getSelectedItem();
-        
+        Screen newScreen = null;
         switch (cargo) {
             case "Cliente":
-                try {
-                    Cliente cliente = (Cliente) novoLogin.validarLoginCliente(login, senha);
-                    Screen newScreen = new HomeCliente(cliente);
-                    Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
-                    if (oldWindow != null) {
-                        oldWindow.dispose();
-                    }
-                    newScreen.show();
-                } catch (LoginException error) {
-                    JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                }
+                ClienteDAO clientes = new ClienteDAO();
+                LoginChecker.checkLoginCliente(login, senha);
+                Cliente cliente = clientes.findByLogin(login);
+                newScreen = new HomeCliente(cliente);
+               
                 break;
             case "Caixa":
-                try {
-                    Caixa cliente = novoLogin.validarLoginCaixa(login, senha);
-                    Screen newScreen = new HomeCaixa(cliente);
-                    Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
-                    if (oldWindow != null) {
-                        oldWindow.dispose();
-                    }
-                    newScreen.show();
-                } catch (LoginException error) {
-                    JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                }
+                CaixaDAO caixas = new CaixaDAO();
+                LoginChecker.checkLoginCaixa(login, senha);
+                Caixa caixa = caixas.findByLogin(login);
+                newScreen = new HomeCaixa(caixa);
             default:
                 break;
         }
-        
+        Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
+        if (oldWindow != null) {
+            oldWindow.dispose();
+        }
+        newScreen.show();
     }
 }
