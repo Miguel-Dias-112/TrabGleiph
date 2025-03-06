@@ -1,6 +1,7 @@
 package View.PopUps;
 
 import Controller.ClickHandlers.trocarScreen;
+import Controller.DataAcessObjects.ClienteDAO;
 import Controller.DataAcessObjects.InvestimentoDAO;
 import Models.Bank.Investimento;
 import Models.Usuarios.Cliente;
@@ -18,8 +19,9 @@ public class InvestimentosScreen extends Screen {
     private DefaultListModel<String> modeloInvestimentos;
     private InvestimentoPersist investimentoDAO;
     private Cliente cliente;
+
     public InvestimentosScreen(Cliente cliente) {
-        investimentoDAO = new InvestimentoDAO(); 
+        investimentoDAO = new InvestimentoDAO();
         this.cliente = cliente;
     }
 
@@ -53,7 +55,7 @@ public class InvestimentosScreen extends Screen {
 
         List<Investimento> investimentos = investimentoDAO.findAll();
         for (Investimento investimento : investimentos) {
-            modeloInvestimentos.addElement(investimento.toString()); 
+            modeloInvestimentos.addElement(investimento.toString());
         }
 
         listaInvestimentos = new JList<>(modeloInvestimentos);
@@ -72,11 +74,10 @@ public class InvestimentosScreen extends Screen {
             String selecionado = listaInvestimentos.getSelectedValue();
             if (selecionado == null || selecionado.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(
-                    null,
-                    "Selecione um investimento para continuar.",
-                    "Erro",
-                    JOptionPane.ERROR_MESSAGE
-                );
+                        null,
+                        "Selecione um investimento para continuar.",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -86,34 +87,48 @@ public class InvestimentosScreen extends Screen {
                     double valorNumerico = Double.parseDouble(valor);
                     if (valorNumerico <= 0) {
                         JOptionPane.showMessageDialog(
-                            null,
-                            "ERRO: valor inválido",
-                            "Erro",
-                            JOptionPane.ERROR_MESSAGE
-                        );
+                                null,
+                                "ERRO: valor inválido",
+                                "Erro",
+                                JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    JOptionPane.showMessageDialog(
-                        null,
-                        "Investimento em \"" + selecionado + "\" de R$ " + valor + " realizado com sucesso.",
-                        "Sucesso",
-                        JOptionPane.INFORMATION_MESSAGE
+                    ClienteDAO clienteDAO = new ClienteDAO();
+                    boolean sucesso = clienteDAO.realizarInvestimento(
+                            cliente.getCpf(),
+                            valorNumerico,
+                            selecionado 
                     );
+
+                    if (sucesso) {
+                        this.cliente = clienteDAO.findByCpf(cliente.getCpf()); 
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Investimento em \"" + selecionado + "\" de R$ " + valorNumerico + " realizado com sucesso.",
+                                "Sucesso",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Erro: Saldo insuficiente ou cliente não encontrado",
+                                "Erro",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(
-                        null,
-                        "ERRO: apenas números ou formato inválido",
-                        "Erro",
-                        JOptionPane.ERROR_MESSAGE
-                    );
+                            null,
+                            "ERRO: apenas números ou formato inválido",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
         JButton cancelarButton = new JButton("Voltar");
         cancelarButton.addActionListener(
-            new trocarScreen(this, new HomeCliente(cliente.getCpf()))
-        );
+                new trocarScreen(this, new HomeCliente(cliente.getCpf())));
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(investirButton);

@@ -2,13 +2,18 @@ package Models.Bank;
 
 //tirei data/hora, acredito que nao seja necessario. mas seria interessante
 
-
 public class Transacao {
     private String id;
     private double valor;
+    private String descricao;
 
     public Transacao(double valor) {
         this.valor = valor;
+    }
+
+    public Transacao(double valor, String descricao) {
+        this.valor = valor;
+        this.descricao = descricao;
     }
 
     public String getId() {
