@@ -1,6 +1,7 @@
 package Models; 
 
 import Utils.Exception.CPFException;
+import Utils.Exception.EditarException;
 import Utils.Exception.CadastroException;
 import Controller.DataAcessObjects.ClienteDao;
 import Utils.CPF;
@@ -13,6 +14,11 @@ public class Usuario {
     final private String cpf;
     final private String cargo;
     public Usuario(String login, String senha, String nome, String cpf, String cargo) throws CPFException, CadastroException {
+        
+        if(cpf.length() < 1){
+            throw new CadastroException("O campo cpf nao pode ficar vazio.");
+        }
+        
         if(!CPF.isCPFValido(cpf)){
             throw new CPFException("Nao foi possivel cria o usuario.");
         }
@@ -24,6 +30,7 @@ public class Usuario {
         if(!checkLoginAvailable(login)){ 
             throw new CadastroException("Este login ja esta em uso.");
         }
+        
         
         if(login.length() < 1){
             throw new CadastroException("O campo login nao pode ficar vazio.");
@@ -64,11 +71,25 @@ public class Usuario {
         return cargo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String novoNome) throws EditarException {
+        if(novoNome.length() < 1){
+            throw new EditarException("O campo nome nao pode ficar vazio.");   
+        }
+        this.nome = novoNome;
     }
     
-    public void setSenha(String novaSenha) {
+    public void setLogin(String novoLogin) throws EditarException{
+        if(novoLogin.length() < 1){
+            throw new EditarException("O campo login nao pode ficar vazio.");   
+        }
+        this.login = novoLogin;
+    }
+    
+    public void setSenha(String novaSenha) throws EditarException {
+        if(novaSenha.length() < 1){
+            throw new EditarException("O campo senha nao pode ficar vazio.");   
+        }
+        
         if(novaSenha.equals(this.senha)){
             throw new Error("Error: A nova senha não pode ser igual a antiga.");
         }else{

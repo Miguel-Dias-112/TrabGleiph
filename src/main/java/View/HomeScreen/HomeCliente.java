@@ -8,6 +8,8 @@ import View.Screen;
 import View.TransferenciaView;
 import Models.Cliente;
 import Models.Transacao;
+import View.EditarScreen;
+import View.RegisterScreen;
 import java.util.List;
 import java.awt.*;
 
@@ -39,7 +41,9 @@ public class HomeCliente extends Screen {
         JButton botaoSair = new JButton("Sair");
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
-        menuSuperior.add(new JButton("Editar Usuário"));
+        JButton botaoEditar = new JButton("Editar Usuário");
+        botaoEditar.addActionListener(new trocarScreen(this,new EditarScreen()));
+        menuSuperior.add(botaoEditar);
         JButton botaoTransferir = new JButton("Transferir");
         botaoTransferir.addActionListener(e -> {
             new TransferenciaView().show();

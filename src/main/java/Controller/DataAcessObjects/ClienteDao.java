@@ -32,6 +32,19 @@ public class ClienteDao implements ClientePersist {
         usuarios.add(novoUsuario);
         save(usuarios);
     }
+    
+    public void deletarUsuario(String cpf) {
+        List<Cliente> usuarios = findAll();
+        boolean removido = usuarios.removeIf(usuario -> usuario.getCpf().equals(cpf));
+
+        if (removido) {
+            save(usuarios);
+            System.out.println("Usuário removido com sucesso!");
+        } else {
+            System.out.println("Usuário não encontrado.");
+        }
+    }
+
     public void realizarSaque(Cliente user, double valor) {
         List<Cliente> usuarios = findAll();
         for (Cliente usuario : usuarios) {
@@ -58,17 +71,7 @@ public class ClienteDao implements ClientePersist {
             }
         }
     }
-    public void realizarTransferencia(Cliente Origem, String cpfDestino) {
-        List<Cliente> usuarios = findAll();
-        for (Cliente usuario : usuarios) {
-            if (usuario.getCpf().equals(cpfDestino)) {
-                realizarSaque(Origem, 100);
-                realizarDeposito(usuario, 100);
-                save(usuarios); 
-                return;
-            }
-        }
-    }
+   
     @Override
     public List<Cliente> findAll() {
         String json = Arquivo.read(PATH);
