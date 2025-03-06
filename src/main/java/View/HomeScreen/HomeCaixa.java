@@ -5,6 +5,7 @@ import javax.swing.*;
 import Controller.ClickHandlers.trocarScreen;
 import Models.Usuario;
 import View.LoginScreen;
+import View.SaqueCaixa;
 import View.Screen;
 import View.TransferenciaCaixa;
 import Models.Caixa;
@@ -39,14 +40,16 @@ public class HomeCaixa extends Screen {
         JButton botaoSair = new JButton("Sair");
         botaoSair.addActionListener(new trocarScreen(this, new LoginScreen()));
         menuSuperior.add(botaoSair);
-
-        menuSuperior.add(new JButton("Editar Usuário"));
-        menuSuperior.add(new JButton("Saque"));
-        menuSuperior.add(new JButton("Depósito"));
+        JButton botaoSaque = new JButton("Saque");
+        botaoSaque.addActionListener(new trocarScreen(this, new SaqueCaixa(caixa)));
         JButton botaoTransferir = new JButton("Transferir");
         botaoTransferir.addActionListener(new trocarScreen(this, new TransferenciaCaixa(caixa)));
+     
+       
         menuSuperior.add(botaoTransferir);
-
+        menuSuperior.add(new JButton("Editar Usuário"));
+        menuSuperior.add(botaoSaque);
+        menuSuperior.add(new JButton("Depósito"));
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
 
