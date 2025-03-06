@@ -75,11 +75,11 @@ public class EditarScreen extends Screen {
         editarButton.addActionListener(editarUser);
         
         JButton cancelarButton = new JButton("Cancelar");
-        // switch(user.getCargo()){
-        //     case("Cliente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCliente((Cliente)Login.user)));
-        //     case("Caixa") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa((Caixa)Login.user)));
-        //     case("Gerente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente((Gerente)Login.user))); 
-        // }
+        switch(user.getCargo()){
+            case("Cliente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCliente(user.getCpf())));
+            case("Caixa") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa(user.getCpf())));
+            case("Gerente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente((Gerente)user))); 
+        }
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(editarButton);

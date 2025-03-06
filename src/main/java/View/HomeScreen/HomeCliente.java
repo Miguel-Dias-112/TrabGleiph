@@ -3,6 +3,8 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
+import Controller.DataAcessObjects.CaixaDAO;
+import Controller.DataAcessObjects.ClienteDAO;
 import View.LoginScreen;
 import View.Screen;
 import View.TransferenciaCliente;
@@ -22,12 +24,14 @@ public class HomeCliente extends Screen {
     private JTextArea historico ;
     private Cliente Cliente;
 
-    public HomeCliente(Cliente user) {
-        double saldo = user.getSaldo();
+    public HomeCliente(String cpf) {
+        ClienteDAO clientes = new ClienteDAO();
+        this.Cliente = clientes.findByCpf(cpf);
+
+        double saldo = Cliente.getSaldo();
         saldoLabel = new JLabel("R$ "+ saldo);
-        this.Cliente = user;
         historico = new JTextArea(10, 30);
-        historico.setText(user.getConta().consultarExtrato());
+        historico.setText(Cliente.getConta().consultarExtrato());
     }
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");

@@ -60,7 +60,7 @@ public class DepositoCaixa  extends Screen {
                 JOptionPane.showMessageDialog(null, "Transferência não realizada!", "Erro", JOptionPane.ERROR_MESSAGE);
             }
             tela.dispose();
-            Screen home = new HomeCaixa(caixa);
+            Screen home = new HomeCaixa(caixa.getCpf());
             home.show();
         });
         cancelButton = new JButton("Cancelar");

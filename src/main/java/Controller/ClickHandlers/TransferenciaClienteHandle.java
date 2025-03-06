@@ -45,7 +45,7 @@ public class TransferenciaClienteHandle implements ActionListener {
         }
         tela.close();
 
-        HomeCliente home = new HomeCliente(clienteDAO.findByCpf(cpfOrigem));
+        HomeCliente home = new HomeCliente(cpfOrigem);
         home.show();
 
     }

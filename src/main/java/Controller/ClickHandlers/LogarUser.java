@@ -19,7 +19,6 @@ import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
 
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 public class LogarUser implements ActionListener {
 
@@ -38,19 +37,22 @@ public class LogarUser implements ActionListener {
         String senha = senhaField.getText();
         String cargo = (String) cargoBox.getSelectedItem();
         Screen newScreen = null;
+        String cpf;
         switch (cargo) {
             case "Cliente":
                 ClienteDAO clientes = new ClienteDAO();
                 LoginChecker.checkLoginCliente(login, senha);
                 Cliente cliente = clientes.findByLogin(login);
-                newScreen = new HomeCliente(cliente);
+                cpf = cliente.getCpf();
+                newScreen = new HomeCliente(cpf);
                
                 break;
             case "Caixa":
                 CaixaDAO caixas = new CaixaDAO();
                 LoginChecker.checkLoginCaixa(login, senha);
                 Caixa caixa = caixas.findByLogin(login);
-                newScreen = new HomeCaixa(caixa);
+                cpf = caixa.getCpf();
+                newScreen = new HomeCaixa(cpf);
             default:
                 break;
         }

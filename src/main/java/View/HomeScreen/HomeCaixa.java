@@ -3,6 +3,7 @@ package View.HomeScreen;
 import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
+import Controller.DataAcessObjects.CaixaDAO;
 import Models.Bank.Transacao;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Usuario;
@@ -24,8 +25,9 @@ public class HomeCaixa extends Screen {
     private JPanel conteudoCentral;
     private Caixa caixa;
 
-    public HomeCaixa(Caixa user) {
-        this.caixa = user;
+    public HomeCaixa(String cpf) {
+        CaixaDAO caixas = new CaixaDAO();
+        this.caixa = caixas.findByCpf(cpf);
     }
 
     private void configuraTela() {
