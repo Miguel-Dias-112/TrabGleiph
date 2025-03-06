@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 public class LogarUser implements ActionListener {
 
@@ -39,7 +40,8 @@ public class LogarUser implements ActionListener {
                 newScreen.show();
                 
             } catch (LoginException error) {
-                error.printStackTrace(); 
+                //error.printStackTrace();
+                JOptionPane.showMessageDialog(null, error.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
             
         }
