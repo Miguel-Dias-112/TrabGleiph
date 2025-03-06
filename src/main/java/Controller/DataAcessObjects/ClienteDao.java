@@ -75,13 +75,13 @@ public class ClienteDao implements ClientePersist {
         List<Cliente> usuarios = findAll();
         for (Cliente usuario : usuarios) {
             if (usuario.getCpf().equals(user.getCpf())) {
-                int saldo = (int) usuario.getConta().getSaldo();
+                double saldo = (double) usuario.getConta().getSaldo();
                 saldo -= valor;
                 usuario.getConta().setSaldo(saldo);
                 usuario.getConta().adicionarTransacao(new Transacao(valor));
                 for (Cliente usuarioDestino : usuarios) {
                     if (usuarioDestino.getCpf().equals(cpfDestino)) {
-                        saldo = (int) usuarioDestino.getConta().getSaldo();
+                        saldo = usuarioDestino.getConta().getSaldo();
                         saldo += valor;
                         usuarioDestino.getConta().setSaldo(saldo);
                         usuarioDestino.getConta().adicionarTransacao(new Transacao(valor));
