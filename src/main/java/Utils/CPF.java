@@ -5,7 +5,7 @@ import Utils.Exception.CPFException;
 
 import java.util.List;
 
-import Controller.DataAcessObjects.ClienteDao;
+import Controller.DataAcessObjects.ClienteDAO;
 
 public class CPF {
     public static boolean isCPFValido(String cpf) throws CPFException {
@@ -71,7 +71,7 @@ public class CPF {
     public static boolean isCPFCadastrado(String cpf) throws CPFException{
         cpf = formatarCPF(cpf);
         
-        ClienteDao usuarioDAO = new ClienteDao();
+        ClienteDAO usuarioDAO = new ClienteDAO();
        // List<Usuario> usuarios = usuarioDAO.findAll();
         
         //for (Usuario usuario : usuarios) {

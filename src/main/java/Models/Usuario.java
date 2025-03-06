@@ -3,7 +3,7 @@ package Models;
 import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.Exception.CadastroException;
-import Controller.DataAcessObjects.ClienteDao;
+import Controller.DataAcessObjects.ClienteDAO;
 import Utils.CPF;
 import java.util.List;
 
@@ -98,7 +98,7 @@ public class Usuario {
     }
     
     private boolean checkLoginAvailable(String login){
-        ClienteDao usuarioDAO = new ClienteDao();
+        ClienteDAO usuarioDAO = new ClienteDAO();
         //List<Usuario> usuarios = usuarioDAO.findAll();
         
         // for(Usuario usuario: usuarios){

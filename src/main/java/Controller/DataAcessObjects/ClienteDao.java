@@ -2,9 +2,8 @@ package Controller.DataAcessObjects;
 
 import Models.Arquivo;
 import Models.Cliente;
-import Models.Conta;
 import Models.Transacao;
-import Models.Usuario;
+import Utils.Exception.EditarException;
 import Utils.GsonUtil;
 import Utils.Persistence.ClientePersist;
 
@@ -14,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.reflect.TypeToken;
 
-public class ClienteDao implements ClientePersist {
+public class ClienteDAO implements ClientePersist {
     private static final String DIRECTORY = "data";
-    private static final String PATH = DIRECTORY + File.separator + "usuarios.json";
+    private static final String PATH = DIRECTORY + File.separator + "clientes.json";
     @Override
-    public void save(List<Cliente> usuarios) {
-        String json = GsonUtil.toJson(usuarios);
+    public void save(List<Cliente> clientes) {
+        String json = GsonUtil.toJson(clientes);
         File diretorio = new File(DIRECTORY);
         if (!diretorio.exists()) {
             diretorio.mkdirs();
@@ -27,65 +26,97 @@ public class ClienteDao implements ClientePersist {
         Arquivo.save(PATH, json);
     }
  
-    public void adicionarNovoUsuario(Cliente novoUsuario) {
-        List<Cliente> usuarios = findAll();
-        usuarios.add(novoUsuario);
-        save(usuarios);
+    public void adicionarNovoCliente(Cliente novoCliente) {
+        List<Cliente> clientes = findAll();
+        clientes.add(novoCliente);
+        save(clientes);
     }
     
-    public void deletarUsuario(String cpf) {
-        List<Cliente> usuarios = findAll();
-        boolean removido = usuarios.removeIf(usuario -> usuario.getCpf().equals(cpf));
+    public void deletarCliente(String cpf) {
+        List<Cliente> clientes = findAll();
+        boolean removido = clientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
 
         if (removido) {
-            save(usuarios);
-            System.out.println("Usuário removido com sucesso!");
+            save(clientes);
+            System.out.println("Cliente removido com sucesso!");
         } else {
-            System.out.println("Usuário não encontrado.");
+            System.out.println("Cliente não encontrado.");
+        }
+    }
+    
+    public void editarCliente(String cpf, String nome, String login, String senha) throws EditarException {
+        List<Cliente> clientes = findAll();
+        boolean encontrado = false;
+
+        for (int i = 0; i < clientes.size(); i++) {
+            Cliente cliente = clientes.get(i);
+            if (cliente.getCpf().equals(cpf)) {
+                Cliente newCliente = cliente;
+                
+                try{
+                    newCliente.setNome(nome);
+                    newCliente.setLogin(login);
+                    newCliente.setSenha(senha);
+                    
+                }catch(EditarException error){
+                    throw new EditarException(error.toString());
+                }
+                
+                clientes.set(i, newCliente);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (encontrado) {
+            save(clientes);
+            System.out.println("Cliente atualizado com sucesso!");
+        } else {
+            System.out.println("Cliente não encontrado.");
         }
     }
 
     public void realizarSaque(Cliente user, double valor) {
-        List<Cliente> usuarios = findAll();
-        for (Cliente usuario : usuarios) {
-            if (usuario.getCpf().equals(user.getCpf())) {
-                int saldo = (int) usuario.getConta().getSaldo();
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(user.getCpf())) {
+                int saldo = (int) cliente.getConta().getSaldo();
                 saldo -= valor;
-                usuario.getConta().setSaldo(saldo);
-                usuario.getConta().adicionarTransacao(new Transacao(valor));
-                save(usuarios); 
+                cliente.getConta().setSaldo(saldo);
+                cliente.getConta().adicionarTransacao(new Transacao(valor));
+                save(clientes); 
                 return;
             }
         }
     }
     public void realizarDeposito(Cliente user, double valor) {
-        List<Cliente> usuarios = findAll();
-        for (Cliente usuario : usuarios) {
-            if (usuario.getCpf().equals(user.getCpf())) {
-                int saldo = (int) usuario.getConta().getSaldo();
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(user.getCpf())) {
+                int saldo = (int) cliente.getConta().getSaldo();
                 saldo += valor;
-                usuario.getConta().setSaldo(saldo);
-                usuario.getConta().adicionarTransacao(new Transacao(valor));
-                save(usuarios); 
+                cliente.getConta().setSaldo(saldo);
+                cliente.getConta().adicionarTransacao(new Transacao(valor));
+                save(clientes); 
                 return;
             }
         }
     }
     public void realizarTransferencia(Cliente user, String cpfDestino, double valor) {
-        List<Cliente> usuarios = findAll();
-        for (Cliente usuario : usuarios) {
-            if (usuario.getCpf().equals(user.getCpf())) {
-                int saldo = (int) usuario.getConta().getSaldo();
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(user.getCpf())) {
+                int saldo = (int) cliente.getConta().getSaldo();
                 saldo -= valor;
-                usuario.getConta().setSaldo(saldo);
-                usuario.getConta().adicionarTransacao(new Transacao(valor));
-                for (Cliente usuarioDestino : usuarios) {
-                    if (usuarioDestino.getCpf().equals(cpfDestino)) {
-                        saldo = (int) usuarioDestino.getConta().getSaldo();
+                cliente.getConta().setSaldo(saldo);
+                cliente.getConta().adicionarTransacao(new Transacao(valor));
+                for (Cliente clienteDestino : clientes) {
+                    if (clienteDestino.getCpf().equals(cpfDestino)) {
+                        saldo = (int) clienteDestino.getConta().getSaldo();
                         saldo += valor;
-                        usuarioDestino.getConta().setSaldo(saldo);
-                        usuarioDestino.getConta().adicionarTransacao(new Transacao(valor));
-                        save(usuarios);
+                        clienteDestino.getConta().setSaldo(saldo);
+                        clienteDestino.getConta().adicionarTransacao(new Transacao(valor));
+                        save(clientes);
                         return;
                     }
                 }

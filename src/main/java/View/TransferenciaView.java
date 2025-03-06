@@ -3,7 +3,7 @@ package View;
 
 import javax.swing.*;
 
-import Controller.DataAcessObjects.ClienteDao;
+import Controller.DataAcessObjects.ClienteDAO;
 import Models.Cliente;
 import java.awt.*;
 
@@ -40,7 +40,7 @@ public class TransferenciaView extends Screen {
         transferButton = new JButton("Transferir");
         transferButton.addActionListener(e -> {
             // Transferir
-            ClienteDao clienteDao = new ClienteDao();
+            ClienteDAO clienteDao = new ClienteDAO();
             clienteDao.realizarTransferencia(cliente, "206.872.847-83", Double.parseDouble(valorField.getText()));
             
             JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
