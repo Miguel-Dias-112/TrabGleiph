@@ -37,11 +37,13 @@ public class TransferenciaCaixaHandle implements ActionListener {
         String cpfDestino = destinoCpField.getText();
         Double valorTrans = Double.parseDouble(valorField.getText());
         String senha = senhaField.getText();
-        
+
         boolean sucess = clienteDAO.realizarTransferencia(cpfOrigem,cpfDestino, valorTrans,senha );
         
         if (sucess) {
             JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Transferência não realizada, verifique os dados e tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         tela.close();
         HomeCaixa home = new HomeCaixa(caixa);

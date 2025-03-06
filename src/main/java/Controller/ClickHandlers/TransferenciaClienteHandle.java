@@ -24,7 +24,8 @@ public class TransferenciaClienteHandle implements ActionListener {
         this.destinoCpField = cpfDestino;
         this.valorField = valor;
         this.senhaField = senha;
-        this.tela = telaAtual;
+        this.tela = telaAtual;  
+        this.cliente = cliente;
     }
 
     @Override
@@ -39,6 +40,8 @@ public class TransferenciaClienteHandle implements ActionListener {
         
         if (sucess) {
             JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Transferência não realizada, verifique os dados e tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         tela.close();
         HomeCliente home = new HomeCliente(cliente);

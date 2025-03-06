@@ -133,17 +133,12 @@ public class ClienteDAO implements ClientePersist {
             save(usuarios);
             return true;
         } catch (CPFException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (TransacaoException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (LoginException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-      
-  
         return false;
     }
     @Override
