@@ -8,7 +8,7 @@ public class Cliente extends Usuario {
     
     public Cliente(String login, String senha, String nome, String cpf) throws CPFException, CadastroException  {
         super(login, senha, nome, cpf, "Cliente");
-        
+        conta = new Conta(cpf);
     }
 
     public void setConta(Conta conta) {

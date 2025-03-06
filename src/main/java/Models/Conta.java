@@ -11,7 +11,7 @@ public class Conta {
     private double saldo;
     private List<Transacao> transacoes;
 
-    public Conta(String id) {
+    public Conta() {
         this.id = "CONT" + df.format(ultimoId++);
         this.saldo = 0.0;
         this.transacoes = new ArrayList<>();
