@@ -77,12 +77,31 @@ public class InvestimentosScreen extends Screen {
 
             String valor = JOptionPane.showInputDialog("Quanto deseja investir?");
             if (valor != null && !valor.trim().isEmpty()) {
-                JOptionPane.showMessageDialog(
-                    null,
-                    "Investimento em \"" + selecionado + "\" de R$ " + valor + "\n{msg de sucesso}",
-                    "Sucesso",
-                    JOptionPane.INFORMATION_MESSAGE
-                );
+                try {
+                    double valorNumerico = Double.parseDouble(valor);
+                    if (valorNumerico <= 0) {
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "ERRO: valor inválido",
+                            "Erro",
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                        return;
+                    }
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "Investimento em \"" + selecionado + "\" de R$ " + valor + " realizado com sucesso.",
+                        "Sucesso",
+                        JOptionPane.INFORMATION_MESSAGE
+                    );
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(
+                        null,
+                        "ERRO: apenas números ou formato inválido",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                }
             }
         });
 
