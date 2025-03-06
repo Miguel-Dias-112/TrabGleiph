@@ -25,6 +25,12 @@ public class TransChecker {
         }
         throw new TransacaoException("Saldo insuficiente");
     }
+    public static boolean isSameAcc(String cpfOrigem, String cpDestino) throws TransacaoException {
+        if (cpfOrigem.equals(cpDestino)) {
+            throw new TransacaoException("Não é possível transferir para a mesma conta");
+        }
+        return true;
+    }
     public static boolean isTransValida(String cpfOrigem, String cpDestino, Double valor, String Senha) throws CPFException, TransacaoException, LoginException {
         //todo
         isPasswordValid(cpfOrigem, Senha);
@@ -33,6 +39,7 @@ public class TransChecker {
         if (!cadastrado1 || !cadastrado2) {
             throw new CPFException("CPF não cadastrado");
         }
+        isSameAcc(cpfOrigem, cpDestino);
         isSaldoAvaible(cpfOrigem, valor);
 
         return true;
