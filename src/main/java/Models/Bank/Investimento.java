@@ -1,4 +1,4 @@
-package Models;
+package Models.Bank;
 
 public class Investimento {
     private String nome;

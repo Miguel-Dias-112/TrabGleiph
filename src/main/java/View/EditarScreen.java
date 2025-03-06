@@ -2,10 +2,10 @@ package View;
 
 import Controller.ClickHandlers.EditarUser;
 import Controller.ClickHandlers.trocarScreen;
-import Models.Caixa;
-import Models.Cliente;
-import Models.Gerente;
-import Models.Login;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Cliente;
+import Models.Usuarios.Gerente;
+import Models.Usuarios.Usuario;
 import View.HomeScreen.HomeCaixa;
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class EditarScreen extends Screen {
     private JTextField nomeField;
     private JTextField loginField;
     private JPasswordField senhaField;
-
+    private Usuario user;
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,24 +71,23 @@ public class EditarScreen extends Screen {
 
     private void desenhaBotoes() {
         JButton editarButton = new JButton("Editar");
-        EditarUser editarUser = new EditarUser(nomeField, loginField, senhaField);
+        EditarUser editarUser = new EditarUser(nomeField, loginField, senhaField, user);
         editarButton.addActionListener(editarUser);
         
         JButton cancelarButton = new JButton("Cancelar");
-        switch(Login.user.getCargo()){
-            case("Cliente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCliente((Cliente)Login.user)));
-            case("Caixa") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa((Caixa)Login.user)));
-            case("Gerente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente((Gerente)Login.user))); 
+        switch(user.getCargo()){
+            case("Cliente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCliente(user.getCpf())));
+            case("Caixa") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeCaixa(user.getCpf())));
+            case("Gerente") -> cancelarButton.addActionListener(new trocarScreen(this, new HomeGerente((Gerente)user))); 
         }
 
         JPanel panelBotoes = new JPanel();
         panelBotoes.add(editarButton);
         panelBotoes.add(cancelarButton);
-
         posicionaElemento(panelBotoes, 0, 7, new Insets(20, 0, 0, 0));
     }
-    public EditarScreen() {
-        
+    public EditarScreen(Usuario user) {
+        this.user = user;
     }
     @Override
     public void show() {

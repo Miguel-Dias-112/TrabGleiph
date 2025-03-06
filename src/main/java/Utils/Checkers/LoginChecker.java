@@ -2,7 +2,8 @@ package Utils.Checkers;
 
 import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Cliente;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Cliente;
 import Utils.Exception.LoginException;
 
 public class LoginChecker {
@@ -27,18 +28,23 @@ public class LoginChecker {
     }
     public static boolean checkLoginCliente(String login, String senha) {
         ClienteDAO clienteDAO = new ClienteDAO();
-        clienteDAO.findByLogin(login).getSenha().equals(senha);
-        if (login.equals("admin") && senha.equals("admin")) {
-            return true;
+        Cliente cliente = clienteDAO.findByLogin(login);
+        if (cliente == null) {
+            return false;   
         }
-        return false;
+        String senhaCliente = cliente.getSenha();
+        boolean valido = senhaCliente.equals(senha);
+        return valido;
     }
     public static boolean checkLoginCaixa(String login, String senha) {
         CaixaDAO caixaDAO = new CaixaDAO();
-        caixaDAO.findByLogin(login).getSenha().equals(senha);
-        if (login.equals("admin") && senha.equals("admin")) {
-            return true;
+        Caixa cliente = caixaDAO.findByLogin(login);
+        if (cliente == null) {
+            return false;   
         }
-        return false;
+        String senhaCaixa= cliente.getSenha();
+        boolean valido = senhaCaixa.equals(senha);
+           
+        return valido;
     }
 }

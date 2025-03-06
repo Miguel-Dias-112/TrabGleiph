@@ -12,8 +12,8 @@ import javax.swing.JTextField;
 
 import Controller.ClickHandlers.TransferenciaCaixaHandle;
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Caixa;
-import Models.Cliente;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Cliente;
 import View.HomeScreen.HomeCaixa;
 import View.HomeScreen.HomeCliente;
 

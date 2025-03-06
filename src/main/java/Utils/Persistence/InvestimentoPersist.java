@@ -1,7 +1,8 @@
 package Utils.Persistence;
 
-import Models.Investimento;
 import java.util.List;
+
+import Models.Bank.Investimento;
 
 public interface InvestimentoPersist {
     public void save(List<Investimento> investimentos);

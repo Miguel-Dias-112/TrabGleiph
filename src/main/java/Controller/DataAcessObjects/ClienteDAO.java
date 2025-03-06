@@ -1,8 +1,8 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
-import Models.Cliente;
-import Models.Transacao;
+import Models.Bank.Transacao;
+import Models.Usuarios.Cliente;
 import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.Exception.LoginException;

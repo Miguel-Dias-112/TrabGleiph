@@ -8,8 +8,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Caixa;
-import Models.Cliente;
+import Models.Usuarios.Caixa;
+import Models.Usuarios.Cliente;
 import View.Screen;
 import View.HomeScreen.HomeCaixa;
 import View.HomeScreen.HomeCliente;
@@ -45,7 +45,7 @@ public class TransferenciaClienteHandle implements ActionListener {
         }
         tela.close();
 
-        HomeCliente home = new HomeCliente(clienteDAO.findByCpf(cpfOrigem));
+        HomeCliente home = new HomeCliente(cpfOrigem);
         home.show();
 
     }

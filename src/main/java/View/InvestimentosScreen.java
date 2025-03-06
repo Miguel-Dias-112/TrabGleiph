@@ -1,7 +1,7 @@
 package View;
 
 import Controller.DataAcessObjects.InvestimentoDAO;
-import Models.Investimento;
+import Models.Bank.Investimento;
 import Utils.Persistence.InvestimentoPersist;
 
 import javax.swing.*;

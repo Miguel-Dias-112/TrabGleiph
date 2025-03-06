@@ -1,6 +1,5 @@
 package Controller.ClickHandlers;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -9,11 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Caixa;
-import Models.Cliente;
+import Models.Usuarios.Caixa;
 import View.Screen;
 import View.HomeScreen.HomeCaixa;
-import View.HomeScreen.HomeCliente;
 
 public class TransferenciaCaixaHandle implements ActionListener {
     private JTextField destinoCpField,
@@ -46,7 +43,8 @@ public class TransferenciaCaixaHandle implements ActionListener {
             JOptionPane.showMessageDialog(null, "Transferência não realizada, verifique os dados e tente novamente", "Erro", JOptionPane.ERROR_MESSAGE);
         }
         tela.close();
-        HomeCaixa home = new HomeCaixa(caixa);
+        String cpf = caixa.getCpf();
+        HomeCaixa home = new HomeCaixa(cpf);
         home.show();
 
     }

@@ -5,7 +5,7 @@ import javax.swing.*;
 
 import Controller.ClickHandlers.TransferenciaClienteHandle;
 import Controller.DataAcessObjects.ClienteDAO;
-import Models.Cliente;
+import Models.Usuarios.Cliente;
 import View.HomeScreen.HomeCliente;
 
 import java.awt.*;

@@ -1,4 +1,4 @@
-package Models;
+package Models.Bank;
 
 //tirei data/hora, acredito que nao seja necessario. mas seria interessante
 
