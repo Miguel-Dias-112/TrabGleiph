@@ -70,7 +70,7 @@ public class CPF {
     public static boolean isCPFCadastrado(String cpf) throws CPFException{
         cpf = formatarCPF(cpf);
         
-        ClienteDAO clientesDAO = new ClienteDAO();
+       ClienteDAO clientesDAO = new ClienteDAO();
        List<Cliente> clientess = clientesDAO.findAll();
         
         for (Cliente clientes : clientess) {
@@ -78,7 +78,7 @@ public class CPF {
                return true;
            }
         }
-
-        return false;
+        throw new CPFException("CPF não cadastrado.");
+        // return false;
     }
 }
