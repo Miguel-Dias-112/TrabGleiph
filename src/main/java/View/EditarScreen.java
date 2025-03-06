@@ -71,7 +71,7 @@ public class EditarScreen extends Screen {
 
     private void desenhaBotoes() {
         JButton editarButton = new JButton("Editar");
-        EditarUser editarUser = new EditarUser(nomeField, loginField, senhaField,);
+        EditarUser editarUser = new EditarUser(nomeField, loginField, senhaField, user);
         editarButton.addActionListener(editarUser);
         
         JButton cancelarButton = new JButton("Cancelar");
