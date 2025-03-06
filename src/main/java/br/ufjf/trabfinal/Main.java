@@ -2,8 +2,6 @@ package br.ufjf.trabfinal;
 
 import javax.swing.JFrame;
 
-import Controller.ClickHandlers.TransacaoController;
-import Controller.DataAcessObjects.TransacaoDAO;
 import Controller.DataAcessObjects.UsuarioDAO;
 import Models.Cliente;
 import Models.Conta;
@@ -14,24 +12,24 @@ import Utils.Exception.CadastroException;
 import Utils.Exception.LoginException;
 import View.LoginScreen;
 import View.Screen;
-import View.HomeScreen.HomeCliente;
 
 public class Main {
     public static void main(String[] args) throws CPFException {
-        TransacaoDAO trasDao = new TransacaoDAO();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Usuario novoUsuario;
-        try {
-            novoUsuario = new Cliente(
-                "jose", "Miguel@123", "José Miguel", "12345678909"
-            );
-            usuarioDAO.adicionarNovoUsuario(novoUsuario);
-        } catch (CPFException | CadastroException e) {
-            e.printStackTrace();
-        }
+        // UsuarioDAO usuarioDAO = new UsuarioDAO();
+        // Usuario novoUsuario;
+        // try {
+        //     novoUsuario = new Cliente(
+        //         "jose", "Miguel@123", "José Miguel", "12345678909"
+        //     );
+            
+        //     usuarioDAO.adicionarNovoUsuario(novoUsuario);
+        // } catch (CPFException | CadastroException e) {
+        //     e.printStackTrace();
+        // }
 
-        Login novoLogin = new Login();
         try {
+            Login novoLogin = new Login();
+            UsuarioDAO trasDao = new UsuarioDAO();
             Cliente cliente = (Cliente) novoLogin.validarlogin("jose", "Miguel@123");
             trasDao.realizarSaque(cliente, 100.0);
 
