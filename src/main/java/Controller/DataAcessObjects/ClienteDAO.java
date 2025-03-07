@@ -138,7 +138,10 @@ public class ClienteDAO implements ClientePersist {
     }
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) throws CPFException, TransacaoException, LoginException {
         
-         if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || senha.isEmpty()) {
+        cpfOrigem = CpfChecker.formatarCPF(cpfOrigem);
+        cpfDestino = CpfChecker.formatarCPF(cpfDestino);
+        
+        if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || senha.isEmpty()) {
             throw new IllegalArgumentException("CPF de origem, CPF de destino e senha não podem estar vazios.");
         }   
 

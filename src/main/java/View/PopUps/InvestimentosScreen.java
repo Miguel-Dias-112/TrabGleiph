@@ -127,6 +127,8 @@ public class InvestimentosScreen extends Screen {
                             "ERRO: apenas números ou formato inválido",
                             "Erro",
                             JOptionPane.ERROR_MESSAGE);
+                } catch (CPFException ex) {
+                    Logger.getLogger(InvestimentosScreen.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

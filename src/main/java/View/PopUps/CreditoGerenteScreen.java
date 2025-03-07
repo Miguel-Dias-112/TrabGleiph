@@ -5,11 +5,14 @@ import Controller.DataAcessObjects.CreditoDAO;
 import Models.Bank.Credito;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
+import Utils.Exception.CPFException;
 import View.Screen;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CreditoGerenteScreen extends Screen {
     private JList<Credito> listaCreditos;
@@ -43,7 +46,13 @@ public class CreditoGerenteScreen extends Screen {
         JButton aprovarButton = new JButton("Aprovar");
         JButton recusarButton = new JButton("Recusar");
         
-        aprovarButton.addActionListener(this::aprovarCredito);
+        aprovarButton.addActionListener(e -> {
+            try {
+                this.aprovarCredito(e);
+            } catch (CPFException ex) {
+                Logger.getLogger(CreditoGerenteScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         recusarButton.addActionListener(this::recusarCredito);
         
         buttonPanel.add(aprovarButton);
@@ -55,7 +64,7 @@ public class CreditoGerenteScreen extends Screen {
         tela.add(mainPanel);
     }
 
-    private void aprovarCredito(ActionEvent e) {
+    private void aprovarCredito(ActionEvent e) throws CPFException {
         Credito selecionado = listaCreditos.getSelectedValue();
         if (selecionado == null) {
             JOptionPane.showMessageDialog(tela, "Selecione um crédito para aprovar!", "Erro", JOptionPane.ERROR_MESSAGE);
