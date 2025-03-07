@@ -107,7 +107,8 @@ public class ClienteDAO implements ClientePersist {
         }
     }
 
-    public boolean realizarSaque(String cpf, double valor, String senha) {
+    public boolean realizarSaque(String cpf, double valor, String senha) throws CPFException {
+        cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {

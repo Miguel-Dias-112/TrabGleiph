@@ -1,5 +1,6 @@
 package View.PopUps;
 
+import Controller.ClickHandlers.SaqueCaixaHandle;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -28,7 +29,7 @@ public class SaqueCaixa extends Screen {
     }
     
     private void initialize() {
-        tela.setTitle("Transferência");
+        tela.setTitle("Saque");
         tela.setSize(400, 250);
         tela.setLocationRelativeTo(null);
         tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,10 +48,15 @@ public class SaqueCaixa extends Screen {
         senhaField = new JPasswordField();
         panel.add(senhaField);
         
-        transferButton = new JButton("Transferir");
-        transferButton.addActionListener(e -> {
+        
+        transferButton = new JButton("Sacar");
+        transferButton.addActionListener(
+            new SaqueCaixaHandle(this, origemCpfField, valorField, senhaField, caixa)
+        );
+        
+        /*transferButton.addActionListener(e -> {
             // Transferir
-            /*ClienteDAO clienteDAO = new ClienteDAO();
+            ClienteDAO clienteDAO = new ClienteDAO();
             String cpfOrigem = origemCpfField.getText();
             Double valorTrans = Double.parseDouble(valorField.getText());
             String senha = senhaField.getText();
@@ -63,8 +69,9 @@ public class SaqueCaixa extends Screen {
             }
             tela.dispose();
             Screen home = new HomeCaixa(caixa.getCpf());
-            home.show();*/
-        });
+            home.show();
+        });*/
+        
         cancelButton = new JButton("Cancelar");
         panel.add(transferButton);
         panel.add(cancelButton);
