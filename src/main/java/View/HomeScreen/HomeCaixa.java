@@ -7,6 +7,7 @@ import Controller.DataAcessObjects.CaixaDAO;
 import Models.Bank.Transacao;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Usuario;
+import Utils.Exception.CPFException;
 import View.Screen;
 import View.Auth.LoginScreen;
 import View.PopUps.DeletarContaScreen;
@@ -18,6 +19,8 @@ import View.PopUps.TransferenciaCaixa;
 import java.util.List;
 
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HomeCaixa extends Screen {
 
@@ -38,7 +41,7 @@ public class HomeCaixa extends Screen {
         tela.setLocationRelativeTo(null);
     }
 
-    private void desenhaMenuSuperior() {
+    private void desenhaMenuSuperior() throws CPFException {
         menuSuperior = new JPanel();
         menuSuperior.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuSuperior.setBackground(Color.LIGHT_GRAY);
@@ -87,7 +90,11 @@ public class HomeCaixa extends Screen {
     @Override
     public void show() {
         configuraTela();
-        desenhaMenuSuperior();
+        try {
+            desenhaMenuSuperior();
+        } catch (CPFException ex) {
+            Logger.getLogger(HomeCaixa.class.getName()).log(Level.SEVERE, null, ex);
+        }
         desenhaConteudoCentral();
         tela.setVisible(true);
     }

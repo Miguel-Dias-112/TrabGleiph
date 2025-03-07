@@ -5,6 +5,7 @@ import Controller.DataAcessObjects.ClienteDAO;
 import Controller.DataAcessObjects.InvestimentoDAO;
 import Models.Bank.Investimento;
 import Models.Usuarios.Cliente;
+import Utils.Exception.CPFException;
 import Utils.Persistence.InvestimentoPersist;
 import View.Screen;
 import View.HomeScreen.HomeCliente;
@@ -12,6 +13,8 @@ import View.HomeScreen.HomeCliente;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InvestimentosScreen extends Screen {
 
@@ -68,7 +71,7 @@ public class InvestimentosScreen extends Screen {
         posicionaElemento(scrollPane, 0, 1, new Insets(0, 0, 20, 0));
     }
 
-    private void desenhaBotoes() {
+    private void desenhaBotoes() throws CPFException {
         JButton investirButton = new JButton("Investir");
         investirButton.addActionListener(e -> {
             String selecionado = listaInvestimentos.getSelectedValue();
@@ -144,7 +147,11 @@ public class InvestimentosScreen extends Screen {
         configuraTela();
         desenhaTitulo();
         desenhaListaInvestimentos();
-        desenhaBotoes();
+        try {
+            desenhaBotoes();
+        } catch (CPFException ex) {
+            Logger.getLogger(InvestimentosScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tela.setVisible(true);
     }
 }

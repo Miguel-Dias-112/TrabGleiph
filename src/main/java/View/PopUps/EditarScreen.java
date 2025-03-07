@@ -6,12 +6,15 @@ import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
 import Models.Usuarios.Usuario;
+import Utils.Exception.CPFException;
 import View.Screen;
 import View.HomeScreen.HomeCaixa;
 import javax.swing.*;
 import java.awt.*;
 import View.HomeScreen.HomeCliente;
 import View.HomeScreen.HomeGerente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EditarScreen extends Screen {
     private JTextField nomeField;
@@ -70,7 +73,7 @@ public class EditarScreen extends Screen {
         posicionaElemento(panelSenha, 0, 4, new Insets(0, 0, 10, 0));
     }
 
-    private void desenhaBotoes() {
+    private void desenhaBotoes() throws CPFException {
         JButton editarButton = new JButton("Editar");
         EditarUser editarUser = new EditarUser(nomeField, loginField, senhaField, user);
         editarButton.addActionListener(editarUser);
@@ -96,7 +99,11 @@ public class EditarScreen extends Screen {
         desenhaTitulo();
         desenhaMensagem();
         desenhaInputs();
-        desenhaBotoes();
+        try {
+            desenhaBotoes();
+        } catch (CPFException ex) {
+            Logger.getLogger(EditarScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tela.setVisible(true);
     }
 }

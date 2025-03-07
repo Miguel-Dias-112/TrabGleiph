@@ -3,6 +3,7 @@ package Controller.DataAcessObjects;
 import Models.Arquivo;
 import Models.Bank.Transacao;
 import Models.Usuarios.Cliente;
+import Utils.Checkers.CpfChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.Exception.LoginException;
@@ -135,8 +136,20 @@ public class ClienteDAO implements ClientePersist {
         }
         return false;
     }
+    public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) throws CPFException, TransacaoException, LoginException {
+        
+         if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || senha.isEmpty()) {
+            throw new IllegalArgumentException("CPF de origem, CPF de destino e senha não podem estar vazios.");
+        }   
 
-    public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor da transferência deve ser maior que zero.");
+        }
+        
+        if(cpfOrigem.equals(cpfDestino)){
+            throw new IllegalArgumentException("As contas origem e destino devem ser diferentes.");
+        }
+        
         List<Cliente> usuarios = findAll();
         try {
             boolean valida = TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);
@@ -164,13 +177,13 @@ public class ClienteDAO implements ClientePersist {
             save(usuarios);
             return true;
         } catch (CPFException e) {
-            e.printStackTrace();
+            throw new CPFException(e.getMessage());
         } catch (TransacaoException e) {
-            e.printStackTrace();
+            throw new TransacaoException(e.getMessage());
         } catch (LoginException e) {
-            e.printStackTrace();
+            throw new LoginException();
         }
-        return false;
+        //return false;
     }
 
     public boolean aprovarCredito(String clienteId, double valor) {
@@ -204,8 +217,8 @@ public class ClienteDAO implements ClientePersist {
         }
         return clientes;
     }
-
-    public Cliente findByCpf(String cpf) {
+    public Cliente findByCpf(String cpf) throws CPFException {
+        cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {

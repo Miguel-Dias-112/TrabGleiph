@@ -43,18 +43,18 @@ public class EditarUser implements ActionListener {
     
     public void editarUserPersist(String cpf, String nome, String login, String senha) throws EditarException{
         switch(user.getCargo()){
-            case "Cliente":
+            case "Cliente" -> {
                 ClienteDAO clienteDAO =  new ClienteDAO();
                 clienteDAO.editarCliente(cpf, nome, login, senha);
-                break;
-            case "Gerente":
+            }
+            case "Gerente" -> {
                 GerenteDAO gerenteDAO =  new GerenteDAO();
                 gerenteDAO.editarGerente(cpf, nome, login, senha);
-                break;
-            case "Caixa":
+            }
+            case "Caixa" -> {
                 CaixaDAO caixaDAO =  new CaixaDAO();
                 caixaDAO.editarCaixa(cpf, nome, login, senha);
-                break;
+            }
         }
     }
 

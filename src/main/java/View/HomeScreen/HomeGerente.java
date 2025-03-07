@@ -9,6 +9,7 @@ import Models.Bank.Transacao;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Gerente;
 import Models.Usuarios.Usuario;
+import Utils.Exception.CPFException;
 import View.Screen;
 import View.Auth.LoginScreen;
 import View.PopUps.CreditoGerenteScreen;
@@ -22,6 +23,8 @@ import View.PopUps.TransferenciaCaixa;
 import java.util.List;
 
 import java.awt.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HomeGerente extends Screen {
 
@@ -42,7 +45,7 @@ public class HomeGerente extends Screen {
         tela.setLocationRelativeTo(null);
     }
 
-    private void desenhaMenuSuperior() {
+    private void desenhaMenuSuperior() throws CPFException {
         menuSuperior = new JPanel();
         menuSuperior.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuSuperior.setBackground(Color.LIGHT_GRAY);
@@ -90,7 +93,11 @@ public class HomeGerente extends Screen {
     @Override
     public void show() {
         configuraTela();
-        desenhaMenuSuperior();
+        try {
+            desenhaMenuSuperior();
+        } catch (CPFException ex) {
+            Logger.getLogger(HomeGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         desenhaConteudoCentral();
         tela.setVisible(true);
     }

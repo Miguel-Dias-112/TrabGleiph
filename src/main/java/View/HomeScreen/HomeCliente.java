@@ -12,9 +12,12 @@ import View.PopUps.InvestimentosScreen;
 import View.PopUps.TransferenciaCliente;
 import View.PopUps.CreditoClienteScreen;
 import Models.Usuarios.Cliente;
+import Utils.Exception.CPFException;
 
 import java.awt.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class HomeCliente extends Screen {
 
     private JPanel menuSuperior;
@@ -23,7 +26,7 @@ public class HomeCliente extends Screen {
     private JTextArea historico;
     private Cliente Cliente;
 
-    public HomeCliente(String cpf) {
+    public HomeCliente(String cpf) throws CPFException {
         ClienteDAO clientes = new ClienteDAO();
         this.Cliente = clientes.findByCpf(cpf);
 
@@ -44,8 +47,7 @@ public class HomeCliente extends Screen {
         tela.setLayout(new BorderLayout());
         tela.setLocationRelativeTo(null);
     }
-
-    private void desenhaMenuSuperior() {
+    private void desenhaMenuSuperior() throws CPFException {
         menuSuperior = new JPanel();
         menuSuperior.setLayout(new FlowLayout(FlowLayout.LEFT));
         menuSuperior.setBackground(Color.LIGHT_GRAY);
@@ -106,7 +108,11 @@ public class HomeCliente extends Screen {
     @Override
     public void show() {
         configuraTela();
-        desenhaMenuSuperior();
+        try {
+            desenhaMenuSuperior();
+        } catch (CPFException ex) {
+            Logger.getLogger(HomeCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         desenhaConteudoCentral();
         tela.setVisible(true);
     }
