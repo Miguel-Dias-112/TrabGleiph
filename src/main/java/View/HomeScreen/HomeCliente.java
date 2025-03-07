@@ -31,7 +31,7 @@ public class HomeCliente extends Screen {
         this.Cliente = clientes.findByCpf(cpf);
 
         double saldo = Cliente.getSaldo();
-        saldoLabel = new JLabel("R$ " + saldo);
+        saldoLabel = new JLabel(String.format("R$ %.2f", saldo));
         historico = new JTextArea(10, 30);
         historico.setText(Cliente.getConta().consultarExtrato());
         historico.setLineWrap(true);
