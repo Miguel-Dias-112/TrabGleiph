@@ -115,7 +115,7 @@ public class ClienteDAO implements ClientePersist {
                 double saldo = (double) cliente.getConta().getSaldo();
                 saldo -= valor;
                 cliente.getConta().setSaldo(saldo);
-                cliente.getConta().adicionarTransacao(new Transacao(valor));
+                cliente.getConta().adicionarTransacao(new Transacao(valor, "Saque"));
                 save(clientes);
                 return true;
             }
@@ -130,7 +130,7 @@ public class ClienteDAO implements ClientePersist {
                 double saldo = (double) cliente.getConta().getSaldo();
                 saldo += valor;
                 cliente.getConta().setSaldo(saldo);
-                cliente.getConta().adicionarTransacao(new Transacao(valor));
+                cliente.getConta().adicionarTransacao(new Transacao(valor, "Depósito"));
                 save(clientes);
                 return true;
             }
@@ -175,7 +175,7 @@ public class ClienteDAO implements ClientePersist {
                     saldo = usuario.getConta().getSaldo();
                     saldo -= valor;
                     usuario.getConta().setSaldo(saldo);
-                    usuario.getConta().adicionarTransacao(new Transacao(valor));
+                    usuario.getConta().adicionarTransacao(new Transacao(valor, "Transferência"));
                 }
             }
             save(usuarios);
