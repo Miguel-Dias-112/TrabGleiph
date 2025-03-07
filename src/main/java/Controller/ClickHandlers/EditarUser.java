@@ -6,6 +6,7 @@ import Controller.DataAcessObjects.GerenteDAO;
 import Utils.Exception.EditarException;
 import Models.*;
 import Models.Usuarios.Usuario;
+import Utils.Exception.CPFException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,15 +34,27 @@ public class EditarUser implements ActionListener {
         String senha = new String(senhaField.getPassword());
         String cpf = user.getCpf();
         
+        if(nome.isEmpty()){
+            nome = user.getNome();
+        }
+        
+        if(login.isEmpty()){
+            login = user.getLogin();
+        }
+        
+        if(senha.isEmpty()){
+            senha = user.getSenha();
+        }
+        
         try {
             editarUserPersist(cpf, nome, login, senha);
-        } catch (EditarException ex) {
-            Logger.getLogger(EditarUser.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Usuário editado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } catch (EditarException | CPFException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, "Usuário editado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public void editarUserPersist(String cpf, String nome, String login, String senha) throws EditarException{
+    public void editarUserPersist(String cpf, String nome, String login, String senha) throws EditarException, CPFException{
         switch(user.getCargo()){
             case "Cliente" -> {
                 ClienteDAO clienteDAO =  new ClienteDAO();
