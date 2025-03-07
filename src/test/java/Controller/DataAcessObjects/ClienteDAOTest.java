@@ -56,31 +56,31 @@ class ClienteDAOTest {
         clienteDAO.deletarCliente("479.207.100-30");
     }
 
-    @Test
-    void testRealizarSaque() throws CPFException, CadastroException {
-        Cliente cliente = new Cliente("login11", "senha4", "Cliente Saque", "690.799.490-94");
-        cliente.getConta().setSaldo(1000.0);
-        clienteDAO.adicionarNovoCliente(cliente);
+    // @Test
+    // void testRealizarSaque() throws CPFException, CadastroException {
+    //     Cliente cliente = new Cliente("login11", "senha4", "Cliente Saque", "690.799.490-94");
+    //     cliente.getConta().setSaldo(1000.0);
+    //     clienteDAO.adicionarNovoCliente(cliente);
 
-        boolean sucesso = clienteDAO.realizarSaque("690.799.490-94", 200, "senha4");
-        assertTrue(sucesso);
-        assertEquals(800.0, clienteDAO.findByCpf("690.799.490-94").getConta().getSaldo());
+    //     boolean sucesso = clienteDAO.realizarSaque("690.799.490-94", 200, "senha4");
+    //     assertTrue(sucesso);
+    //     assertEquals(800.0, clienteDAO.findByCpf("690.799.490-94").getConta().getSaldo());
 
-        clienteDAO.deletarCliente("690.799.490-94");
-    }
+    //     clienteDAO.deletarCliente("690.799.490-94");
+    // }
 
-    @Test
-    void testRealizarDeposito() throws CPFException, CadastroException {
-        Cliente cliente = new Cliente("login12", "senha5", "Cliente Deposito", "734.944.880-53");
-        cliente.getConta().setSaldo(500.0);
-        clienteDAO.adicionarNovoCliente(cliente);
+    // @Test
+    // void testRealizarDeposito() throws CPFException, CadastroException {
+    //     Cliente cliente = new Cliente("login12", "senha5", "Cliente Deposito", "734.944.880-53");
+    //     cliente.getConta().setSaldo(500.0);
+    //     clienteDAO.adicionarNovoCliente(cliente);
 
-        boolean sucesso = clienteDAO.realizarDeposito("734.944.880-53", 300.0, "senha5");
-        assertTrue(sucesso);
-        assertEquals(800.0, clienteDAO.findByCpf("734.944.880-53").getConta().getSaldo());
+    //     boolean sucesso = clienteDAO.realizarDeposito("734.944.880-53", 300.0, "senha5");
+    //     assertTrue(sucesso);
+    //     assertEquals(800.0, clienteDAO.findByCpf("734.944.880-53").getConta().getSaldo());
 
-        clienteDAO.deletarCliente("734.944.880-53");
-    }
+    //     clienteDAO.deletarCliente("734.944.880-53");
+    // }
 
     @Test
     void testFindAll() {

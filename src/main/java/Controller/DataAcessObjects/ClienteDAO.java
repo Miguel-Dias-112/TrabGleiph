@@ -153,7 +153,7 @@ public class ClienteDAO implements ClientePersist {
                     saldo = usuario.getConta().getSaldo();
                     saldo += valor;
                     usuario.getConta().setSaldo(saldo);
-                    usuario.getConta().adicionarTransacao(new Transacao(valor, "Transferencia"));
+                    usuario.getConta().adicionarTransacao(new Transacao(valor, "Transferência Recebida"));
     
                 }
                 if (usuario.getCpf().equals(cpfOrigem)) {
@@ -161,7 +161,7 @@ public class ClienteDAO implements ClientePersist {
                     saldo = usuario.getConta().getSaldo();
                     saldo -= valor;
                     usuario.getConta().setSaldo(saldo);
-                    usuario.getConta().adicionarTransacao(new Transacao(valor, "Transferencia"));
+                    usuario.getConta().adicionarTransacao(new Transacao(valor, "Transferência Enviada"));
                 }
             }
             save(usuarios);
