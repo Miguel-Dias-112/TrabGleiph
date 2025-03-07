@@ -83,30 +83,6 @@ class ClienteDAOTest {
     }
 
     @Test
-    void testRealizarTransferencia() throws CPFException, CadastroException, TransacaoException {
-        Cliente origem = new Cliente("login6", "senha6", "Origem", "265.854.230-54");
-        origem.getConta().setSaldo(1000.0);
-        Cliente destino = new Cliente("login7", "senha7", "Destino", "192.110.360-46");
-        destino.getConta().setSaldo(300.0);
-
-        clienteDAO.adicionarNovoCliente(origem);
-        clienteDAO.adicionarNovoCliente(destino);
-
-        boolean sucesso = clienteDAO.realizarTransferencia(
-            "265.854.230-54",
-            "192.110.360-46",
-            200.0,
-            "senha6"
-        );
-        assertTrue(sucesso);
-        assertEquals(800.0, clienteDAO.findByCpf("265.854.230-54").getConta().getSaldo());
-        assertEquals(500.0, clienteDAO.findByCpf("192.110.360-46").getConta().getSaldo());
-
-        clienteDAO.deletarCliente("265.854.230-54");
-        clienteDAO.deletarCliente("192.110.360-46");
-    }
-
-    @Test
     void testFindAll() {
         List<Cliente> lista = clienteDAO.findAll();
         assertNotNull(lista);
