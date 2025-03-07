@@ -1,5 +1,8 @@
 package Models.Bank;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 //tirei data/hora, acredito que nao seja necessario. mas seria interessante
 
 public class Transacao {
@@ -32,10 +35,10 @@ public class Transacao {
         this.valor = valor;
     }
 
-    // mockup para testes sem a interface grafica
     @Override
     public String toString() {
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         return "-> " + descricao + '\'' +
-                ", Valor: " + valor + "\n";
+                ", Valor: " + currencyFormatter.format(valor) + "\n";
     }
 }
