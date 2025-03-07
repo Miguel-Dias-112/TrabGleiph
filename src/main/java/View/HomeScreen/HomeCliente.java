@@ -15,9 +15,11 @@ import Models.Usuarios.Cliente;
 import Utils.Exception.CPFException;
 
 import java.awt.*;
-
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class HomeCliente extends Screen {
 
     private JPanel menuSuperior;
@@ -31,7 +33,8 @@ public class HomeCliente extends Screen {
         this.Cliente = clientes.findByCpf(cpf);
 
         double saldo = Cliente.getSaldo();
-        saldoLabel = new JLabel(String.format("R$ %.2f", saldo));
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        saldoLabel = new JLabel(currencyFormatter.format(saldo));
         historico = new JTextArea(10, 30);
         historico.setText(Cliente.getConta().consultarExtrato());
         historico.setLineWrap(true);
