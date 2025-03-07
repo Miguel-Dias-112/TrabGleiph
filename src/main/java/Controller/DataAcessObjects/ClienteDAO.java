@@ -4,6 +4,7 @@ import Models.Arquivo;
 import Models.Bank.Transacao;
 import Models.Usuarios.Cliente;
 import Utils.Checkers.CpfChecker;
+import Utils.Checkers.LoginChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.Exception.LoginException;
@@ -95,7 +96,18 @@ public class ClienteDAO implements ClientePersist {
         }
         return false;
     }
+<<<<<<< Updated upstream
     public boolean realizarDeposito(String cpf, double valor, String senha) {
+=======
+
+    public boolean realizarDeposito(String cpf, double valor, String senha) throws CPFException, LoginException {
+        cpf = CpfChecker.formatarCPF(cpf);
+        
+        if (!LoginChecker.isPasswordValid(cpf, senha)) {
+            throw new LoginException();
+        }
+        
+>>>>>>> Stashed changes
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {

@@ -1,5 +1,7 @@
 package View.PopUps;
 
+import Controller.ClickHandlers.DepositoCaixaHandle;
+import Controller.ClickHandlers.SaqueCaixaHandle;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -28,7 +30,7 @@ public class DepositoCaixa  extends Screen {
     }
     
     private void initialize() {
-        tela.setTitle("Transferência");
+        tela.setTitle("Depósito");
         tela.setSize(400, 250);
         tela.setLocationRelativeTo(null);
         tela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,24 +49,10 @@ public class DepositoCaixa  extends Screen {
         senhaField = new JPasswordField();
         panel.add(senhaField);
         
-        transferButton = new JButton("Transferir");
-        transferButton.addActionListener(e -> {
-            // Transferir
-            /*ClienteDAO clienteDAO = new ClienteDAO();
-            String cpfOrigem = origemCpfField.getText();
-            Double valorTrans = Double.parseDouble(valorField.getText());
-            String senha = senhaField.getText();
-            boolean sucess = clienteDAO.realizarDeposito(cpfOrigem, valorTrans,senha );
-            
-            if (sucess) {
-                JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(null, "Transferência não realizada!", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-            tela.dispose();
-            Screen home = new HomeCaixa(caixa.getCpf());
-            home.show();*/
-        });
+        transferButton = new JButton("Depositar");
+        transferButton.addActionListener(
+            new DepositoCaixaHandle(this, origemCpfField, valorField, senhaField, caixa)
+        );
         cancelButton = new JButton("Cancelar");
         panel.add(cancelButton);
 
