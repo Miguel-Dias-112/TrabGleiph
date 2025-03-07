@@ -18,6 +18,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.reflect.TypeToken;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ClienteDAO implements ClientePersist {
     private static final String DIRECTORY = "data";
@@ -40,7 +42,15 @@ public class ClienteDAO implements ClientePersist {
     
     public void deletarCliente(String cpf) {
         List<Cliente> clientes = findAll();
-        boolean removido = clientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
+
+        boolean removido = clientes.removeIf(cliente -> {
+            try {
+                return cliente.getCpf().equals(CpfChecker.formatarCPF(cpf));
+            } catch (CPFException ex) {
+                Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        });
 
         if (removido) {
             save(clientes);
@@ -50,7 +60,8 @@ public class ClienteDAO implements ClientePersist {
         }
     }
     
-    public void editarCliente(String cpf, String nome, String login, String senha) throws EditarException {
+    public void editarCliente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+        cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
         boolean encontrado = false;
 

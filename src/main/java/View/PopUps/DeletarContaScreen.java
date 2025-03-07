@@ -20,6 +20,8 @@ import java.util.List;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DeletarContaScreen extends Screen {
     private JPasswordField senhaField;
@@ -77,7 +79,11 @@ JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
                     for(Caixa caixa : caixas){
                         if(cpf.equals(caixa.getCpf()) && senha.equals(caixa.getSenha())){
                             encontrou = true;
-                            caixaDAO.deletarCaixa(cpf);
+                            try {
+                                caixaDAO.deletarCaixa(cpf);
+                            } catch (CPFException ex) {
+                                Logger.getLogger(DeletarContaScreen.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                     break;

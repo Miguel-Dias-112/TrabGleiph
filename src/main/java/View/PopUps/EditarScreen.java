@@ -45,7 +45,7 @@ public class EditarScreen extends Screen {
     }
 
     private void desenhaMensagem() {
-        JLabel messageLabel = new JLabel("Preencha os dados que deseja editar", SwingConstants.CENTER);
+        JLabel messageLabel = new JLabel("Preencha os dados que deseja editar. Campos vazios permanecerão não serão alterados", SwingConstants.CENTER);
         posicionaElemento(messageLabel, 0, 1, new Insets(0, 0, 20, 0));
     }
 

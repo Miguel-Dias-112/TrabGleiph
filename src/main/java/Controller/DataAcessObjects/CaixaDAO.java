@@ -2,6 +2,8 @@ package Controller.DataAcessObjects;
 
 import Models.Arquivo;
 import Models.Usuarios.Caixa;
+import Utils.Checkers.CpfChecker;
+import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.GsonUtil;
 import Utils.Persistence.CaixaPersist;
@@ -11,6 +13,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.reflect.TypeToken;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CaixaDAO implements CaixaPersist {
     private static final String DIRECTORY = "data";
@@ -31,9 +35,17 @@ public class CaixaDAO implements CaixaPersist {
         save(caixas);
     }
     
-    public void deletarCaixa(String cpf) {
+    public void deletarCaixa(String cpf) throws CPFException {
         List<Caixa> caixas = findAll();
-        boolean removido = caixas.removeIf(caixa -> caixa.getCpf().equals(cpf));
+
+        boolean removido = caixas.removeIf(caixa -> {
+            try {
+                return caixa.getCpf().equals(CpfChecker.formatarCPF(cpf));
+            } catch (CPFException ex) {
+                Logger.getLogger(CaixaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+            }
+        });
 
         if (removido) {
             save(caixas);
@@ -43,7 +55,8 @@ public class CaixaDAO implements CaixaPersist {
         }
     }
     
-    public void editarCaixa(String cpf, String nome, String login, String senha) throws EditarException {
+    public void editarCaixa(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+        cpf = CpfChecker.formatarCPF(cpf);
         List<Caixa> caixas = findAll();
         boolean encontrado = false;
 

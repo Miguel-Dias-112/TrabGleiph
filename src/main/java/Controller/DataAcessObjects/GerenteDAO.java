@@ -3,6 +3,8 @@ package Controller.DataAcessObjects;
 import Models.Arquivo;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
+import Utils.Checkers.CpfChecker;
+import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.GsonUtil;
 import Utils.Persistence.GerentePersist;
@@ -12,6 +14,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.reflect.TypeToken;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GerenteDAO implements GerentePersist {
     private static final String DIRECTORY = "data";
@@ -34,7 +38,16 @@ public class GerenteDAO implements GerentePersist {
     
     public void deletarGerente(String cpf) {
         List<Gerente> gerentes = findAll();
-        boolean removido = gerentes.removeIf(gerente -> gerente.getCpf().equals(cpf));
+
+        boolean removido = gerentes.removeIf(gerente -> {
+            try {
+                // Retorna true se os CPFs forem iguais
+                return gerente.getCpf().equals(CpfChecker.formatarCPF(cpf));
+            } catch (CPFException ex) {
+                Logger.getLogger(GerenteDAO.class.getName()).log(Level.SEVERE, null, ex);
+                return false; // Retorna false se der erro na formatação
+            }
+        });
 
         if (removido) {
             save(gerentes);
@@ -44,7 +57,8 @@ public class GerenteDAO implements GerentePersist {
         }
     }
     
-    public void editarGerente(String cpf, String nome, String login, String senha) throws EditarException {
+    public void editarGerente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+        cpf = CpfChecker.formatarCPF(cpf);
         List<Gerente> gerentes = findAll();
         boolean encontrado = false;
 
