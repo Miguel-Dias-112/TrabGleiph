@@ -68,6 +68,8 @@ public class SaqueCaixaHandle implements ActionListener {
             }
         } catch (CPFException ex) {
             Logger.getLogger(SaqueCaixaHandle.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LoginException ex) {
+            Logger.getLogger(SaqueCaixaHandle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      

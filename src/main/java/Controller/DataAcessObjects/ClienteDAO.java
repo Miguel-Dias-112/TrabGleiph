@@ -82,23 +82,26 @@ public class ClienteDAO implements ClientePersist {
         }
     }
 
-    public boolean realizarSaque(String cpf, double valor, String senha) {
+    public boolean realizarSaque(String cpf, double valor, String senha) throws CPFException, LoginException {
+        cpf = CpfChecker.formatarCPF(cpf);
+        
+        if (!LoginChecker.isPasswordValid(cpf, senha)) {
+            throw new LoginException();
+        }
+        
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
                 int saldo = (int) cliente.getConta().getSaldo();
                 saldo -= valor;
                 cliente.getConta().setSaldo(saldo);
-                cliente.getConta().adicionarTransacao(new Transacao(valor));
+                cliente.getConta().adicionarTransacao(new Transacao(valor, "Saque"));
                 save(clientes); 
                 return true;
             }
         }
         return false;
     }
-<<<<<<< Updated upstream
-    public boolean realizarDeposito(String cpf, double valor, String senha) {
-=======
 
     public boolean realizarDeposito(String cpf, double valor, String senha) throws CPFException, LoginException {
         cpf = CpfChecker.formatarCPF(cpf);
@@ -107,14 +110,13 @@ public class ClienteDAO implements ClientePersist {
             throw new LoginException();
         }
         
->>>>>>> Stashed changes
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
                 int saldo = (int) cliente.getConta().getSaldo();
                 saldo += valor;
                 cliente.getConta().setSaldo(saldo);
-                cliente.getConta().adicionarTransacao(new Transacao(valor));
+                cliente.getConta().adicionarTransacao(new Transacao(valor, "Deposito"));
                 save(clientes); 
                 return true;
             }
@@ -123,7 +125,10 @@ public class ClienteDAO implements ClientePersist {
     }
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) throws CPFException, TransacaoException, LoginException {
         
-         if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || senha.isEmpty()) {
+        cpfOrigem = CpfChecker.formatarCPF(cpfOrigem);
+        cpfDestino = CpfChecker.formatarCPF(cpfDestino);
+        
+        if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || senha.isEmpty()) {
             throw new IllegalArgumentException("CPF de origem, CPF de destino e senha não podem estar vazios.");
         }   
 
@@ -148,7 +153,7 @@ public class ClienteDAO implements ClientePersist {
                     saldo = usuario.getConta().getSaldo();
                     saldo += valor;
                     usuario.getConta().setSaldo(saldo);
-                    usuario.getConta().adicionarTransacao(new Transacao(valor));
+                    usuario.getConta().adicionarTransacao(new Transacao(valor, "Transferencia"));
     
                 }
                 if (usuario.getCpf().equals(cpfOrigem)) {
@@ -156,7 +161,7 @@ public class ClienteDAO implements ClientePersist {
                     saldo = usuario.getConta().getSaldo();
                     saldo -= valor;
                     usuario.getConta().setSaldo(saldo);
-                    usuario.getConta().adicionarTransacao(new Transacao(valor));
+                    usuario.getConta().adicionarTransacao(new Transacao(valor, "Transferencia"));
                 }
             }
             save(usuarios);
@@ -170,6 +175,48 @@ public class ClienteDAO implements ClientePersist {
         }
         //return false;
     }
+    
+        public boolean realizarInvestimento(String cpf, double valor, String descricaoInvestimento) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                double saldoAtual = cliente.getConta().getSaldo();
+
+                if (saldoAtual < valor) {
+                    return false; 
+                }
+
+                cliente.getConta().setSaldo(saldoAtual - valor);
+
+                Transacao investimento = new Transacao(
+                        -valor,
+                        "Investimento em " + descricaoInvestimento);
+                cliente.getConta().adicionarTransacao(investimento);
+
+                save(clientes);
+                return true;
+            }
+        }
+        return false; 
+    }
+        
+    public boolean aprovarCredito(String clienteId, double valor) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getId().equals(clienteId)) {
+                double saldoAtual = cliente.getConta().getSaldo();
+                cliente.getConta().setSaldo(saldoAtual + valor);
+
+                Transacao credito = new Transacao(valor, "Crédito aprovado");
+                cliente.getConta().adicionarTransacao(credito);
+
+                save(clientes);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     public List<Cliente> findAll() {
         String json = Arquivo.read(PATH);
