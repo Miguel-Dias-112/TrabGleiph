@@ -71,7 +71,7 @@ public class CreditoGerenteScreen extends Screen {
             return;
         }
 
-        Cliente cliente = clienteDAO.findByCpf(selecionado.getClienteId());
+        Cliente cliente = clienteDAO.findById(selecionado.getClienteId());
         String senha = JOptionPane.showInputDialog(tela, "Digite a senha do cliente para confirmação:");
         if (senha != null && senha.equals(cliente.getSenha())) {
             selecionado.setStatus("Aprovado");

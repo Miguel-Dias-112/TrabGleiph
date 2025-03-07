@@ -250,4 +250,14 @@ public class ClienteDAO implements ClientePersist {
         }
         return null;
     }
+
+    public Cliente findById(String id) {
+        List<Cliente> clientes = findAll();
+        for (Cliente cliente : clientes) {
+            if (cliente.getId().equals(id)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
 }
