@@ -49,35 +49,42 @@ public class LogarUser implements ActionListener {
         String cargo = (String) cargoBox.getSelectedItem();
         Screen newScreen = null;
         String cpf;
-        
+        boolean logado = false;
         try{
             switch (cargo) {
                 case "Cliente":
                     ClienteDAO clientes = new ClienteDAO();
-                    LoginChecker.checkLoginCliente(login, senha);
-                    Cliente cliente = clientes.findByLogin(login);
-                    cpf = cliente.getCpf();
-                    newScreen = new HomeCliente(cpf);
-
+                    logado = LoginChecker.checkLoginCliente(login, senha);
+                    if (logado) {
+                        Cliente cliente = clientes.findByLogin(login);
+                        cpf = cliente.getCpf();
+                        newScreen = new HomeCliente(cpf);  
+                    }
                     break;
                 case "Caixa":
                     CaixaDAO caixas = new CaixaDAO();
-                    LoginChecker.checkLoginCaixa(login, senha);
-                    Caixa caixa = caixas.findByLogin(login);
-                    cpf = caixa.getCpf();
-                    newScreen = new HomeCaixa(cpf);
+                    logado = LoginChecker.checkLoginCaixa(login, senha);
+                    if (logado) {
+                        Caixa caixa = caixas.findByLogin(login);
+                        cpf = caixa.getCpf();
+                        newScreen = new HomeCaixa(cpf);
+                    }
                     break;
                 case "Gerente":
                     GerenteDAO gerentes = new GerenteDAO();
-                    LoginChecker.checkLoginGerente(login, senha);
-                    Gerente gerente = gerentes.findByLogin(login);
-                    cpf = gerente.getCpf();
-                    newScreen = new HomeGerente(cpf);
+                    logado = LoginChecker.checkLoginGerente(login, senha);
+                    if(logado){
+                        Gerente gerente = gerentes.findByLogin(login);
+                        cpf = gerente.getCpf();
+                        newScreen = new HomeGerente(cpf);
+                    }  
                     break;
                 default:
                     break;
             }
-            
+            if (logado == false) {
+                throw new LoginException();
+            }
             Window oldWindow = SwingUtilities.getWindowAncestor(loginField);
             if (oldWindow != null) {
                 oldWindow.dispose();
