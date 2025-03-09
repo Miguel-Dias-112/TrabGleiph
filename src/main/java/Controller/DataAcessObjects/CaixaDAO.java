@@ -42,9 +42,8 @@ public class CaixaDAO implements CaixaPersist {
         save(caixas);
     }
     
-    public void deletarCaixa(String cpf) throws CPFException {
+    public boolean deletarCaixa(String cpf) throws CPFException {
         List<Caixa> caixas = findAll();
-
         boolean removido = caixas.removeIf(caixa -> {
             try {
                 return caixa.getCpf().equals(CpfChecker.formatarCPF(cpf));
@@ -53,16 +52,10 @@ public class CaixaDAO implements CaixaPersist {
                 return false;
             }
         });
-
-        if (removido) {
-            save(caixas);
-            System.out.println("Caixa removido com sucesso!");
-        } else {
-            System.out.println("Caixa não encontrado.");
-        }
+        return removido;
     }
     
-    public void editarCaixa(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+    public boolean editarCaixa(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
         cpf = CpfChecker.formatarCPF(cpf);
         List<Caixa> caixas = findAll();
         boolean encontrado = false;
@@ -86,13 +79,7 @@ public class CaixaDAO implements CaixaPersist {
                 break;
             }
         }
-
-        if (encontrado) {
-            save(caixas);
-            System.out.println("Caixa atualizado com sucesso!");
-        } else {
-            System.out.println("Caixa não encontrado.");
-        }
+        return encontrado;
     }
     @Override
     public List<Caixa> findAll() {
