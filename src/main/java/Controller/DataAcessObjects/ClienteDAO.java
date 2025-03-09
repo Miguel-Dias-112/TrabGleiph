@@ -195,7 +195,7 @@ public class ClienteDAO implements ClientePersist {
     public boolean aprovarCredito(String clienteId, double valor) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
-            if (cliente.getId().equals(clienteId)) {
+            if (cliente.getIdConta().equals(clienteId)) {
                 double saldoAtual = cliente.getConta().getSaldo();
                 cliente.getConta().setSaldo(saldoAtual + valor);
 
@@ -246,7 +246,7 @@ public class ClienteDAO implements ClientePersist {
     public Cliente findById(String id) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
-            if (cliente.getId().equals(id)) {
+            if (cliente.getIdConta().equals(id)) {
                 return cliente;
             }
         }

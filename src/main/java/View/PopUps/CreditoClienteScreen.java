@@ -56,7 +56,7 @@ public class CreditoClienteScreen extends Screen {
         try {
             double valor = Double.parseDouble(valorField.getText().trim());
 
-            Credito novoCredito = new Credito(cliente.getId(), valor);
+            Credito novoCredito = new Credito(cliente.getIdConta(), valor);
             creditoDAO.adicionarCredito(novoCredito);
             
             JOptionPane.showMessageDialog(tela, "Crédito solicitado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

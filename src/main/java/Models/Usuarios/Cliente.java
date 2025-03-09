@@ -31,7 +31,7 @@ public class Cliente extends Usuario {
         return conta.getSaldo();
     }
 
-    public String getId() {
+    public String getIdConta() {
         return conta.getId();
     }
 }
