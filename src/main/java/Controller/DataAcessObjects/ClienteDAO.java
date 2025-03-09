@@ -47,7 +47,7 @@ public class ClienteDAO implements ClientePersist {
         save(clientes);
     }
     
-    public void deletarCliente(String cpf) {
+    public boolean deletarCliente(String cpf) {
         List<Cliente> clientes = findAll();
 
         boolean removido = clientes.removeIf(cliente -> {
@@ -58,16 +58,10 @@ public class ClienteDAO implements ClientePersist {
                 return false;
             }
         });
-
-        if (removido) {
-            save(clientes);
-            System.out.println("Cliente removido com sucesso!");
-        } else {
-            System.out.println("Cliente não encontrado.");
-        }
+        return removido;
     }
     
-    public void editarCliente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+    public boolean editarCliente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
         cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
         boolean encontrado = false;
@@ -92,12 +86,7 @@ public class ClienteDAO implements ClientePersist {
             }
         }
 
-        if (encontrado) {
-            save(clientes);
-            System.out.println("Cliente atualizado com sucesso!");
-        } else {
-            System.out.println("Cliente não encontrado.");
-        }
+        return encontrado;
     }
 
     public boolean realizarSaque(String cpf, double valor, String senha) throws CPFException, LoginException {
@@ -142,22 +131,9 @@ public class ClienteDAO implements ClientePersist {
         return false;
     }
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) throws CPFException, TransacaoException, LoginException {
-        
         cpfOrigem = CpfChecker.formatarCPF(cpfOrigem);
         cpfDestino = CpfChecker.formatarCPF(cpfDestino);
-        
-        if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || senha.isEmpty()) {
-            throw new IllegalArgumentException("CPF de origem, CPF de destino e senha não podem estar vazios.");
-        }   
-
-        if (valor <= 0) {
-            throw new IllegalArgumentException("O valor da transferência deve ser maior que zero.");
-        }
-        
-        if(cpfOrigem.equals(cpfDestino)){
-            throw new IllegalArgumentException("As contas origem e destino devem ser diferentes.");
-        }
-        
+      
         List<Cliente> usuarios = findAll();
         try {
             boolean valida = TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);

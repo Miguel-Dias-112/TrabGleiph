@@ -16,14 +16,11 @@ import java.awt.event.ActionListener;
 
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
-import Utils.Checkers.CpfChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.LoginException;
-import Utils.Exception.TransacaoException;
 import View.Screen;
 import View.HomeScreen.HomeCaixa;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class DepositoCaixaHandle implements ActionListener {
     private JTextField origemCpfField, valorField;
@@ -43,7 +40,7 @@ public class DepositoCaixaHandle implements ActionListener {
         // Transferir
         ClienteDAO clienteDAO = new ClienteDAO();
         String cpfOrigem = origemCpfField.getText();
-        String senha = senhaField.getText();
+        String senha = String.valueOf(senhaField.getPassword());
         
         if (cpfOrigem.isEmpty() || valorField.getText().trim().isEmpty() || senha.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);

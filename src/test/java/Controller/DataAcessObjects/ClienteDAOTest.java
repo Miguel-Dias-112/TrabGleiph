@@ -3,8 +3,6 @@ package Controller.DataAcessObjects;
 import Models.Usuarios.Cliente;
 import Utils.Exception.CPFException;
 import Utils.Exception.CadastroException;
-import Utils.Exception.EditarException;
-import Utils.Exception.TransacaoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

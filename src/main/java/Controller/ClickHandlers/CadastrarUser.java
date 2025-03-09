@@ -10,7 +10,6 @@ package Controller.ClickHandlers;
 import Controller.DataAcessObjects.CaixaDAO;
 import Utils.Exception.CPFException;
 import Utils.Exception.CadastroException;
-import Models.*;
 import Models.Usuarios.Caixa;
 import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
