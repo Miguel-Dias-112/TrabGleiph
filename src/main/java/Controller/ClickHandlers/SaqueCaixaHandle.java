@@ -66,21 +66,28 @@ public class SaqueCaixaHandle implements ActionListener {
         }
 
         try {
-            if (clienteDAO.realizarSaque(cpfOrigem, valorSaque, senha)) {
-                JOptionPane.showMessageDialog(null, "Saque realizado com sucesso!", "Sucesso",
-                        JOptionPane.INFORMATION_MESSAGE);
-                tela.close();
-                String cpf = caixa.getCpf();
-                HomeCaixa home = new HomeCaixa(cpf);
-                home.show();
-            } else {
-                JOptionPane.showMessageDialog(null, "Erro: Usuário não encontrado", "Erro", JOptionPane.ERROR_MESSAGE);
+            valorSaque = Double.parseDouble(valorField.getText().trim());
+            if (valorSaque <= 0) {
+                JOptionPane.showMessageDialog(null, "O valor deve ser maior que zero!", "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        } catch (CPFException ex) {
-            Logger.getLogger(SaqueCaixaHandle.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LoginException ex) {
-            Logger.getLogger(SaqueCaixaHandle.class.getName()).log(Level.SEVERE, null, ex);
+
+            // Bloqueia saques acima de 1 milhão para a operação de caixa
+            if (valorSaque > 1000000) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Saques acima de 1 milhão não são permitidos nesta operação. Veja com seu gerente.",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Insira um valor válido para o saque!", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
     }
 
 }

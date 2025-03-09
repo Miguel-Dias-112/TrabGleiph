@@ -39,25 +39,51 @@ public class TransferenciaCaixaHandle implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Transferir
-         ClienteDAO clienteDAO = new ClienteDAO();
+        ClienteDAO clienteDAO = new ClienteDAO();
         String cpfOrigem = origemCpfField.getText();
         String cpfDestino = destinoCpField.getText();
         String senha = String.valueOf(senhaField.getPassword());
-
+    
         try {
             double valorTrans = Double.parseDouble(valorField.getText().trim());
+            
+            // Bloqueia transações acima de 1 milhão para a tela do caixa
+            if (valorTrans > 1000000) {
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Transações acima de 1 milhão não são permitidas. Veja com seu gerente.",
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+            
             clienteDAO.realizarTransferencia(cpfOrigem, cpfDestino, valorTrans, senha);
-            JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso!", "Sucesso",
-                    JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(
+                null, 
+                "Transferência realizada com sucesso!", 
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE
+            );
             tela.close();
             HomeCaixa home = new HomeCaixa(caixa.getCpf());
             home.show();
         } catch (CPFException | TransacaoException | LoginException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                null, 
+                ex.getMessage(), 
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE
+            );
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Insira um valor valido", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                null, 
+                "Insira um valor válido", 
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
+    
      
 }
