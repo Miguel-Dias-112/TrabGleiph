@@ -83,7 +83,7 @@ public class CreditoGerenteScreen extends Screen {
         if (senha != null && senha.equals(cliente.getSenha())) {
             selecionado.setStatus("Aprovado");
             creditoDAO.atualizarCredito(selecionado);
-            clienteDAO.aprovarCredito(cliente.getId(), selecionado.getValor());
+            clienteDAO.aprovarCredito(cliente.getIdConta(), selecionado.getValor());
             atualizarListaCreditos();
             JOptionPane.showMessageDialog(tela, "Crédito aprovado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         } else {
