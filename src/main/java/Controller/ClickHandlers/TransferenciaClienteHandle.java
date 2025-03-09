@@ -47,20 +47,9 @@ public class TransferenciaClienteHandle implements ActionListener {
         String cpfDestino = destinoCpField.getText();
         String senha = senhaField.getText();
         
-        if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || valorField.getText().trim().isEmpty() || senha.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+       
         
-        try {
-            if (CpfChecker.formatarCPF(cpfOrigem).equals(CpfChecker.formatarCPF(cpfDestino))) {
-                JOptionPane.showMessageDialog(null, "Conta origem e conta destino devem ser diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        } catch (CPFException ex) {
-            Logger.getLogger(TransferenciaClienteHandle.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+       
         double valorTrans;
         
         try {

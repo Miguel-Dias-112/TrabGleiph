@@ -24,14 +24,24 @@ public class TransChecker {
         }
         return false;
     }
+    
     public static boolean isSameAcc(String cpfOrigem, String cpDestino) throws TransacaoException {
         if (cpfOrigem.equals(cpDestino)) {
             return true;
         }
         return false;
     }
+    public static boolean tudoPreenchido(String cpfOrigem, String cpDestino, Double valor, String Senha) throws TransacaoException {
+        if (cpfOrigem.equals("") || cpDestino.equals("") || valor == 0 || Senha.equals("")) {
+            return false;
+        }
+        return true;
+    }
     public static boolean isTransValida(String cpfOrigem, String cpDestino, Double valor, String Senha) throws CPFException, TransacaoException, LoginException {
         //todo
+        if(!tudoPreenchido(cpfOrigem, cpDestino, valor, Senha)){
+            throw new TransacaoException("Preencha todos os campos");
+        }
         if(!LoginChecker.isPasswordValid(cpfOrigem, Senha)){
             throw new LoginException();
         }
@@ -46,7 +56,9 @@ public class TransChecker {
         if(!isSaldoAvaible(cpfOrigem, valor)){
             throw new TransacaoException("Saldo insuficiente");
         }
-
+        if (valor <= 0) {
+            throw new TransacaoException("O valor da transferência deve ser maior que zero.");
+        }
 
         return true;
     }

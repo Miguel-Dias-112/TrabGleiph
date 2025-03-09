@@ -142,22 +142,8 @@ public class ClienteDAO implements ClientePersist {
         return false;
     }
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) throws CPFException, TransacaoException, LoginException {
-        
         cpfOrigem = CpfChecker.formatarCPF(cpfOrigem);
         cpfDestino = CpfChecker.formatarCPF(cpfDestino);
-        
-        if (cpfOrigem.isEmpty() || cpfDestino.isEmpty() || senha.isEmpty()) {
-            throw new IllegalArgumentException("CPF de origem, CPF de destino e senha não podem estar vazios.");
-        }   
-
-        if (valor <= 0) {
-            throw new IllegalArgumentException("O valor da transferência deve ser maior que zero.");
-        }
-        
-        if(cpfOrigem.equals(cpfDestino)){
-            throw new IllegalArgumentException("As contas origem e destino devem ser diferentes.");
-        }
-        
         List<Cliente> usuarios = findAll();
         try {
             boolean valida = TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);
