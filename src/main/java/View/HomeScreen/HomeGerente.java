@@ -15,6 +15,7 @@ import Models.Usuarios.Gerente;
 import Utils.Exception.CPFException;
 import View.Screen;
 import View.Auth.LoginScreen;
+import View.PopUps.AuxilioOperacaoGerenteScreen;
 import View.PopUps.CreditoGerenteScreen;
 import View.PopUps.DeletarContaScreen;
 import View.PopUps.EditarScreen;
@@ -70,6 +71,12 @@ public class HomeGerente extends Screen {
         JButton botaoDeletar = new JButton("Deletar");
         botaoDeletar.addActionListener(new trocarScreen(this, new DeletarContaScreen(gerente)));
         menuSuperior.add(botaoDeletar);
+
+        JButton auxilioButton = new JButton("Auxílio de Operações");
+        auxilioButton.addActionListener(e -> {
+            new AuxilioOperacaoGerenteScreen(gerente).show();
+        });
+        menuSuperior.add(auxilioButton);
 
         tela.add(menuSuperior, BorderLayout.NORTH);
     }
