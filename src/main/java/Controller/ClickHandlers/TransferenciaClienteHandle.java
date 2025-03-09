@@ -30,12 +30,14 @@ public class TransferenciaClienteHandle implements ActionListener {
     private JPasswordField senhaField;
     private Screen tela;
     private Cliente cliente;
-    public TransferenciaClienteHandle(Screen telaAtual, JTextField cpfDestino, JTextField valor, JPasswordField senha, Cliente cliente) {
-        
+
+    public TransferenciaClienteHandle(Screen telaAtual, JTextField cpfDestino, JTextField valor, JPasswordField senha,
+            Cliente cliente) {
+
         this.destinoCpField = cpfDestino;
         this.valorField = valor;
         this.senhaField = senha;
-        this.tela = telaAtual;  
+        this.tela = telaAtual;
         this.cliente = cliente;
     }
 
@@ -46,32 +48,19 @@ public class TransferenciaClienteHandle implements ActionListener {
         String cpfOrigem = cliente.getCpf();
         String cpfDestino = destinoCpField.getText();
         String senha = senhaField.getText();
-        
-       
-        
-       
-        double valorTrans;
-        
-        try {
-            valorTrans = Double.parseDouble(valorField.getText().trim());
-            if (valorTrans <= 0) {
-                JOptionPane.showMessageDialog(null, "O valor deve ser maior que zero!", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Insira um valor válido para a transferência!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        try {
-            clienteDAO.realizarTransferencia(cpfOrigem,cpfDestino, valorTrans,senha );
-            JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            tela.close();
 
+        try {
+            double valorTrans = Double.parseDouble(valorField.getText().trim());
+            clienteDAO.realizarTransferencia(cpfOrigem, cpfDestino, valorTrans, senha);
+            JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso!", "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+            tela.close();
             HomeCliente home = new HomeCliente(cpfOrigem);
             home.show();
         } catch (CPFException | TransacaoException | LoginException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Insira um valor valido", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

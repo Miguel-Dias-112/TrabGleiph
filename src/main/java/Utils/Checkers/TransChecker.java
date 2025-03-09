@@ -37,7 +37,7 @@ public class TransChecker {
         }
         return true;
     }
-    public static boolean isTransValida(String cpfOrigem, String cpDestino, Double valor, String Senha) throws CPFException, TransacaoException, LoginException {
+    public static boolean isTransValida(String cpfOrigem, String cpDestino, Double valor, String Senha) throws CPFException, TransacaoException, LoginException, NumberFormatException {
         //todo
         if(!tudoPreenchido(cpfOrigem, cpDestino, valor, Senha)){
             throw new TransacaoException("Preencha todos os campos");
@@ -57,7 +57,7 @@ public class TransChecker {
             throw new TransacaoException("Saldo insuficiente");
         }
         if (valor <= 0) {
-            throw new TransacaoException("O valor da transferência deve ser maior que zero.");
+            throw new NumberFormatException("O valor da transferência deve ser maior que zero.");
         }
 
         return true;

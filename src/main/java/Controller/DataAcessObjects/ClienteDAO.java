@@ -144,6 +144,7 @@ public class ClienteDAO implements ClientePersist {
     public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) throws CPFException, TransacaoException, LoginException {
         cpfOrigem = CpfChecker.formatarCPF(cpfOrigem);
         cpfDestino = CpfChecker.formatarCPF(cpfDestino);
+      
         List<Cliente> usuarios = findAll();
         try {
             boolean valida = TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);
