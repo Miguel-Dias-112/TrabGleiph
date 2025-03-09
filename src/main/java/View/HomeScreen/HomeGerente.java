@@ -37,7 +37,7 @@ public class HomeGerente extends Screen {
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        tela.setSize(800, 600);
+        tela.setSize(1200, 600);
         tela.setLayout(new BorderLayout());
         tela.setLocationRelativeTo(null);
     }
