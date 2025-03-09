@@ -186,9 +186,7 @@ public class ClienteDAO implements ClientePersist {
             return true;
         } catch (CPFException e) {
             throw new CPFException(e.getMessage());
-        } catch (TransacaoException e) {
-            throw new TransacaoException(e.getMessage());
-        } catch (LoginException e) {
+        }  catch (LoginException e) {
             throw new LoginException();
         }
         //return false;
