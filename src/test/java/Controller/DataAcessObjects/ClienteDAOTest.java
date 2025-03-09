@@ -30,6 +30,15 @@ class ClienteDAOTest {
     }
 
     @Test
+    void testDeletarCliente() throws CPFException, CadastroException {
+        Cliente cliente = new Cliente("login2", "senha2", "Para Deletar", "285.414.830-45");
+        clienteDAO.adicionarNovoCliente(cliente);
+
+        clienteDAO.deletarCliente("285.414.830-45");
+        assertNull(clienteDAO.findByCpf("285.414.830-45"));
+    }
+
+    @Test
     void testFindAll() {
         List<Cliente> lista = clienteDAO.findAll();
         assertNotNull(lista);
