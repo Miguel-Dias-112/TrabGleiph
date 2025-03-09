@@ -11,14 +11,12 @@ import Controller.DataAcessObjects.CaixaDAO;
 import Controller.DataAcessObjects.ClienteDAO;
 import Controller.DataAcessObjects.GerenteDAO;
 import Utils.Exception.EditarException;
-import Models.*;
 import Models.Usuarios.Usuario;
 import Utils.Exception.CPFException;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.*;
 
 public class EditarUser implements ActionListener {

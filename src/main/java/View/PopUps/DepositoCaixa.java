@@ -8,25 +8,22 @@
 package View.PopUps;
 
 import Controller.ClickHandlers.DepositoCaixaHandle;
-import Controller.ClickHandlers.SaqueCaixaHandle;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Controller.ClickHandlers.trocarScreen;
-import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
 import View.Screen;
 import View.HomeScreen.HomeCaixa;
 
 public class DepositoCaixa  extends Screen {
-    private JTextField destinoCpfField,origemCpfField, valorField;
+    private JTextField origemCpfField, valorField;
     private JPasswordField senhaField;
     private JButton transferButton, cancelButton;
     private Caixa   caixa;

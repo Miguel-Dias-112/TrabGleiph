@@ -11,9 +11,7 @@ import javax.swing.*;
 
 import Controller.ClickHandlers.trocarScreen;
 import Controller.DataAcessObjects.CaixaDAO;
-import Models.Bank.Transacao;
 import Models.Usuarios.Caixa;
-import Models.Usuarios.Usuario;
 import Utils.Exception.CPFException;
 import View.Screen;
 import View.Auth.LoginScreen;
@@ -22,8 +20,6 @@ import View.PopUps.DepositoCaixa;
 import View.PopUps.EditarScreen;
 import View.PopUps.SaqueCaixa;
 import View.PopUps.TransferenciaCaixa;
-
-import java.util.List;
 
 import java.awt.*;
 import java.util.logging.Level;
@@ -43,7 +39,7 @@ public class HomeCaixa extends Screen {
     private void configuraTela() {
         tela = new JFrame("BANCO JAVA - Home");
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        tela.setSize(800, 600);
+        tela.setSize(1200, 600);
         tela.setLayout(new BorderLayout());
         tela.setLocationRelativeTo(null);
     }

@@ -12,9 +12,7 @@ import Utils.Checkers.LoginChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.EditarException;
 import Utils.Exception.CadastroException;
-import Controller.DataAcessObjects.ClienteDAO;
 
-import java.util.List;
 
 public class Usuario {
     private String login;

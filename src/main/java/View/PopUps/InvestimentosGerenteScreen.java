@@ -11,12 +11,9 @@ import Controller.DataAcessObjects.InvestimentoDAO;
 import Models.Bank.Investimento;
 import Models.Usuarios.Gerente;
 import View.Screen;
-import View.HomeScreen.HomeGerente;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class InvestimentosGerenteScreen extends Screen {
     private JTextField nomeField, anoField, retornoField;
