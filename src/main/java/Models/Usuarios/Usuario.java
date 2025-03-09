@@ -14,7 +14,7 @@ import Utils.Exception.EditarException;
 import Utils.Exception.CadastroException;
 
 
-public class Usuario {
+public abstract class Usuario {
     private String login;
     private String senha;
     private String nome;
