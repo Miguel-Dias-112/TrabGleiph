@@ -8,7 +8,6 @@
 package Controller.DataAcessObjects;
 
 import Models.Arquivo;
-import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
 import Utils.Checkers.CpfChecker;
 import Utils.Exception.CPFException;
@@ -43,7 +42,7 @@ public class GerenteDAO implements GerentePersist {
         save(gerentes);
     }
     
-    public void deletarGerente(String cpf) {
+    public boolean deletarGerente(String cpf) {
         List<Gerente> gerentes = findAll();
 
         boolean removido = gerentes.removeIf(gerente -> {
@@ -56,18 +55,13 @@ public class GerenteDAO implements GerentePersist {
             }
         });
 
-        if (removido) {
-            save(gerentes);
-            System.out.println("Gerente removido com sucesso!");
-        } else {
-            System.out.println("Gerente não encontrado.");
-        }
+        return removido;
     }
     
-    public void editarGerente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+    public boolean editarGerente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
         cpf = CpfChecker.formatarCPF(cpf);
         List<Gerente> gerentes = findAll();
-        boolean encontrado = false;
+        boolean editado = false;
 
         for (int i = 0; i < gerentes.size(); i++) {
             Gerente gerente = gerentes.get(i);
@@ -84,17 +78,12 @@ public class GerenteDAO implements GerentePersist {
                 }
                 
                 gerentes.set(i, newGerente);
-                encontrado = true;
+                editado = true;
                 break;
             }
         }
 
-        if (encontrado) {
-            save(gerentes);
-            System.out.println("Gerente atualizado com sucesso!");
-        } else {
-            System.out.println("Gerente não encontrado.");
-        }
+        return editado;
     }
     @Override
     public List<Gerente> findAll() {
