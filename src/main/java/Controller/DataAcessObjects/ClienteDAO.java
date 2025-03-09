@@ -47,7 +47,7 @@ public class ClienteDAO implements ClientePersist {
         save(clientes);
     }
     
-    public void deletarCliente(String cpf) {
+    public boolean deletarCliente(String cpf) {
         List<Cliente> clientes = findAll();
 
         boolean removido = clientes.removeIf(cliente -> {
@@ -58,16 +58,10 @@ public class ClienteDAO implements ClientePersist {
                 return false;
             }
         });
-
-        if (removido) {
-            save(clientes);
-            System.out.println("Cliente removido com sucesso!");
-        } else {
-            System.out.println("Cliente não encontrado.");
-        }
+        return removido;
     }
     
-    public void editarCliente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+    public boolean editarCliente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
         cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
         boolean encontrado = false;
@@ -92,12 +86,7 @@ public class ClienteDAO implements ClientePersist {
             }
         }
 
-        if (encontrado) {
-            save(clientes);
-            System.out.println("Cliente atualizado com sucesso!");
-        } else {
-            System.out.println("Cliente não encontrado.");
-        }
+        return encontrado;
     }
 
     public boolean realizarSaque(String cpf, double valor, String senha) throws CPFException, LoginException {
