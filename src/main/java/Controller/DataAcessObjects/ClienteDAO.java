@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 public class ClienteDAO implements ClientePersist {
     private static final String DIRECTORY = "data";
     private static final String PATH = DIRECTORY + File.separator + "clientes.json";
+
     @Override
     public void save(List<Cliente> clientes) {
         String json = GsonUtil.toJson(clientes);
@@ -40,13 +41,13 @@ public class ClienteDAO implements ClientePersist {
         }
         Arquivo.save(PATH, json);
     }
- 
+
     public void adicionarNovoCliente(Cliente novoCliente) {
         List<Cliente> clientes = findAll();
         clientes.add(novoCliente);
         save(clientes);
     }
-    
+
     public boolean deletarCliente(String cpf) {
         List<Cliente> clientes = findAll();
 
@@ -58,10 +59,16 @@ public class ClienteDAO implements ClientePersist {
                 return false;
             }
         });
+
+        if (removido) {
+            save(clientes);
+        }
+
         return removido;
     }
-    
-    public boolean editarCliente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+
+    public boolean editarCliente(String cpf, String nome, String login, String senha)
+            throws EditarException, CPFException {
         cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
         boolean encontrado = false;
@@ -70,16 +77,16 @@ public class ClienteDAO implements ClientePersist {
             Cliente cliente = clientes.get(i);
             if (cliente.getCpf().equals(cpf)) {
                 Cliente newCliente = cliente;
-                
-                try{
+
+                try {
                     newCliente.setNome(nome);
                     newCliente.setLogin(login);
                     newCliente.setSenha(senha);
-                    
-                }catch(EditarException error){
+
+                } catch (EditarException error) {
                     throw new EditarException(error.toString());
                 }
-                
+
                 clientes.set(i, newCliente);
                 encontrado = true;
                 break;
@@ -91,11 +98,11 @@ public class ClienteDAO implements ClientePersist {
 
     public boolean realizarSaque(String cpf, double valor, String senha) throws CPFException, LoginException {
         cpf = CpfChecker.formatarCPF(cpf);
-        
+
         if (!LoginChecker.isPasswordValid(cpf, senha)) {
             throw new LoginException();
         }
-        
+
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
@@ -103,7 +110,7 @@ public class ClienteDAO implements ClientePersist {
                 saldo -= valor;
                 cliente.getConta().setSaldo(saldo);
                 cliente.getConta().adicionarTransacao(new Transacao(valor, "Saque"));
-                save(clientes); 
+                save(clientes);
                 return true;
             }
         }
@@ -112,11 +119,11 @@ public class ClienteDAO implements ClientePersist {
 
     public boolean realizarDeposito(String cpf, double valor, String senha) throws CPFException, LoginException {
         cpf = CpfChecker.formatarCPF(cpf);
-        
+
         if (!LoginChecker.isPasswordValid(cpf, senha)) {
             throw new LoginException();
         }
-        
+
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
@@ -124,16 +131,18 @@ public class ClienteDAO implements ClientePersist {
                 saldo += valor;
                 cliente.getConta().setSaldo(saldo);
                 cliente.getConta().adicionarTransacao(new Transacao(valor, "Deposito"));
-                save(clientes); 
+                save(clientes);
                 return true;
             }
         }
         return false;
     }
-    public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha) throws CPFException, TransacaoException, LoginException {
+
+    public boolean realizarTransferencia(String cpfOrigem, String cpfDestino, double valor, String senha)
+            throws CPFException, TransacaoException, LoginException {
         cpfOrigem = CpfChecker.formatarCPF(cpfOrigem);
         cpfDestino = CpfChecker.formatarCPF(cpfDestino);
-      
+
         List<Cliente> usuarios = findAll();
         try {
             boolean valida = TransChecker.isTransValida(cpfOrigem, cpfDestino, valor, senha);
@@ -148,7 +157,7 @@ public class ClienteDAO implements ClientePersist {
                     saldo += valor;
                     usuario.getConta().setSaldo(saldo);
                     usuario.getConta().adicionarTransacao(new Transacao(valor, "Transferência Recebida"));
-    
+
                 }
                 if (usuario.getCpf().equals(cpfOrigem)) {
                     saldo = (double) usuario.getConta().getSaldo();
@@ -162,20 +171,20 @@ public class ClienteDAO implements ClientePersist {
             return true;
         } catch (CPFException e) {
             throw new CPFException(e.getMessage());
-        }  catch (LoginException e) {
+        } catch (LoginException e) {
             throw new LoginException();
         }
-        //return false;
+        // return false;
     }
-    
-        public boolean realizarInvestimento(String cpf, double valor, String descricaoInvestimento) {
+
+    public boolean realizarInvestimento(String cpf, double valor, String descricaoInvestimento) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
             if (cliente.getCpf().equals(cpf)) {
                 double saldoAtual = cliente.getConta().getSaldo();
 
                 if (saldoAtual < valor) {
-                    return false; 
+                    return false;
                 }
 
                 cliente.getConta().setSaldo(saldoAtual - valor);
@@ -189,9 +198,9 @@ public class ClienteDAO implements ClientePersist {
                 return true;
             }
         }
-        return false; 
+        return false;
     }
-        
+
     public boolean aprovarCredito(String clienteId, double valor) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
@@ -208,7 +217,7 @@ public class ClienteDAO implements ClientePersist {
         }
         return false;
     }
-    
+
     @Override
     public List<Cliente> findAll() {
         String json = Arquivo.read(PATH);
@@ -223,6 +232,7 @@ public class ClienteDAO implements ClientePersist {
         }
         return clientes;
     }
+
     public Cliente findByCpf(String cpf) throws CPFException {
         cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
@@ -233,6 +243,7 @@ public class ClienteDAO implements ClientePersist {
         }
         return null;
     }
+
     public Cliente findByLogin(String login) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
