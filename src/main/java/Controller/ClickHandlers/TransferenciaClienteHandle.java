@@ -16,14 +16,11 @@ import javax.swing.JTextField;
 
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Cliente;
-import Utils.Checkers.CpfChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.LoginException;
 import Utils.Exception.TransacaoException;
 import View.Screen;
 import View.HomeScreen.HomeCliente;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TransferenciaClienteHandle implements ActionListener {
     private JTextField destinoCpField, valorField;
@@ -47,7 +44,7 @@ public class TransferenciaClienteHandle implements ActionListener {
         ClienteDAO clienteDAO = new ClienteDAO();
         String cpfOrigem = cliente.getCpf();
         String cpfDestino = destinoCpField.getText();
-        String senha = senhaField.getText();
+        String senha = String.valueOf(senhaField.getPassword());
 
         try {
             double valorTrans = Double.parseDouble(valorField.getText().trim());

@@ -12,19 +12,15 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Controller.ClickHandlers.TransferenciaCaixaHandle;
 import Controller.ClickHandlers.trocarScreen;
-import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
-import Models.Usuarios.Cliente;
 import View.Screen;
 import View.HomeScreen.HomeCaixa;
-import View.HomeScreen.HomeCliente;
 
 public class TransferenciaCaixa  extends Screen {
     private JTextField destinoCpfField,origemCpfField, valorField;

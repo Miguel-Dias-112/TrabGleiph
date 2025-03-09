@@ -16,16 +16,11 @@ import java.awt.event.ActionListener;
 
 import Controller.DataAcessObjects.ClienteDAO;
 import Models.Usuarios.Caixa;
-import Utils.Checkers.CpfChecker;
 import Utils.Exception.CPFException;
 import Utils.Exception.LoginException;
 import Utils.Exception.TransacaoException;
 import View.Screen;
 import View.HomeScreen.HomeCaixa;
-import View.HomeScreen.HomeCliente;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TransferenciaCaixaHandle implements ActionListener {
     private JTextField destinoCpField,
@@ -48,7 +43,7 @@ public class TransferenciaCaixaHandle implements ActionListener {
          ClienteDAO clienteDAO = new ClienteDAO();
         String cpfOrigem = origemCpfField.getText();
         String cpfDestino = destinoCpField.getText();
-        String senha = senhaField.getText();
+        String senha = String.valueOf(senhaField.getPassword());
 
         try {
             double valorTrans = Double.parseDouble(valorField.getText().trim());
@@ -56,7 +51,7 @@ public class TransferenciaCaixaHandle implements ActionListener {
             JOptionPane.showMessageDialog(null, "Transferencia realizada com sucesso!", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
             tela.close();
-            HomeCaixa home = new HomeCaixa(cpfOrigem);
+            HomeCaixa home = new HomeCaixa(caixa.getCpf());
             home.show();
         } catch (CPFException | TransacaoException | LoginException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
