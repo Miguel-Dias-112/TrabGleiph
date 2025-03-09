@@ -9,9 +9,6 @@ package View.PopUps;
 
 import Controller.ClickHandlers.EditarUser;
 import Controller.ClickHandlers.trocarScreen;
-import Models.Usuarios.Caixa;
-import Models.Usuarios.Cliente;
-import Models.Usuarios.Gerente;
 import Models.Usuarios.Usuario;
 import Utils.Exception.CPFException;
 import View.Screen;
