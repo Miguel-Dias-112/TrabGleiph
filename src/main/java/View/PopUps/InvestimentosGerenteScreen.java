@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.time.Year;
+import java.util.List;
 
 public class InvestimentosGerenteScreen extends Screen {
     private JTextField nomeField, anoField, retornoField;
@@ -82,6 +83,15 @@ public class InvestimentosGerenteScreen extends Screen {
             if (nome.isEmpty()) {
                 JOptionPane.showMessageDialog(tela, "Nome do investimento é obrigatório!", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
+            }
+            
+            InvestimentoDAO investimentoDAO = new InvestimentoDAO();
+            List<Investimento> investimentos = investimentoDAO.findAll();
+            for(Investimento investimento : investimentos){
+                if(investimento.getNome().equals(nome)){
+                    JOptionPane.showMessageDialog(tela, "Já existe um investimento com esse nome. Escolha outro!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
             }
 
             int anoAtual = Year.now().getValue();
