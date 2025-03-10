@@ -14,6 +14,7 @@ import View.Screen;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.time.Year;
 
 public class InvestimentosGerenteScreen extends Screen {
     private JTextField nomeField, anoField, retornoField;
@@ -83,6 +84,13 @@ public class InvestimentosGerenteScreen extends Screen {
                 return;
             }
 
+            int anoAtual = Year.now().getValue();
+
+            if (ano <= anoAtual) {
+                JOptionPane.showMessageDialog(tela, "O ano do investimento deve ser no futuro!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             Investimento novoInvestimento = new Investimento(nome, ano, retorno);
             investimentoDAO.adicionarInvestimento(novoInvestimento);
             
