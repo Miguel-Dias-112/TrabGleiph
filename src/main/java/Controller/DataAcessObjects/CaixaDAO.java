@@ -63,22 +63,23 @@ public class CaixaDAO implements CaixaPersist {
         for (int i = 0; i < caixas.size(); i++) {
             Caixa caixa = caixas.get(i);
             if (caixa.getCpf().equals(cpf)) {
-                Caixa newCaixa = caixa;
-                
-                try{
-                    newCaixa.setNome(nome);
-                    newCaixa.setLogin(login);
-                    newCaixa.setSenha(senha);
-                    
-                }catch(EditarException error){
+                try {
+                    caixa.setNome(nome);
+                    caixa.setLogin(login);
+                    caixa.setSenha(senha);
+                    caixas.set(i, caixa);
+                    encontrado = true;
+                    break;
+                } catch (EditarException error) {
                     throw new EditarException(error.toString());
                 }
-                
-                caixas.set(i, newCaixa);
-                encontrado = true;
-                break;
             }
         }
+
+        if (encontrado) {
+            save(caixas);
+        }
+
         return encontrado;
     }
     @Override

@@ -66,21 +66,21 @@ public class GerenteDAO implements GerentePersist {
         for (int i = 0; i < gerentes.size(); i++) {
             Gerente gerente = gerentes.get(i);
             if (gerente.getCpf().equals(cpf)) {
-                Gerente newGerente = gerente;
-                
-                try{
-                    newGerente.setNome(nome);
-                    newGerente.setLogin(login);
-                    newGerente.setSenha(senha);
-                    
-                }catch(EditarException error){
+                try {
+                    gerente.setNome(nome);
+                    gerente.setLogin(login);
+                    gerente.setSenha(senha);
+                    gerentes.set(i, gerente); 
+                    editado = true;
+                    break;
+                } catch (EditarException error) {
                     throw new EditarException(error.toString());
                 }
-                
-                gerentes.set(i, newGerente);
-                editado = true;
-                break;
             }
+        }
+
+        if (editado) {
+            save(gerentes); 
         }
 
         return editado;
