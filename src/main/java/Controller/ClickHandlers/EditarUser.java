@@ -38,7 +38,7 @@ public class EditarUser implements ActionListener {
         String login = loginField.getText();
         String senha = new String(senhaField.getPassword());
         String cpf = user.getCpf();
-        
+
         if(nome.isEmpty()){
             nome = user.getNome();
         }

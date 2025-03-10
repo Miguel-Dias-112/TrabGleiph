@@ -97,6 +97,8 @@ public abstract class Usuario {
             throw new EditarException("O campo senha nao pode ficar vazio.");   
         }
         
+        this.senha = novaSenha;
+        
         /*if(novaSenha.equals(this.senha)){
             throw new Error("Error: A nova senha não pode ser igual a antiga.");
         }else{
