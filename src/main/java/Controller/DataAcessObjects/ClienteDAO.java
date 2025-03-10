@@ -67,7 +67,8 @@ public class ClienteDAO implements ClientePersist {
         return removido;
     }
 
-    public boolean editarCliente(String cpf, String nome, String login, String senha) throws EditarException, CPFException {
+    public boolean editarCliente(String cpf, String nome, String login, String senha)
+            throws EditarException, CPFException {
         cpf = CpfChecker.formatarCPF(cpf);
         List<Cliente> clientes = findAll();
         boolean encontrado = false;
@@ -200,10 +201,10 @@ public class ClienteDAO implements ClientePersist {
         return false;
     }
 
-    public boolean aprovarCredito(String clienteId, double valor) {
+    public boolean aprovarCredito(String idConta, double valor) {
         List<Cliente> clientes = findAll();
         for (Cliente cliente : clientes) {
-            if (cliente.getIdConta().equals(clienteId)) {
+            if (cliente.getConta().getId().equals(idConta)) {
                 double saldoAtual = cliente.getConta().getSaldo();
                 cliente.getConta().setSaldo(saldoAtual + valor);
 
