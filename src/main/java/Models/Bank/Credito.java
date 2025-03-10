@@ -6,7 +6,11 @@
 */
 
 package Models.Bank;
+import Controller.DataAcessObjects.CreditoDAO;
 import java.text.DecimalFormat;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Credito {
     final private DecimalFormat df = new DecimalFormat("000");
@@ -16,6 +20,23 @@ public class Credito {
     private String status;
     private String clienteId;
 
+    static {
+        CreditoDAO creditoDAO = new CreditoDAO();
+        List<Credito> creditos = creditoDAO.findAll();
+
+        ultimoId = 1;
+
+        Pattern pattern = Pattern.compile("CRED(\\d+)");
+
+        for (Credito credito : creditos) {
+            Matcher matcher = pattern.matcher(credito.getId());
+            if (matcher.matches()) {
+                int numeroId = Integer.parseInt(matcher.group(1));
+                ultimoId = Math.max(ultimoId, numeroId + 1);
+            }
+        }
+    }
+    
     public Credito(String clienteId, double valor) {
         this.id = "CRED" + df.format(ultimoId++);
         this.valor = valor;

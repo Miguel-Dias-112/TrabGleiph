@@ -7,6 +7,7 @@ import Models.Usuarios.Cliente;
 import Models.Usuarios.Gerente;
 import Utils.Exception.CPFException;
 import View.Screen;
+import java.util.List;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,7 +90,11 @@ public class CreditoGerenteScreen extends Screen {
 
     private void atualizarListaCreditos() {
         modeloLista.clear();
-        creditoDAO.findAll().forEach(modeloLista::addElement);
+        List<Credito> listaAtualizada = creditoDAO.findAll();
+
+        for (Credito credito : listaAtualizada) {
+            modeloLista.addElement(credito);
+        }
     }
 
     private void atualizarExtrato() {
