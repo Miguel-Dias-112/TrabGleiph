@@ -91,6 +91,11 @@ public class InvestimentosGerenteScreen extends Screen {
                 return;
             }
             
+            if (retorno <= 0) {
+                JOptionPane.showMessageDialog(tela, "a porcentagem de retorno deve ser maior do que 0.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             Investimento novoInvestimento = new Investimento(nome, ano, retorno);
             investimentoDAO.adicionarInvestimento(novoInvestimento);
             
